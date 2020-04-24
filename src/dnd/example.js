@@ -1,6 +1,6 @@
-import React from 'react'
-import Dustbin from './Dustbin'
-import Box from './Box'
+import React from 'react';
+import Dustbin from './Dustbin';
+import Box from './Box';
 export default function Container() {
   return (
     <div>
@@ -15,5 +15,5 @@ export default function Container() {
         <Box name="Paper" />
       </div>
     </div>
-  )
+  );
 }

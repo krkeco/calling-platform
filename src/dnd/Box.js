@@ -1,6 +1,6 @@
-import React from 'react'
-import { useDrag } from 'react-dnd'
-import ItemTypes from './ItemTypes'
+import React from 'react';
+import { useDrag } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -9,25 +9,25 @@ const style = {
   marginBottom: '1.5rem',
   cursor: 'move',
   float: 'left',
-}
+};
 const Box = ({ name }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { name, type: ItemTypes.BOX },
     end: (item, monitor) => {
-      const dropResult = monitor.getDropResult()
+      const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+        alert(`You dropped ${item.name} into ${dropResult.name}!`);
       }
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-  })
-  const opacity = isDragging ? 0.8 : 1
+  });
+  const opacity = isDragging ? 0.8 : 1;
   return (
     <div ref={drag} style={{ ...style, opacity }}>
       {name}
     </div>
-  )
-}
-export default Box
+  );
+};
+export default Box;

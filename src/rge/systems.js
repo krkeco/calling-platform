@@ -4,10 +4,10 @@ const MoveBox = (entities, { input }) => {
   //-- Example: return { ...entities, t.id: { UPDATED COMPONENTS }};
   //-- That said, it's probably worth considering performance implications in either case.
 
-  const { payload } = input.find(x => x.name === "onMouseDown") || {};
+  const { payload } = input.find((x) => x.name === 'onMouseDown') || {};
 
   if (payload) {
-    const box1 = entities["box1"];
+    const box1 = entities['box1'];
 
     box1.x = payload.pageX;
     box1.y = payload.pageY;

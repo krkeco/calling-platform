@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
 class Box extends PureComponent {
   render() {
@@ -6,7 +6,16 @@ class Box extends PureComponent {
     const x = this.props.x - size / 2;
     const y = this.props.y - size / 2;
     return (
-      <div style={{ position: "absolute", width: size, height: size, backgroundColor: "red", left: x, top: y }} />
+      <div
+        style={{
+          position: 'absolute',
+          width: size,
+          height: size,
+          backgroundColor: 'red',
+          left: x,
+          top: y,
+        }}
+      />
     );
   }
 }

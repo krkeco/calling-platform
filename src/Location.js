@@ -4,9 +4,10 @@ import { Button } from '@material-ui/core';
 
 const Location = (props) => {
 
-  const buyCard = (card) => {
+  const buyCard = (card,index) => {
     console.log('buying something');
     if(card.cost <= props.location.currentGold){
+      props.buyCard(index, props.location)
       console.log('this is affordable!'+card.cost + props.location.currentGold)
     }else{
       console.log('you cannot afford this!'+card.cost + props.location.currentGold)
@@ -26,7 +27,7 @@ const Location = (props) => {
   if(props.location){
     props.location.market.map((card,index)=>{
       market.push(
-        <Button style={{margin:5}} onClick={()=>buyCard(card)} variant="contained" color="primary">
+        <Button style={{margin:5}} onClick={()=>buyCard(card,index)} variant="contained" color="primary">
           <div className="flexCol marketcard center" >
             <div className="market-title">{card.name}({card.cost})</div>
 

@@ -8,20 +8,13 @@ import { Button } from '@material-ui/core';
 
 const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(0);
-  const [gameId, setId] = useState(0);
+  const [gameId, setId] = useState(-1);
   const [locations, setLocationInfo] = useState([]);
   const [players, setPlayerInfo] = useState([]);
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
-  const [cards, setCards] = useState([
-    // {player: "2",id: "1", influence:0,gold:0, name:"Read book",location:"babylon", backgroundColor: "red"},
-    // {player: "1",id: "2", influence:0,gold:0, name:"Pay bills", location:"hand", backgroundColor:"green"},
-    // {player: "1",id: "3", influence:0,gold:0, name:"Go to the gym", location:"hand", backgroundColor:"blue"},
-    // {player: "1",id: "5", influence:0,gold:0, name:"Go to the gym", location:"hand", backgroundColor:"blue"},
-    // {player: "1",id: "4", influence:0,gold:0, name:"Play baseball", location:"hand", backgroundColor:"green"}
-  ]);
+  const [cards, setCards] = useState([]);
 
   // useEffect(() => {
-    // Update the document title using the browser API
   // });
 
   //basic promise
@@ -57,14 +50,16 @@ const App = () => {
   };
 
   const onDragStart = (event, cardId) => {
-    let playerId = cards.find((card) => card.id == cardId);
-    if (playerId.player == currentPlayer) {
+    let triggerCard = cards.find((card) => card.id == cardId);
+    // if (triggerCard.player == currentPlayer) {
       console.log('dragstart on div: ', cardId);
+      // console.log('tx'+origin)
+      // event.dataTransfer.setData('origin', origin);
       event.dataTransfer.setData('cardId', cardId);
-    } else {
+    // } else {
       // alert(`you can't play someone else's card!`)
-      console.log(`you can't play someone else's card!`);
-    }
+      // console.log(`you can't play someone else's card!`);
+    // }
   };
   const onDragOver = (event) => {
     event.preventDefault();
@@ -72,21 +67,45 @@ const App = () => {
 
   const onDrop = (event, loc) => {
     let cardId = event.dataTransfer.getData('cardId');
+    let og = event.dataTransfer.getData('origin');
+    console.log('drop from' + og);
     console.log('drop on' + loc);
-    let newCards = cards.filter((card) => {
-      if (card.id == cardId) {
-        card.location = loc;
+    // let oldLocation, oldCard;
+    let newCards = cards.map((card) => {
+
+      if (card.id == cardId && card.player == currentPlayer) {
+
         let newLocations = [...locations]
+        card.location = loc;
+        card.draggable = false;
         let local = newLocations.find((el)=>el.name ==loc)
-        local.currentGold += card.gold;
-        local.currentInfluence += card.influence;
-        setLocationInfo([...newLocations])
+        if(local && local.name != "hand"){
+          local.currentGold += card.gold;
+          local.currentInfluence += card.influence;
+          setLocationInfo([...newLocations])
+        }
       }
       return card;
     });
+    // console.log('is this:'+oldLocation)
+
+
     setCards(newCards);
 
   };
+  const buyCard = async (index, location) => {
+    let data = {"index":index, "player":players[currentPlayer].name,"location":location,}
+    let res = await fetch('http://localhost:8080/game/' + gameId+'/buy',{
+    method: 'POST', 
+    mode: 'cors', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) 
+  });
+    console.log(res)
+  // return response.json(); // parses JSON response into native JavaScript objects
+  }
 
   const nextPlayer = async () => {
     console.log(players[currentPlayer].name +'is current turn')
@@ -107,6 +126,7 @@ const App = () => {
       let displayCard = {...card}
       displayCard.player = newPlayer
       displayCard.id = index
+      displayCard.draggable= true
       displayCard.location = "hand"
       displayCard.backgroundColor = playerBGs[newPlayer]
       playerHand.push(displayCard)
@@ -133,9 +153,9 @@ const App = () => {
   })
 
   cards.forEach((card) => {
-    console.log('card forweach'+JSON.stringify(card))
+    // console.log('card forweach'+JSON.stringify(card))
     displayCards[card.location].push(
-      <PlayingCard draggable onDragStart={onDragStart} card={card} />,
+      <PlayingCard draggable={card.draggable} onDragStart={onDragStart} card={card} />,
     );
   });
 
@@ -144,6 +164,7 @@ const App = () => {
     locations.map((location, index) => {
       locCards.push(
         <Location
+          buyCard={buyCard}
           location={location}
           name={location.name}
           cards={displayCards[location.name]}
@@ -157,25 +178,27 @@ const App = () => {
     <div className="flexCol">
       <div className="flexRow spaceAround padded">
       {locCards}
-      <Button onClick={nextPlayer} variant="contained" color="secondary">
-        Next Player
-      </Button>
       </div>
-      <div className="flexRow center">
         
+
+      {gameId == -1 ?  <div className="flexCol">
+          <Button onClick={startGame} variant="contained" color="secondary">
+            Start Game
+          </Button>
+        </div>
+        : 
+      <div className="flexRow center">
         <Location
           name="hand"
           cards={displayCards["hand"]}
           onDragOver={onDragOver}
           onDrop={onDrop}
         />
-
-        <div className="flexCol">
-          <Button onClick={startGame} variant="contained" color="secondary">
-            Start Game
-          </Button>
-        </div>
+      <Button onClick={nextPlayer} variant="contained" color="secondary">
+        Next Player
+      </Button>
       </div>
+        }
     </div>
   );
 };

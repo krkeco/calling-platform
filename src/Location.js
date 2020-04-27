@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
+import {HAND} from './constants.js'
 
 import { Button } from '@material-ui/core';
+import PlayingCard from './PlayingCard'
 
 const Location = (props) => {
 
   const buyCard = (card,index) => {
-    console.log('buying something');
-    if(card.cost <= props.location.currentGold){
-      props.buyCard(index, props.location)
-      console.log('this is affordable!'+card.cost + props.location.currentGold)
+    if(props.location.battlefield 
+      // props.location.battlefield[bf]
+      && props.location.battlefield[props.players[props.player].name]){
+      let playerField = props.location.battlefield[props.players[props.player].name]
+      console.log(props.players[props.player].name+' could buy something with ' + playerField.gold)
+      props.buyCard(index, props.location, card)
+    
+    // console.log('buying something');
+    
+    // if(card.cost <= props.location.currentGold){
+      // console.log('this is affordable!'+card.cost + props.location.currentGold)
     }else{
       console.log('you cannot afford this!'+card.cost + props.location.currentGold)
     }
@@ -38,37 +47,49 @@ const Location = (props) => {
             </div>
             
           </div>
-        </Button>)
-      }) 
-    }
+        </Button>
+      )
+    }) 
+  }
+  
+  const battlefield = (props) => {
+    
+  return (<div className="flexCol padded">
+        
+        {Object.keys(props.location.battlefield).map((bf,index)=>{
+          return(<div className="flexRow padded">
+          <div>{bf}:</div>
+          <div>G:{props.location.battlefield[bf].gold}</div>
+          <div>I:{props.location.battlefield[bf].influence}</div>
+            {props.location.battlefield[bf].cards.map((card,ind)=>{
+              return(
+              <PlayingCard 
+              size="small"
+              id={ind} 
+              backgroundColor={props.playerBGs[props.player]}
+              draggable={false} 
+              onDragStart={null} 
+              card={card}
+              player={props.player}
+            
+             />
+              )
+            })}
+          </div>
+          )
+        })}
+        
+        </div>)
+  }
 
-    const details = (props) => {
-      if(props.name != "hand"){
-            return( <div className="flexCol center">
-                          <div className="flexRow spaceAround" style={{width:'100%'}} >
-                  
-                            <div className="flexCol center">
-                              <div>Gold</div>
-                              <div>- {props.location.currentGold} -</div>
-                            </div>
-                  
-                            <div className="group-header">{props.name}</div>
-                  
-                            <div className="flexCol center">
-                              <div>Influence</div>
-                              <div>- {props.location.currentInfluence} -</div>
-                            </div>
-                  
-                          </div>
-                            
-                        </div>)
-          }else{
-            return (<div className="flexCol center">
-            <div className="group-header">{props.name}</div>
-            </div>
-            )
-          }
-    }
+  const titlebar = (props) => {
+    return(<div>
+    <div>{props.location.name}</div>
+    <div>{props.location.influencer}</div>
+    <div>{props.location.influence}</div>
+    </div>
+    )
+  }
 
   return (
     <div
@@ -76,9 +97,9 @@ const Location = (props) => {
       onDragOver={(event) => props.onDragOver(event)}
       onDrop={(event) => props.onDrop(event, props.name)}
     >
-     {details(props)}
+      {titlebar(props)}
       {market}
-      <div className="flexRow center">{props.cards}</div>
+      {battlefield(props)}
     </div>
   );
 };

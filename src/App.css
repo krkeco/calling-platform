@@ -42,6 +42,13 @@
   margin: 10px;
   transition: width 0.15s, height 0.15s;
 }
+.small{
+	width:50px;
+	height:50px;
+	overflow: hidden;
+	margin:0px;
+	border: 1px solid black;
+}
 .playcard:hover {
   opacity: 0.7;
   color: yellow;

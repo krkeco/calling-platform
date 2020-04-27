@@ -5,16 +5,23 @@ const PlayingCard = (props) => {
   const [opacity, setOpacity] = useState(1);
 
   const dragStart = (event) => {
-    props.onDragStart(event, props.card.id);
+    props.onDragStart(event, props.id);
   };
+  const size = (size) =>{
+    if(size == "small"){
+      return "playcard small"
+    }else{
+      return "playcard"
+    }
+  }
 
   return (
     <div
-      key={props.card.id}
+      key={props.id}
       onDragStart={(event) => dragStart(event)}
       draggable={props.draggable}
-      className="playcard"
-      style={{ backgroundColor: props.card.backgroundColor, opacity: opacity }}
+      className={size(props.size)}
+      style={{ backgroundColor: props.backgroundColor, opacity: opacity }}
     >
       <div className="title">{props.card.name}</div>
       <div className="text">

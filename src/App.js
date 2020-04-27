@@ -3,6 +3,7 @@ import './App.css';
 
 import Location from './Location';
 import PlayingCard from './PlayingCard';
+import {HAND} from './constants.js'
 
 import { Button } from '@material-ui/core';
 
@@ -14,8 +15,19 @@ const App = () => {
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
   const [cards, setCards] = useState([]);
 
-  // useEffect(() => {
-  // });
+  const onDragStart = (event, cardId) => {
+    let triggerCard = cards.find((card) => card.id == cardId);
+      console.log('dragstart on div: ', cardId);
+      event.dataTransfer.setData('cardId', cardId);
+  };
+  const onDragOver = (event) => {
+    event.preventDefault();
+  };
+  const onDrop = (event, loc) => {
+    let cardId = event.dataTransfer.getData('cardId');
+    console.log('drop on' + loc);
+    playCard(cardId,loc)
+  };
 
   //basic promise
   const startGame = () =>{
@@ -38,62 +50,32 @@ const App = () => {
       console.log('trying getgame');
       let res = await fetch('http://localhost:8080/game/' + id);
       let response = await res.json();
-      console.log('getting game' + id + ':' + response.locations);
-      let locationInfo = response.locations;
-      console.log(response);
-      setLocationInfo(locationInfo);
-      setPlayerInfo(response.players)
-      
+      setLocationInfo(response.locations);
+      setPlayerInfo(response.players)      
     } catch (e) {
       console.log('error getting game:' + e);
     }
   };
 
-  const onDragStart = (event, cardId) => {
-    let triggerCard = cards.find((card) => card.id == cardId);
-    // if (triggerCard.player == currentPlayer) {
-      console.log('dragstart on div: ', cardId);
-      // console.log('tx'+origin)
-      // event.dataTransfer.setData('origin', origin);
-      event.dataTransfer.setData('cardId', cardId);
-    // } else {
-      // alert(`you can't play someone else's card!`)
-      // console.log(`you can't play someone else's card!`);
-    // }
-  };
-  const onDragOver = (event) => {
-    event.preventDefault();
-  };
+  const playCard = async(name, location)=>{
+    let data = {"cardname":name, "player":players[currentPlayer].name,"location":location,}
+    let res = await fetch('http://localhost:8080/game/' + gameId+'/play',{
+    method: 'POST', 
+    mode: 'cors', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) 
 
-  const onDrop = (event, loc) => {
-    let cardId = event.dataTransfer.getData('cardId');
-    let og = event.dataTransfer.getData('origin');
-    console.log('drop from' + og);
-    console.log('drop on' + loc);
-    // let oldLocation, oldCard;
-    let newCards = cards.map((card) => {
+  });
+    let response = await res.json();
+    console.log('playcard result'+response.locations)
+    setLocationInfo(response.locations);
+    setPlayerInfo(response.players)
+  }
 
-      if (card.id == cardId && card.player == currentPlayer) {
+  const buyCard = async (index, location,card) => {
 
-        let newLocations = [...locations]
-        card.location = loc;
-        card.draggable = false;
-        let local = newLocations.find((el)=>el.name ==loc)
-        if(local && local.name != "hand"){
-          local.currentGold += card.gold;
-          local.currentInfluence += card.influence;
-          setLocationInfo([...newLocations])
-        }
-      }
-      return card;
-    });
-    // console.log('is this:'+oldLocation)
-
-
-    setCards(newCards);
-
-  };
-  const buyCard = async (index, location) => {
     let data = {"index":index, "player":players[currentPlayer].name,"location":location,}
     let res = await fetch('http://localhost:8080/game/' + gameId+'/buy',{
     method: 'POST', 
@@ -104,10 +86,14 @@ const App = () => {
     body: JSON.stringify(data) 
   });
     console.log(res)
-  // return response.json(); // parses JSON response into native JavaScript objects
+    let response = await res.json();
+    console.log('buycard result'+response.locations)
+    setLocationInfo(response.locations);
+    setPlayerInfo(response.players)
+  
   }
 
-  const nextPlayer = async () => {
+  const nextPlayer = () => {
     console.log(players[currentPlayer].name +'is current turn')
     console.log(players[currentPlayer].hand)
     // setCards(players[currentPlayer].hand)
@@ -116,58 +102,58 @@ const App = () => {
     if(newPlayer >= players.length){
       newPlayer = 0;
     }
-    let playerHand = []
-    cards.map((oldcard,index)=>{
-      if (oldcard.location != "hand"){
-        playerHand.push(oldcard)
-      }
-    })
-    players[newPlayer].hand.map((card,index)=>{
-      let displayCard = {...card}
-      displayCard.player = newPlayer
-      displayCard.id = index
-      displayCard.draggable= true
-      displayCard.location = "hand"
-      displayCard.backgroundColor = playerBGs[newPlayer]
-      playerHand.push(displayCard)
-    })
-    setCards(playerHand)
+    // setHand(newPlayer)
     setCurrentPlayer(newPlayer)
-    // {player: "2",id: "1", influence:0,gold:0, cardName:"Read book",location:"babylon", backgroundColor: "red"},
-    
-    
-    // console.log(
-    //   'submitting cards and getting next player: ' + JSON.stringify(cards),
-    // );
-    // let res = await fetch('http://localhost:8080/game/'+gameId+"/"+currentPlayer);
-    // console.log(res)
   };
 
+  // const setHand = (mPLayer) => {
+  //    let playerHand = []
+  //   // cards.map((oldcard,index)=>{
+  //   //   if (oldcard.location != HAND){
+  //   //     playerHand.push(oldcard)
+  //   //   }
+  //   // })
+  //   players[mPLayer].hand.map((card,index)=>{
+  //     let displayCard = {...card}
+  //     displayCard.player = mPLayer
+  //     // displayCard.id = index
+  //     // displayCard.draggable= true
+  //     displayCard.location = HAND
+  //     displayCard.backgroundColor = playerBGs[mPLayer]
+  //     playerHand.push(displayCard)
+  //   })
+  //   setCards(playerHand)
+  // }
 
-  let displayCards = {
-    hand: [],
-  };
-  Object.keys(locations).map((location,index)=>{
-    // console.log
-    displayCards[locations[location].name]=[]
-  })
 
-  cards.forEach((card) => {
-    // console.log('card forweach'+JSON.stringify(card))
-    displayCards[card.location].push(
-      <PlayingCard draggable={card.draggable} onDragStart={onDragStart} card={card} />,
-    );
-  });
+  // let displayCards = [] 
+  // {
+  //   hand: [],
+  // };
+  // Object.keys(locations).map((location,index)=>{
+  //   // console.log
+  //   displayCards[locations[location].name]=[]
+  // })
+
+  // cards.forEach((card) => {
+  //   // console.log('card forweach'+JSON.stringify(card))
+  //   displayCards.push(
+  //     <PlayingCard draggable={card.draggable} onDragStart={onDragStart} card={card} />,
+  //   );
+  // });
 
   let locCards = [];
   if (locations) {
     locations.map((location, index) => {
       locCards.push(
         <Location
+          player={currentPlayer}
+          players={players}
           buyCard={buyCard}
           location={location}
           name={location.name}
-          cards={displayCards[location.name]}
+          playerBGs={playerBGs}
+          // cards={displayCards[location.name]}
           onDragOver={onDragOver}
           onDrop={onDrop}
         />,
@@ -188,12 +174,14 @@ const App = () => {
         </div>
         : 
       <div className="flexRow center">
-        <Location
-          name="hand"
-          cards={displayCards["hand"]}
-          onDragOver={onDragOver}
-          onDrop={onDrop}
-        />
+        {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
+          <PlayingCard id={index} 
+          draggable 
+          onDragStart={onDragStart} 
+          card={card}
+          player={currentPlayer}
+          backgroundColor = {playerBGs[currentPlayer]}
+           />)}) : <span/>}
       <Button onClick={nextPlayer} variant="contained" color="secondary">
         Next Player
       </Button>

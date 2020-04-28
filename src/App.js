@@ -14,6 +14,7 @@ const App = () => {
   const [players, setPlayerInfo] = useState([]);
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
   const [cards, setCards] = useState([]);
+  const [turn, setTurn] = useState(0)
 
   const onDragStart = (event, cardId) => {
     let triggerCard = cards.find((card) => card.id == cardId);
@@ -30,6 +31,7 @@ const App = () => {
   };
 
   //basic promise
+  //todo: add player select page
   const startGame = () =>{
     fetch('http://localhost:8080/game')
       .then((res) => res.json())
@@ -51,7 +53,8 @@ const App = () => {
       let res = await fetch('http://localhost:8080/game/' + id);
       let response = await res.json();
       setLocationInfo(response.locations);
-      setPlayerInfo(response.players)      
+      setPlayerInfo(response.players)    
+      setTurn(response.turn)  
     } catch (e) {
       console.log('error getting game:' + e);
     }
@@ -93,54 +96,25 @@ const App = () => {
   
   }
 
-  const nextPlayer = () => {
-    console.log(players[currentPlayer].name +'is current turn')
-    console.log(players[currentPlayer].hand)
-    // setCards(players[currentPlayer].hand)
-    // setCurrentPlayer()
-    let newPlayer = currentPlayer+1;
-    if(newPlayer >= players.length){
-      newPlayer = 0;
-    }
-    // setHand(newPlayer)
-    setCurrentPlayer(newPlayer)
+  const nextPlayer = async() => {
+    console.log('next current'+currentPlayer)
+    // let data = {"index":index, "player":players[currentPlayer].name,"location":location,}
+    let res = await fetch('http://localhost:8080/game/' + gameId+'/next/'+currentPlayer,{
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    // body: JSON.stringify(data) 
+  });
+    console.log(res)
+    let response = await res.json();
+    console.log('nextplayer result'+JSON.stringify(response.locations))
+    setLocationInfo(response.locations);
+    setPlayerInfo(response.players);
+    setCurrentPlayer(response.newPlayer)
+    setTurn(response.turn)
   };
-
-  // const setHand = (mPLayer) => {
-  //    let playerHand = []
-  //   // cards.map((oldcard,index)=>{
-  //   //   if (oldcard.location != HAND){
-  //   //     playerHand.push(oldcard)
-  //   //   }
-  //   // })
-  //   players[mPLayer].hand.map((card,index)=>{
-  //     let displayCard = {...card}
-  //     displayCard.player = mPLayer
-  //     // displayCard.id = index
-  //     // displayCard.draggable= true
-  //     displayCard.location = HAND
-  //     displayCard.backgroundColor = playerBGs[mPLayer]
-  //     playerHand.push(displayCard)
-  //   })
-  //   setCards(playerHand)
-  // }
-
-
-  // let displayCards = [] 
-  // {
-  //   hand: [],
-  // };
-  // Object.keys(locations).map((location,index)=>{
-  //   // console.log
-  //   displayCards[locations[location].name]=[]
-  // })
-
-  // cards.forEach((card) => {
-  //   // console.log('card forweach'+JSON.stringify(card))
-  //   displayCards.push(
-  //     <PlayingCard draggable={card.draggable} onDragStart={onDragStart} card={card} />,
-  //   );
-  // });
 
   let locCards = [];
   if (locations) {
@@ -166,13 +140,15 @@ const App = () => {
       {locCards}
       </div>
         
-
       {gameId == -1 ?  <div className="flexCol">
           <Button onClick={startGame} variant="contained" color="secondary">
             Start Game
           </Button>
         </div>
         : 
+        <div className="flexCol">
+        <div>Current Turn: {turn}</div>
+        <div className="title">CurrentPlayer: {players[currentPlayer] ? players[currentPlayer].name : ''}</div>
       <div className="flexRow center">
         {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
           <PlayingCard id={index} 
@@ -185,6 +161,7 @@ const App = () => {
       <Button onClick={nextPlayer} variant="contained" color="secondary">
         Next Player
       </Button>
+      </div>
       </div>
         }
     </div>

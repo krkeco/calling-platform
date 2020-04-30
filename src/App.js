@@ -4,7 +4,7 @@ import './App.css';
 import Location from './Location';
 import PlayingCard from './PlayingCard';
 import {HAND} from './constants.js'
-
+import PlayerDataForm from './PlayerDataForm'
 import { Button } from '@material-ui/core';
 
 const App = () => {
@@ -15,6 +15,42 @@ const App = () => {
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
   const [cards, setCards] = useState([]);
   const [turn, setTurn] = useState(0)
+  const [playerCount, setPlayerCount] = useState(2)
+
+
+
+//graphql query
+const getData = async() => {
+  try{
+    let res = await fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      // mode: 'cors', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body:JSON.stringify({'query':`{
+        players(gameId:0){
+          name, type, firstPlayer,
+          deck{cost, gold, influence, name},
+          discard{cost, gold, influence, name},
+          hand{cost, gold, influence, name}
+        }
+      
+      }`})
+    })
+
+ // let res = await fetch('http://localhost:4001/graphql?query={hello}')
+ let response = await res.json();
+ console.log('got response:'+JSON.stringify(response))
+  // .then(r => r.json())
+  // .then(data => console.log('data returned:', data));
+  }catch(e){
+    console.log('error:'+e)
+  }
+
+}
+getData();
 
   const onDragStart = (event, cardId) => {
     let triggerCard = cards.find((card) => card.id == cardId);
@@ -32,20 +68,27 @@ const App = () => {
 
   //basic promise
   //todo: add player select page
-  const startGame = () =>{
-    fetch('http://localhost:8080/game')
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log('result' + result.id); //gameid
-          setId(result.id);
-          getGame(result.id);
-        },
-        (error) => {
-          console.log('error' + error);
-        },
-      );
+  // const startGame = () =>{
+  //   fetch('http://localhost:8080/game')
+  //     .then((res) => res.json())
+  //     .then(
+  //       (result) => {
+  //         console.log('result' + result.id); //gameid
+  //         setId(result.id);
+  //         getGame(result.id);
+  //       },
+  //       (error) => {
+  //         console.log('error' + error);
+  //       },
+  //     );
+  // }
+  const startGame = async(result) =>{
+    // console.log('getting game '+result)
+    setId(result);
+    getGame(result);
   }
+
+
   //async await
   const getGame = async (id) => {
     try {
@@ -61,8 +104,8 @@ const App = () => {
   };
 
   const playCard = async(name, location)=>{
-    let data = {"cardname":name, "player":players[currentPlayer].name,"location":location,}
-    let res = await fetch('http://localhost:8080/game/' + gameId+'/play',{
+    let data = {"cardname":name, "player":players[currentPlayer].name, "location":location}
+    let res = await fetch('http://localhost:8080/game/' + gameId + '/play',{
     method: 'POST', 
     mode: 'cors', 
     headers: {
@@ -103,12 +146,18 @@ const App = () => {
     method: 'GET',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     // body: JSON.stringify(data) 
   });
+
     console.log(res)
     let response = await res.json();
+    
+    if(response.winner){
+      alert('Good Game! ' +response.winner+ " wins!!")
+    }
     console.log('nextplayer result'+JSON.stringify(response.locations))
     setLocationInfo(response.locations);
     setPlayerInfo(response.players);
@@ -141,9 +190,8 @@ const App = () => {
       </div>
         
       {gameId == -1 ?  <div className="flexCol">
-          <Button onClick={startGame} variant="contained" color="secondary">
-            Start Game
-          </Button>
+        <PlayerDataForm playerBGs={playerBGs} startGame={startGame}/>
+        
         </div>
         : 
         <div className="flexCol">

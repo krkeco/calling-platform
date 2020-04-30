@@ -24,14 +24,6 @@ const Location = (props) => {
 
   };
 
-  // if(props.cards && props.cards.length > 0){
-    // props.cards[props.name].map((card,index)=>{
-      // console.log("maping card"+JSON.stringify(props.cards))
-      // totalGold+=card.gold
-      // totalInfluence += card.influence
-    // })
-  // }
-
   let market = []
   if(props.location){
     props.location.market.map((card,index)=>{
@@ -53,10 +45,11 @@ const Location = (props) => {
   }
   
   const battlefield = (props) => {
-    
   return (<div className="flexCol padded">
         
         {Object.keys(props.location.battlefield).map((bf,index)=>{
+          let bfIndex = props.players.findIndex((player)=> player.name == bf)
+          let bgColor = props.playerBGs[bfIndex]
           return(<div className="flexRow padded">
           <div>{bf}:</div>
           <div>G:{props.location.battlefield[bf].gold}</div>
@@ -66,7 +59,7 @@ const Location = (props) => {
               <PlayingCard 
               size="small"
               id={ind} 
-              backgroundColor={props.playerBGs[props.player]}
+              backgroundColor={bgColor}
               draggable={false} 
               onDragStart={null} 
               card={card}

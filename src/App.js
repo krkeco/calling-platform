@@ -50,7 +50,7 @@ const getData = async() => {
   }
 
 }
-getData();
+// getData();
 
   const onDragStart = (event, cardId) => {
     let triggerCard = cards.find((card) => card.id == cardId);
@@ -91,15 +91,41 @@ getData();
 
   //async await
   const getGame = async (id) => {
-    try {
-      console.log('trying getgame');
-      let res = await fetch('http://localhost:8080/game/' + id);
-      let response = await res.json();
-      setLocationInfo(response.locations);
-      setPlayerInfo(response.players)    
-      setTurn(response.turn)  
-    } catch (e) {
-      console.log('error getting game:' + e);
+    try{
+      let theId = parseInt(id);
+      console.log('getting game from '+theId)
+      let query = `query Game($theId: Int) {
+          players(gameId: $theId){
+            name, type, firstPlayer,
+            deck{cost, gold, influence, name},
+            discard{cost, gold, influence, name},
+            hand{cost, gold, influence, name}
+          },
+          locations(gameId: $theId){
+            name, influence
+            market{cost, gold, influence, name},
+          }
+      }`;
+      let res = await fetch('http://localhost:4000/graphql', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {theId}
+        })
+      })
+
+      let response = await res.json()
+      console.log('response to newgame:'+JSON.stringify(response))
+      
+      setLocationInfo(response.data.locations);
+      setPlayerInfo(response.data.players)    
+      setTurn(response.data.turn)  
+    }catch(e){
+      console.log(e)
     }
   };
 

@@ -47,7 +47,8 @@ const Location = (props) => {
   const battlefield = (props) => {
   return (<div className="flexCol padded">
         
-        {Object.keys(props.location.battlefield).map((bf,index)=>{
+          
+        {props.location.battlefield ? Object.keys(props.location.battlefield).map((bf,index)=>{
           let bfIndex = props.players.findIndex((player)=> player.name == bf)
           let bgColor = props.playerBGs[bfIndex]
           return(<div className="flexRow padded">
@@ -70,7 +71,9 @@ const Location = (props) => {
             })}
           </div>
           )
-        })}
+        }) : 
+        <div/>
+      }
         
         </div>)
   }

@@ -1,0 +1,10 @@
+TODO
+game log prettify
+
+next player graphql
+
+tests
+
+cleanup
+	fe
+	be

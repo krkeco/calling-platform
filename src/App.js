@@ -14,44 +14,42 @@ const App = () => {
   const [players, setPlayerInfo] = useState([]);
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
   const [cards, setCards] = useState([]);
-  const [turn, setTurn] = useState(0)
+  const [turn, setTurn] = useState(1)
   const [playerCount, setPlayerCount] = useState(2)
+  const [gameLog, appendLog] = useState([])
 
 
-
-//graphql query
-const getData = async() => {
-  try{
-    let res = await fetch('http://localhost:4000/graphql', {
-      method: 'POST',
-      // mode: 'cors', 
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body:JSON.stringify({'query':`{
-        players(gameId:0){
-          name, type, firstPlayer,
-          deck{cost, gold, influence, name},
-          discard{cost, gold, influence, name},
-          hand{cost, gold, influence, name}
-        }
+// //graphql query
+// const getData = async() => {
+//   try{
+//     let res = await fetch('http://localhost:4000/graphql', {
+//       method: 'POST',
+//       // mode: 'cors', 
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//       },
+//       body:JSON.stringify({'query':`{
+//         players(gameId:0){
+//           name, type, firstPlayer,
+//           deck{cost, gold, influence, name},
+//           discard{cost, gold, influence, name},
+//           hand{cost, gold, influence, name}
+//         }
       
-      }`})
-    })
+//       }`})
+//     })
 
- // let res = await fetch('http://localhost:4001/graphql?query={hello}')
- let response = await res.json();
- console.log('got response:'+JSON.stringify(response))
-  // .then(r => r.json())
-  // .then(data => console.log('data returned:', data));
-  }catch(e){
-    console.log('error:'+e)
-  }
+//  // let res = await fetch('http://localhost:4001/graphql?query={hello}')
+//  let response = await res.json();
+//  console.log('got response:'+JSON.stringify(response))
+//   // .then(r => r.json())
+//   // .then(data => console.log('data returned:', data));
+//   }catch(e){
+//     console.log('error:'+e)
+//   }
 
-}
-// getData();
-
+// }
   const onDragStart = (event, cardId) => {
     let triggerCard = cards.find((card) => card.id == cardId);
       console.log('dragstart on div: ', cardId);
@@ -66,22 +64,6 @@ const getData = async() => {
     playCard(cardId,loc)
   };
 
-  //basic promise
-  //todo: add player select page
-  // const startGame = () =>{
-  //   fetch('http://localhost:8080/game')
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         console.log('result' + result.id); //gameid
-  //         setId(result.id);
-  //         getGame(result.id);
-  //       },
-  //       (error) => {
-  //         console.log('error' + error);
-  //       },
-  //     );
-  // }
   const startGame = async(result) =>{
     // console.log('getting game '+result)
     setId(result);
@@ -97,13 +79,14 @@ const getData = async() => {
       let query = `query Game($theId: Int) {
           players(gameId: $theId){
             name, type, firstPlayer,
-            deck{cost, gold, influence, name},
-            discard{cost, gold, influence, name},
-            hand{cost, gold, influence, name}
+            deck{cost, draw, gold, influence, name},
+            discard{cost, draw, gold, influence, name},
+            hand{cost, draw, gold, influence, name}
           },
           locations(gameId: $theId){
-            name, influence
+            name, influence,influencer,
             market{cost, gold, influence, name},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold}}
           }
       }`;
       let res = await fetch('http://localhost:4000/graphql', {
@@ -119,76 +102,163 @@ const getData = async() => {
       })
 
       let response = await res.json()
-      console.log('response to newgame:'+JSON.stringify(response))
+      console.log('response for game info:'+JSON.stringify(response.data.players))
       
       setLocationInfo(response.data.locations);
       setPlayerInfo(response.data.players)    
-      setTurn(response.data.turn)  
+      
+      let log = "Starting first Turn: 1"
+      let log2 = response.data.players[currentPlayer].name + " is now First Player"
+      appendLog([...gameLog,log,log2])
     }catch(e){
       console.log(e)
     }
   };
 
-  const playCard = async(name, location)=>{
-    let data = {"cardname":name, "player":players[currentPlayer].name, "location":location}
-    let res = await fetch('http://localhost:8080/game/' + gameId + '/play',{
-    method: 'POST', 
-    mode: 'cors', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) 
 
-  });
-    let response = await res.json();
-    console.log('playcard result'+response.locations)
-    setLocationInfo(response.locations);
-    setPlayerInfo(response.players)
+// play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
+  const playCard = async(name, location)=>{
+    let cardIndex = parseInt(name);
+    let theGame = parseInt(gameId);
+    let playerName = players[currentPlayer].name;
+    // let data = {"cardname":name, "player":players[currentPlayer].name, "location":location}
+    // console.log(`trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`)
+       try{
+//{gameId, playerName, buyLocation}
+      let query = `query Play($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
+        play(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
+      }`;
+      let res = await fetch('http://localhost:4000/graphql', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {playerName, cardIndex, location, theGame}
+        })
+      })
+
+      let response = await res.json()
+      console.log('response to playcard:'+JSON.stringify(response))
+      let log = players[currentPlayer].name + " " + response.data.play
+      appendLog([...gameLog, log])
+      getGame(gameId);
+    }catch(e){
+      console.log(e)
+    }
   }
 
-  const buyCard = async (index, location,card) => {
+  const buyCard = async (index, location, card) => {
+    let cardIndex = parseInt(index);
+    let theGame = parseInt(gameId);
+    let playerName = players[currentPlayer].name;
+    // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
+    console.log(`trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`)
+        try{
+      let query = `query Buy($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
+        buy(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
+      }`;
+      let res = await fetch('http://localhost:4000/graphql', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {playerName, cardIndex, location, theGame}
+        })
+      })
 
-    let data = {"index":index, "player":players[currentPlayer].name,"location":location,}
-    let res = await fetch('http://localhost:8080/game/' + gameId+'/buy',{
-    method: 'POST', 
-    mode: 'cors', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) 
-  });
-    console.log(res)
-    let response = await res.json();
-    console.log('buycard result'+response.locations)
-    setLocationInfo(response.locations);
-    setPlayerInfo(response.players)
+      let response = await res.json()
+      console.log('response to playcard:'+JSON.stringify(response))
+
+      let log = players[currentPlayer].name + " " + response.data.buy
+      appendLog([...gameLog, log])
+
+      getGame(gameId);
+    }catch(e){
+      console.log(e)
+    }
   
   }
 
   const nextPlayer = async() => {
-    console.log('next current'+currentPlayer)
-    // let data = {"index":index, "player":players[currentPlayer].name,"location":location,}
-    let res = await fetch('http://localhost:8080/game/' + gameId+'/next/'+currentPlayer,{
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    // body: JSON.stringify(data) 
-  });
+    let theGame = parseInt(gameId);
+    let thePlayer = parseInt(currentPlayer);
+    // console.log('next current'+currentPlayer)
+  try{
+      let query = `query NextPlayer($theGame: Int, $thePlayer: Int ) {
+        nextPlayer(gameId: $theGame, currentPlayer: $thePlayer){
+          turn, nextPlayer, winner
+        },
+        players(gameId: $theGame){
+            name, type, firstPlayer,
+            deck{cost, draw, gold, influence, name},
+            discard{cost, draw, gold, influence, name},
+            hand{cost, draw, gold, influence, name}
+          },
+        locations(gameId: $theGame){
+            name, influence,influencer,
+            market{cost, gold, influence, name},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold}}
+          }
+      }`;
+      let res = await fetch('http://localhost:4000/graphql', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {theGame, thePlayer}
+        })
+      })
 
-    console.log(res)
-    let response = await res.json();
-    
-    if(response.winner){
-      alert('Good Game! ' +response.winner+ " wins!!")
+      let response = await res.json()
+      console.log('response to nextturn newfirst is:'+JSON.stringify(response.data))
+      let newLog = [...gameLog]
+      locations.map((location, index)=>{
+        if(location.influencer != response.data.locations[index].influencer){
+          console.log('new influencer!!!')
+          let log = response.data.locations[index].influencer +" took " +locations[index].name + " from "+location.influencer+ "!"
+          newLog.push(log)
+        }
+      })
+
+      if(response.data.nextPlayer.winner){
+        alert(response.data.nextPlayer.winner+' is the winner!!')
+        newLog.push(response.data.nextPlayer.winner+ " won the game!")
+        setId(-1)
+        setLocationInfo([]);
+        setPlayerInfo([])    
+        setCurrentPlayer(0)
+        setTurn(1)
+      
+      }else{
+        
+        setCurrentPlayer(response.data.nextPlayer.nextPlayer)
+        
+        if(turn != response.data.nextPlayer.turn){
+          setTurn(response.data.nextPlayer.turn)
+          let log = "Starting new Turn:"+response.data.nextPlayer.turn
+          let log2 = players[currentPlayer].name + " is now First Player"
+          newLog.push("",log,log2)
+        }
+
+        // getGame(gameId);
+
+        setLocationInfo(response.data.locations);
+        setPlayerInfo(response.data.players)    
+      }
+        appendLog([...newLog])
+
+    }catch(e){
+      console.log(e)
     }
-    console.log('nextplayer result'+JSON.stringify(response.locations))
-    setLocationInfo(response.locations);
-    setPlayerInfo(response.players);
-    setCurrentPlayer(response.newPlayer)
-    setTurn(response.turn)
   };
 
   let locCards = [];
@@ -202,7 +272,6 @@ const getData = async() => {
           location={location}
           name={location.name}
           playerBGs={playerBGs}
-          // cards={displayCards[location.name]}
           onDragOver={onDragOver}
           onDrop={onDrop}
         />,
@@ -238,6 +307,14 @@ const getData = async() => {
       </div>
       </div>
         }
+        <div className="flexCol" >
+        GAME LOG:
+          {gameLog.map((log, ind)=>{
+            return (<div>
+            {log}
+            </div>)
+          })}
+        </div>
     </div>
   );
 };

@@ -8,16 +8,10 @@ const Location = (props) => {
 
   const buyCard = (card,index) => {
     if(props.location.battlefield 
-      // props.location.battlefield[bf]
-      && props.location.battlefield[props.players[props.player].name]){
-      let playerField = props.location.battlefield[props.players[props.player].name]
-      console.log(props.players[props.player].name+' could buy something with ' + playerField.gold)
-      props.buyCard(index, props.location, card)
-    
-    // console.log('buying something');
-    
-    // if(card.cost <= props.location.currentGold){
-      // console.log('this is affordable!'+card.cost + props.location.currentGold)
+      && props.location.battlefield[props.player]){
+      let playerField = props.location.battlefield[props.player]
+      console.log(props.players[props.player]+' could buy something with ' + playerField.gold)
+      props.buyCard(index, props.location.name, card)
     }else{
       console.log('you cannot afford this!'+card.cost + props.location.currentGold)
     }
@@ -28,14 +22,14 @@ const Location = (props) => {
   if(props.location){
     props.location.market.map((card,index)=>{
       market.push(
-        <Button style={{margin:5}} onClick={()=>buyCard(card,index)} variant="contained" color="primary">
-          <div className="flexCol marketcard center" >
+        <Button className="marketcard" style={{margin:5}} onClick={()=>buyCard(card,index)} variant="contained" color="primary">
+          <div className="marketcard flexCol flexStart paddded" >
             <div className="market-title">{card.name}({card.cost})</div>
 
             <div className="market-stat">
-              <span>Gold:{card.gold}</span>
-              <span>Influence: {card.influence} </span>
-              <span>Draw: {card.draw}</span>
+              <div>Gold:{card.gold}</div>
+              <div>Influence: {card.influence} </div>
+              <div>Draw: {card.draw}</div>
             </div>
             
           </div>
@@ -43,21 +37,24 @@ const Location = (props) => {
       )
     }) 
   }
-  
+    
   const battlefield = (props) => {
-  return (<div className="flexCol padded">
-        
-          
-        {props.location.battlefield ? Object.keys(props.location.battlefield).map((bf,index)=>{
-          let bfIndex = props.players.findIndex((player)=> player.name == bf)
-          let bgColor = props.playerBGs[bfIndex]
-          return(<div className="flexRow padded">
-          <div>{bf}:</div>
-          <div>G:{props.location.battlefield[bf].gold}</div>
-          <div>I:{props.location.battlefield[bf].influence}</div>
-            {props.location.battlefield[bf].cards.map((card,ind)=>{
-              return(
-              <PlayingCard 
+    return (<div className="flexCol padded">
+      {props.location.battlefield.length > 0 ? 
+        (props.location.battlefield.map((bf, index)=>{
+          let playerBF = props.location.battlefield[index]
+          let bgColor = props.playerBGs[index]
+          return playerBF ? (
+           (<div className="flexRow" >
+            <div className="flexCol" >
+              <div>{playerBF.name}</div>
+              <div className="flexRow" >
+                <div>G:{playerBF.gold}</div>
+                <div>--Inf:{playerBF.influence}</div>
+              </div>
+            </div>
+            {playerBF.cards.map((card,ind)=>{
+              return ( <PlayingCard 
               size="small"
               id={ind} 
               backgroundColor={bgColor}
@@ -65,24 +62,21 @@ const Location = (props) => {
               onDragStart={null} 
               card={card}
               player={props.player}
-            
-             />
-              )
+             />)
             })}
-          </div>
-          )
-        }) : 
-        <div/>
+            </div>)
+          ) : (null)
+        })
+          ) : (<div></div>)
       }
-        
-        </div>)
+    </div>)
   }
 
   const titlebar = (props) => {
-    return(<div>
+    return(<div className="flexRow" >
     <div>{props.location.name}</div>
-    <div>{props.location.influencer}</div>
-    <div>{props.location.influence}</div>
+    <div>({props.location.influence})--</div>
+    <div>influencer:{props.location.influencer}</div>
     </div>
     )
   }

@@ -30,6 +30,9 @@ const PlayingCard = (props) => {
       <div className="text">
         {props.card.influence} Inf<span className="stat">luence</span>
       </div>
+      <div className="text">
+        {props.card.draw} D<span className="stat">raw</span>
+      </div>
     </div>
   );
 };

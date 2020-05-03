@@ -37,6 +37,7 @@ const Location = (props) => {
       )
     }) 
   }
+  
     
   const battlefield = (props) => {
     return (<div className="flexCol padded">
@@ -73,15 +74,19 @@ const Location = (props) => {
   }
 
   const titlebar = (props) => {
-    return(<div className="flexRow" >
+    return(<div><div className="flexRow" >
     <div>{props.location.name}</div>
     <div>({props.location.influence})--</div>
     <div>influencer:{props.location.influencer}</div>
     </div>
+    <div className="flexRow" >
+      <div>weariness:{props.location.weariness}</div>
+    </div>
+    </div>
     )
   }
 
-  return (
+  return (<div>
     <div
       className="location"
       onDragOver={(event) => props.onDragOver(event)}
@@ -90,6 +95,16 @@ const Location = (props) => {
       {titlebar(props)}
       {market}
       {battlefield(props)}
+    </div>
+    {props.location.name=="Jerusalem" ? (
+    <div
+      style={{width:100, height:100, backgroundColor:'gray'}}
+      onDrop={(event) => props.onDrop(event, 'mill')}
+      onDragOver={(event) => props.onDragOver(event)}>
+    Scrap Pile
+    </div> 
+    ) : (<div/>)
+  }
     </div>
   );
 };

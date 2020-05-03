@@ -5,12 +5,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import {URL, playerTypeEnum} from './constants'
+
 
 const PlayerDataForm = (props) => {
   
-  const [players, setPlayers] = useState(2);
-  const [playerCharacters, setCharacter] = useState(["Jonah","Esther"])
+  const [players, setPlayers] = useState(1);
+  const [localPlayers, setLocalPlayers] = useState(1);
+  const [gameId, setGameId] = useState(-1);
+  const [playerType, setType] = useState(playerTypeEnum.GUEST);
+  const [playerCharacters, setCharacter] = useState(["Jonah"])
+  const [waitingPlayers, setWaitRoom] = useState([])
 
   const handleChange = (event) => {
     setPlayers(event.target.value);
@@ -37,19 +44,63 @@ const PlayerDataForm = (props) => {
         >
           <MenuItem value={"Jonah"}>Jonah</MenuItem>
           <MenuItem value={"Esther"}>Esther</MenuItem>
+          <MenuItem value={"Joshua"}>Joshua</MenuItem> 
+         {/**
           <MenuItem value={"Paul"}>Paul</MenuItem>
-          <MenuItem value={"Joshua"}>Joshua</MenuItem>
+        **/}
         </Select>
       </div>
       )
   }
-  const startGame = async() =>{
+
+  const queryGameStatus = async(theTimeOut, theId, myIndex) => {
+    try{
+      let theGame = parseInt(theId)
+      // let index = localPlayers
+      console.log('index is '+myIndex)
+      let query = `query Game($theGame: Int) {
+        waitingRoom(gameId: $theGame){room, started}
+      }`;
+
+      let res = await fetch(URL, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {theGame}
+        })
+      })
+
+      let response = await res.json()
+      console.log('response to gamestatus:'+JSON.stringify(response))
+      // setGameId(response.data.newGame)
+      // setWaitRoom([...playerCharacters])
+      if(response.data.waitingRoom.started){
+        console.log('starting game' +theId)
+        props.startGame(theId,myIndex)
+
+      }else{
+        setWaitRoom([...response.data.waitingRoom.room])
+        setTimeout(()=>{queryGameStatus(theTimeOut, theId, myIndex)}, theTimeOut)
+      }
+
+    }catch(e){
+      console.log(e)
+      // setTimeout(()=>queryGameStatus(), timeout)
+    }
+  }
+
+  const createGame = async() =>{
     try{
 
-      let query = `query Game($playerCharacters: [String]) {
-        game(players: $playerCharacters)
+      let query = `query NewGame($playerCharacters: [String]) {
+        newGame(players: $playerCharacters)
       }`;
-      let res = await fetch('http://localhost:4000/graphql', {
+
+      let res = await fetch(URL, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -63,33 +114,126 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json()
       console.log('response to newgame:'+JSON.stringify(response))
-      props.startGame(response.data.game)
+      let id = response.data.newGame
+      setGameId(id)
+      setWaitRoom([...playerCharacters])
+      console.log('setting local player to '+playerCharacters.length)
+      setLocalPlayers(playerCharacters.length)
+      // props.startGame(response.data.game)
+      queryGameStatus(2000,id, playerCharacters.length)
+
     }catch(e){
       console.log(e)
     }
   }
+  const startGame = async() =>{
+    try{
+      let theGame = parseInt(gameId);
+
+      let query = `query StartGame($theGame: Int!) {
+        startGame(gameId: $theGame)
+      }`;
+      let res = await fetch(URL, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {theGame}
+        })
+      })
+
+      let response = await res.json()
+      console.log('response to newgame:'+JSON.stringify(response))
+      // setGameId(response.data.newGame)
+      // props.startGame(response.data.startGame, localPlayers)
+    }catch(e){
+      console.log(e)
+    }
+  }
+  const joinGame = async() =>{
+
+    try{
+      let theGame = parseInt(gameId)
+      let query = `query JoinGame($playerCharacters: [String], $theGame: Int) {
+        joinGame(players: $playerCharacters, gameId: $theGame)
+      }`;
+      let res = await fetch(URL, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {theGame, playerCharacters}
+        })
+      })
+
+      let response = await res.json()
+      let count = response.data.joinGame.length
+      console.log('my index should be '+count)
+      setLocalPlayers(count)
+
+      setWaitRoom([...response.data.joinGame])
+      console.log('response to newgame:'+JSON.stringify(response))
+      // props.startGame(response.data.game)
+      queryGameStatus(5000, theGame, count)
+    }catch(e){
+      console.log(e)
+    }
+    
+  }
+
+  const playerCountToggle =  <FormControl className="formControl">
+        <InputLabel id="player-count-label">Players</InputLabel>
+        <Select
+          labelId="player-count-label"
+          id="player-count"
+          value={players}
+          onChange={handleChange}
+        >
+          <MenuItem value={1}>One</MenuItem>
+          <MenuItem value={2}>Two</MenuItem>
+          <MenuItem value={3}>Three</MenuItem>
+          <MenuItem value={4}>Four</MenuItem>
+        </Select>
+        
+      </FormControl>
 
 
   return (
     <div>
       <FormControl className="formControl">
-        <InputLabel id="player-count">Players</InputLabel>
+        <InputLabel id="player-type-label">Player Type</InputLabel>        
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={players}
-          onChange={handleChange}
+          labelId="player-type-label"
+          id="player-type"
+          value={playerType}
+          onChange={(e)=>setType(e.target.value)}
         >
-          <MenuItem value={2}>Two</MenuItem>
-          <MenuItem value={3}>Three</MenuItem>
-          <MenuItem value={4}>Four</MenuItem>
+          <MenuItem value={playerTypeEnum.HOST}>Host a Game</MenuItem>
+          <MenuItem value={playerTypeEnum.GUEST}>Join a Game</MenuItem>
         </Select>
-        {playerForm}
+        
+        {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> : <span/>}
+        
       </FormControl>
-      
-          <Button onClick={startGame} variant="contained" color="secondary">
-            Start Game
+      {playerType == playerTypeEnum.HOST ? playerCountToggle : players > 1 ? setPlayers(1) : <div/>}
+      {playerForm}
+
+          <Button onClick={playerType == playerTypeEnum.HOST ? createGame : joinGame} variant="contained" color="secondary">
+            Create/Join Game
           </Button>
+
+          {playerType == playerTypeEnum.HOST && gameId >= 0 ?(
+                      <Button onClick={startGame} variant="contained" color="secondary">
+                      Start Game
+                    </Button>):(<div/>)}
+                    <div>players in game: {waitingPlayers} </div>
+                    <div>players on this local: {localPlayers}</div>
     </div>
   );
 }

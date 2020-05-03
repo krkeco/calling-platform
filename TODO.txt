@@ -1,10 +1,17 @@
 TODO
-game log prettify
 
-next player graphql
+be
+	1 gold to recycle market?
+	paul
 
-tests
 
-cleanup
-	fe
-	be
+	someday: subscriptions
+
+react-native?
+	apis: same as react
+	views:
+		start page (basically same)
+		game page (3 locations and small hand) -- tablet same as desktop?
+			location specific page
+			hand zoom in (like hearthstone)
+

@@ -3,7 +3,7 @@ import './App.css';
 
 import Location from './Location';
 import PlayingCard from './PlayingCard';
-import {HAND} from './constants.js'
+import {HAND,URL} from './constants.js'
 import PlayerDataForm from './PlayerDataForm'
 import { Button } from '@material-ui/core';
 
@@ -14,46 +14,21 @@ const App = () => {
   const [players, setPlayerInfo] = useState([]);
   const [playerBGs, setBGs] = useState(['red','blue','green','yellow'])
   const [cards, setCards] = useState([]);
-  const [turn, setTurn] = useState(1)
+  const [turn, setTurn] = useState(0)
   const [playerCount, setPlayerCount] = useState(2)
   const [gameLog, appendLog] = useState([])
+  const [playerIndex, setPlayerIndex] = useState(-1)
 
-
-// //graphql query
-// const getData = async() => {
-//   try{
-//     let res = await fetch('http://localhost:4000/graphql', {
-//       method: 'POST',
-//       // mode: 'cors', 
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json',
-//       },
-//       body:JSON.stringify({'query':`{
-//         players(gameId:0){
-//           name, type, firstPlayer,
-//           deck{cost, gold, influence, name},
-//           discard{cost, gold, influence, name},
-//           hand{cost, gold, influence, name}
-//         }
-      
-//       }`})
-//     })
-
-//  // let res = await fetch('http://localhost:4001/graphql?query={hello}')
-//  let response = await res.json();
-//  console.log('got response:'+JSON.stringify(response))
-//   // .then(r => r.json())
-//   // .then(data => console.log('data returned:', data));
-//   }catch(e){
-//     console.log('error:'+e)
-//   }
-
-// }
   const onDragStart = (event, cardId) => {
-    let triggerCard = cards.find((card) => card.id == cardId);
+    if(currentPlayer == playerIndex-1 || playerIndex == -1){
+      let triggerCard = cards.find((card) => card.id == cardId);
       console.log('dragstart on div: ', cardId);
       event.dataTransfer.setData('cardId', cardId);
+    }else{
+      alert("You can't playe someone else's cards!"+currentPlayer+"/"+playerIndex)
+      event.preventDefault();
+      
+    }
   };
   const onDragOver = (event) => {
     event.preventDefault();
@@ -64,15 +39,16 @@ const App = () => {
     playCard(cardId,loc)
   };
 
-  const startGame = async(result) =>{
+  const startGame = async(result, playerIndex) =>{
     // console.log('getting game '+result)
     setId(result);
-    getGame(result);
+    getGame(result, true);
+    setPlayerIndex(playerIndex);
   }
 
 
   //async await
-  const getGame = async (id) => {
+  const getGame = async (id, repeat=false) => {
     try{
       let theId = parseInt(id);
       console.log('getting game from '+theId)
@@ -84,12 +60,13 @@ const App = () => {
             hand{cost, draw, gold, influence, name}
           },
           locations(gameId: $theId){
-            name, influence,influencer,
+            name, influence,influencer, weariness,
             market{cost, gold, influence, name},
             battlefield{name,influence, gold, cards{name,draw, influence, gold}}
-          }
+          },
+          currentPlayer(gameId: $theId)
       }`;
-      let res = await fetch('http://localhost:4000/graphql', {
+      let res = await fetch(URL, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -102,15 +79,22 @@ const App = () => {
       })
 
       let response = await res.json()
-      console.log('response for game info:'+JSON.stringify(response.data.players))
+      console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
       
       setLocationInfo(response.data.locations);
-      setPlayerInfo(response.data.players)    
       
-      let log = "Starting first Turn: 1"
-      let log2 = response.data.players[currentPlayer].name + " is now First Player"
-      appendLog([...gameLog,log,log2])
-    }catch(e){
+      setPlayerInfo(response.data.players);
+
+      if(turn == 0 && !repeat){
+        setTurn(1)
+        let log = "Starting first Turn: 1"
+        let log2 = response.data.players[currentPlayer].name + " is now First Player"
+        appendLog([...gameLog,log,log2])
+      }
+      // if(repeat){
+      //   setTimeout(async()=>getGame(id, repeat),1000)
+      // }
+          }catch(e){
       console.log(e)
     }
   };
@@ -128,7 +112,7 @@ const App = () => {
       let query = `query Play($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
         play(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
       }`;
-      let res = await fetch('http://localhost:4000/graphql', {
+      let res = await fetch(URL, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +144,7 @@ const App = () => {
       let query = `query Buy($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
         buy(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
       }`;
-      let res = await fetch('http://localhost:4000/graphql', {
+      let res = await fetch(URL, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -201,12 +185,12 @@ const App = () => {
             hand{cost, draw, gold, influence, name}
           },
         locations(gameId: $theGame){
-            name, influence,influencer,
+            name, influence,influencer,weariness,
             market{cost, gold, influence, name},
             battlefield{name,influence, gold, cards{name,draw, influence, gold}}
           }
       }`;
-      let res = await fetch('http://localhost:4000/graphql', {
+      let res = await fetch(URL, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -290,8 +274,8 @@ const App = () => {
         </div>
         : 
         <div className="flexCol">
-        <div>Current Turn: {turn}</div>
-        <div className="title">CurrentPlayer: {players[currentPlayer] ? players[currentPlayer].name : ''}</div>
+        <div>Current Turn: {turn}; You are Player {playerIndex}</div>
+        <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
       <div className="flexRow center">
         {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
           <PlayingCard id={index} 
@@ -301,9 +285,13 @@ const App = () => {
           player={currentPlayer}
           backgroundColor = {playerBGs[currentPlayer]}
            />)}) : <span/>}
+    {currentPlayer == (playerIndex-1) ? 
       <Button onClick={nextPlayer} variant="contained" color="secondary">
         Next Player
       </Button>
+      :
+      <div/>
+    }
       </div>
       </div>
         }

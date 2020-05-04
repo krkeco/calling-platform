@@ -17,6 +17,10 @@
   justify-content: space-around;
   align-items: space-around;
 }
+.spaceBetween {
+  justify-content: space-between;
+  align-items: space-between;
+}
 .flexStart{
 	justify-content: flex-start;
 	align-items: flex-start;
@@ -28,8 +32,27 @@
 .location {
   min-width: 300px;
   height: 250px;
+  border-radius:5px;
+  padding:5px;
   background-color: #9e9e9e;
   border-left: 2px dotted red;
+}
+
+.dropdownBox{
+  margin: 5px;
+  border-radius: 5px; 
+  background-color:#ddd;
+}
+
+.scrapPile {
+  width:150px;
+  height:100px; 
+  margin-bottom:5px;
+  border-radius:5px;
+  background-color:gray;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 }
 
 .playcard {

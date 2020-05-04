@@ -61,7 +61,7 @@ const App = () => {
           },
           locations(gameId: $theId){
             name, influence,influencer, weariness,
-            market{cost, gold, influence, name},
+            market{cost,draw, gold, influence, name},
             battlefield{name,influence, gold, cards{name,draw, influence, gold}}
           },
           currentPlayer(gameId: $theId)
@@ -245,6 +245,14 @@ const App = () => {
     }
   };
 
+  let scrapPile =  <div
+              className="scrapPile flexCol center"
+              onDrop={(event) => onDrop(event, 'mill')}
+              onDragOver={(event) => onDragOver(event)}>
+            Scrap Pile
+            </div> 
+  
+
   let locCards = [];
   if (locations) {
     locations.map((location, index) => {
@@ -262,18 +270,26 @@ const App = () => {
       );
     });
   }
-  return (
-    <div className="flexCol">
+
+let view = <PlayerDataForm playerBGs={playerBGs} startGame={startGame}/>
+if(gameId > -1){
+  view = <div>
       <div className="flexRow spaceAround padded">
-      {locCards}
+        {locCards}
       </div>
-        
-      {gameId == -1 ?  <div className="flexCol">
-        <PlayerDataForm playerBGs={playerBGs} startGame={startGame}/>
-        
+      <div className="flexRow spaceBetween" style={{width:'100%'}} >
+
+    <div className="flexCol" style={{width:250}}>
+        <div className="flexCol" >
+        GAME LOG:
+          {gameLog.map((log, ind)=>{
+            return (<div>
+            {log}
+            </div>)
+          })}
         </div>
-        : 
-        <div className="flexCol">
+      </div>
+      <div className="flexCol">
         <div>Current Turn: {turn}; You are Player {playerIndex}</div>
         <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
       <div className="flexRow center">
@@ -285,24 +301,29 @@ const App = () => {
           player={currentPlayer}
           backgroundColor = {playerBGs[currentPlayer]}
            />)}) : <span/>}
+      </div>
+      </div>
+<div className="flexCol" style={{width:250}}>
+      {scrapPile}
     {currentPlayer == (playerIndex-1) ? 
-      <Button onClick={nextPlayer} variant="contained" color="secondary">
+      <Button style={{width:150, height:75}} onClick={nextPlayer} variant="contained" color="secondary">
         Next Player
       </Button>
       :
       <div/>
     }
+
       </div>
       </div>
-        }
-        <div className="flexCol" >
-        GAME LOG:
-          {gameLog.map((log, ind)=>{
-            return (<div>
-            {log}
-            </div>)
-          })}
-        </div>
+
+    </div>
+}
+
+  return (
+    <div className="flexCol">
+
+      {view}
+
     </div>
   );
 };

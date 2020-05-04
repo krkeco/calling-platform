@@ -21,7 +21,7 @@ const PlayingCard = (props) => {
       onDragStart={(event) => dragStart(event)}
       draggable={props.draggable}
       className={size(props.size)}
-      style={{ backgroundColor: props.backgroundColor, opacity: opacity }}
+      style={{ backgroundColor: props.backgroundColor, opacity: opacity, borderRadius: 5 }}
     >
       <div className="title">{props.card.name}</div>
       <div className="text">

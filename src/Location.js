@@ -29,7 +29,9 @@ const Location = (props) => {
             <div className="market-stat">
               <div>Gold:{card.gold}</div>
               <div>Influence: {card.influence} </div>
-              <div>Draw: {card.draw}</div>
+              {card.draw ? (<div>Draw: {card.draw}</div>) :(<span/>)}
+              {card.weary ? (<div>Draw: {card.weary}</div>) :(<span/>)}
+              {card.vitality ? (<div>Draw: {card.vitality}</div>) :(<span/>)}
             </div>
             
           </div>
@@ -96,15 +98,6 @@ const Location = (props) => {
       {market}
       {battlefield(props)}
     </div>
-    {props.location.name=="Jerusalem" ? (
-    <div
-      style={{width:100, height:100, backgroundColor:'gray'}}
-      onDrop={(event) => props.onDrop(event, 'mill')}
-      onDragOver={(event) => props.onDragOver(event)}>
-    Scrap Pile
-    </div> 
-    ) : (<div/>)
-  }
     </div>
   );
 };

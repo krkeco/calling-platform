@@ -15,7 +15,7 @@ const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(1);
   const [localPlayers, setLocalPlayers] = useState(1);
   const [gameId, setGameId] = useState(-1);
-  const [playerType, setType] = useState(playerTypeEnum.GUEST);
+  const [playerType, setType] = useState(playerTypeEnum.HOST);
   const [playerCharacters, setCharacter] = useState(["Jonah"])
   const [waitingPlayers, setWaitRoom] = useState([])
 
@@ -33,7 +33,7 @@ const PlayerDataForm = (props) => {
   for(let x = 0; x < players; x++){
     let bgColor = props.playerBGs[x]
     playerForm.push(
-      <div style={{backgroundColor: bgColor, margin:10}} >
+      <div className="flexCol center" style={{backgroundColor: bgColor, margin:10, width:100, height:100, borderRadius:5}} >
       <div >Player {(x+1)}:</div>
         <InputLabel id="player-count">Players</InputLabel>
         <Select 
@@ -190,6 +190,7 @@ const PlayerDataForm = (props) => {
   const playerCountToggle =  <FormControl className="formControl">
         <InputLabel id="player-count-label">Players</InputLabel>
         <Select
+          className="dropdownBox"
           labelId="player-count-label"
           id="player-count"
           value={players}
@@ -205,7 +206,8 @@ const PlayerDataForm = (props) => {
 
 
   return (
-    <div>
+    <div className="flexCol center" >
+    <div> The Calling Online Deck Building Game</div>
       <FormControl className="formControl">
         <InputLabel id="player-type-label">Player Type</InputLabel>        
         <Select
@@ -213,27 +215,35 @@ const PlayerDataForm = (props) => {
           id="player-type"
           value={playerType}
           onChange={(e)=>setType(e.target.value)}
+          className="dropdownBox"
         >
           <MenuItem value={playerTypeEnum.HOST}>Host a Game</MenuItem>
           <MenuItem value={playerTypeEnum.GUEST}>Join a Game</MenuItem>
         </Select>
         
-        {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> : <span/>}
+        {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" className="dropdownBox" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> : <div>{playerCountToggle}</div> }
+      {playerType == playerTypeEnum.GUEST && players > 1 ? setPlayers(1) : <div/>}
         
       </FormControl>
-      {playerType == playerTypeEnum.HOST ? playerCountToggle : players > 1 ? setPlayers(1) : <div/>}
-      {playerForm}
-
-          <Button onClick={playerType == playerTypeEnum.HOST ? createGame : joinGame} variant="contained" color="secondary">
+      
+      <div className="flexRow"> {playerForm}</div>
+      <div className="flexCol" style={{width:200}} >
+          <Button 
+          style={{margin:5}}
+          onClick={playerType == playerTypeEnum.HOST ? createGame : joinGame} 
+          variant="contained" color="secondary">
             Create/Join Game
           </Button>
 
           {playerType == playerTypeEnum.HOST && gameId >= 0 ?(
-                      <Button onClick={startGame} variant="contained" color="secondary">
-                      Start Game
-                    </Button>):(<div/>)}
-                    <div>players in game: {waitingPlayers} </div>
-                    <div>players on this local: {localPlayers}</div>
+            <Button 
+              style={{margin:5}}
+              onClick={startGame} variant="contained" color="secondary">
+            Start Game
+          </Button>):(<div/>)}
+          </div>
+          <div>players in game: {waitingPlayers} </div>
+          <div>players on this local: {localPlayers}</div>
     </div>
   );
 }

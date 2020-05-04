@@ -4,6 +4,11 @@ be
 	1 gold to recycle market?
 	paul
 
+	market should be cards and show vitality/weary
+	location should define special rules
+	bugs:
+		joshua auto win?
+
 
 	someday: subscriptions
 

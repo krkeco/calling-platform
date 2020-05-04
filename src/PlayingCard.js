@@ -23,16 +23,32 @@ const PlayingCard = (props) => {
       className={size(props.size)}
       style={{ backgroundColor: props.backgroundColor, opacity: opacity, borderRadius: 5 }}
     >
-      <div className="title">{props.card.name}</div>
-      <div className="text">
-        {props.card.gold} G<span className="stat">old</span>
-      </div>
+      <div className="title">({props.card.cost}) {props.card.name} </div>
+      {props.card.gold > 0 ? (
+        <div className="text">
+          {props.card.gold} G<span className="stat">old</span>
+        </div>):(<span/>)
+      }
+      {props.card.influence > 0 ? (
       <div className="text">
         {props.card.influence} Inf<span className="stat">luence</span>
-      </div>
+      </div>):(<span/>)
+      }
+      {props.card.draw > 0 ? (
       <div className="text">
         {props.card.draw} D<span className="stat">raw</span>
-      </div>
+      </div>):(<span/>)
+      }
+      {props.card.vitality > 0 ? (
+        <div className="text">
+        {props.card.vitality} V<span className="stat">itality</span>
+      </div>):(<span/>)
+      }
+      {props.weary > 0 ? (<div className="text">
+        {props.card.weary} W<span className="stat">eary</span>
+      </div>):(<span/>)
+      }
+
     </div>
   );
 };

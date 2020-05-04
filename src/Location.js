@@ -22,20 +22,16 @@ const Location = (props) => {
   if(props.location){
     props.location.market.map((card,index)=>{
       market.push(
-        <Button className="marketcard" style={{margin:5}} onClick={()=>buyCard(card,index)} variant="contained" color="primary">
-          <div className="marketcard flexCol flexStart paddded" >
-            <div className="market-title">{card.name}({card.cost})</div>
-
-            <div className="market-stat">
-              <div>Gold:{card.gold}</div>
-              <div>Influence: {card.influence} </div>
-              {card.draw ? (<div>Draw: {card.draw}</div>) :(<span/>)}
-              {card.weary ? (<div>Draw: {card.weary}</div>) :(<span/>)}
-              {card.vitality ? (<div>Draw: {card.vitality}</div>) :(<span/>)}
-            </div>
+        
+          <div className="marketcard" onClick={()=>buyCard(card,index)}>
+             <PlayingCard id={index}
+              size="small"
+              card={card}
+              backgroundColor = "blue"
+              player={null}
+               />
             
           </div>
-        </Button>
       )
     }) 
   }
@@ -95,7 +91,7 @@ const Location = (props) => {
       onDrop={(event) => props.onDrop(event, props.name)}
     >
       {titlebar(props)}
-      {market}
+     <div className="flexRow flexStart">Market:{market}</div>
       {battlefield(props)}
     </div>
     </div>

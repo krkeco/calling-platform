@@ -45,8 +45,8 @@ const PlayerDataForm = (props) => {
           <MenuItem value={"Jonah"}>Jonah</MenuItem>
           <MenuItem value={"Esther"}>Esther</MenuItem>
           <MenuItem value={"Joshua"}>Joshua</MenuItem> 
-         {/**
           <MenuItem value={"Paul"}>Paul</MenuItem>
+         {/**
         **/}
         </Select>
       </div>
@@ -118,9 +118,12 @@ const PlayerDataForm = (props) => {
       setGameId(id)
       setWaitRoom([...playerCharacters])
       console.log('setting local player to '+playerCharacters.length)
-      setLocalPlayers(playerCharacters.length)
+      let count = -1
+      if(playerType == playerTypeEnum.LAN){
+        count  = 0
+      }
       // props.startGame(response.data.game)
-      queryGameStatus(2000,id, playerCharacters.length)
+      queryGameStatus(2000,id, count)
 
     }catch(e){
       console.log(e)
@@ -217,12 +220,14 @@ const PlayerDataForm = (props) => {
           onChange={(e)=>setType(e.target.value)}
           className="dropdownBox"
         >
-          <MenuItem value={playerTypeEnum.HOST}>Host a Game</MenuItem>
+          <MenuItem value={playerTypeEnum.HOST}>Host local Game</MenuItem>
+          <MenuItem value={playerTypeEnum.LAN}>Host Net Game</MenuItem>
           <MenuItem value={playerTypeEnum.GUEST}>Join a Game</MenuItem>
         </Select>
         
-        {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" className="dropdownBox" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> : <div>{playerCountToggle}</div> }
-      {playerType == playerTypeEnum.GUEST && players > 1 ? setPlayers(1) : <div/>}
+        {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" className="dropdownBox" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> 
+        : playerType == playerTypeEnum.HOST ? <div>{playerCountToggle}</div> : <div/>}
+      {(playerType == playerTypeEnum.GUEST || playerType == playerTypeEnum.LAN) && players > 1 ? setPlayers(1) : <div/>}
         
       </FormControl>
       

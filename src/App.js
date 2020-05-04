@@ -221,6 +221,7 @@ const App = () => {
         setPlayerInfo([])    
         setCurrentPlayer(0)
         setTurn(1)
+        appendLog([])
       
       }else{
         
@@ -280,7 +281,7 @@ if(gameId > -1){
       <div className="flexRow spaceBetween" style={{width:'100%'}} >
 
     <div className="flexCol" style={{width:250}}>
-        <div className="flexCol" >
+        <div className="flexCol gamelog" >
         GAME LOG:
           {gameLog.map((log, ind)=>{
             return (<div>
@@ -294,18 +295,22 @@ if(gameId > -1){
         <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
       <div className="flexRow center">
         {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
-          <PlayingCard id={index} 
-          draggable 
-          onDragStart={onDragStart} 
+            <div
+              key={index}
+              onDragStart={(event) => onDragStart(event, index)}
+              draggable
+              style={{margin:5, backgroundColor: `${playerBGs[currentPlayer]}`, opacity: 1, borderRadius: 5 }}
+            >
+          <PlayingCard id={index}
           card={card}
-          player={currentPlayer}
           backgroundColor = {playerBGs[currentPlayer]}
-           />)}) : <span/>}
+          player={currentPlayer}
+           /></div>)}) : <span/>}
       </div>
       </div>
 <div className="flexCol" style={{width:250}}>
       {scrapPile}
-    {currentPlayer == (playerIndex-1) ? 
+    {currentPlayer == (playerIndex-1) || playerIndex == -1 ? 
       <Button style={{width:150, height:75}} onClick={nextPlayer} variant="contained" color="secondary">
         Next Player
       </Button>

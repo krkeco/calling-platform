@@ -72,16 +72,19 @@ const Location = (props) => {
   }
 
   const titlebar = (props) => {
-    return(<div><div className="flexRow" >
-    <div>{props.location.name}</div>
-    <div>({props.location.influence})--</div>
-    <div>influencer:{props.location.influencer}</div>
-    </div>
-    <div className="flexRow" >
-      <div>weariness:{props.location.weariness}</div>
-    </div>
-    </div>
-    )
+    return(<div>
+    <div className="flexCol titlebar" >
+        <div>( ? ) {props.location.name}</div>
+        
+        <div className="titlebarInfo">Influence:({props.location.influence})</div>
+        <div className="titlebarInfo">Influencer:{props.location.influencer}</div>
+        
+        <div className="titlebarInfo">Weariness:{props.location.weariness}</div>
+
+        <div className="titlebarInfo">Wounds:{props.location.wounds || 0}</div>
+      
+      </div>
+    </div>)
   }
 
   return (<div>

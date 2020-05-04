@@ -109,3 +109,30 @@
   height:400px;
   overflow:scroll;
 }
+.titlebar{
+  font-size: 24px;
+  border-radius: 5px;
+  height:25px;
+    -webkit-transition: height .5s;
+  transition: height .5s;
+  -moz-transition: height 0.5s;
+}
+.titlebarInfo{
+  overflow:hidden;
+  opacity: 0;
+  visibility: hidden;
+  height: 0px;
+}
+.titlebar:hover{
+  height:150px;
+   -webkit-transition: height .5s;
+  transition: height .5s;
+  -moz-transition: height 0.5s; 
+}
+.titlebar:hover .titlebarInfo{
+  opacity: 1;
+  height: auto;
+  position: inherit;
+  visibility: visible;
+  transition: opacity .25s height .25s;
+}

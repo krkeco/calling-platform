@@ -281,6 +281,8 @@ if(gameId > -1){
       <div className="flexRow spaceBetween" style={{width:'100%'}} >
 
     <div className="flexCol" style={{width:250}}>
+     <div>Current Turn: {turn}; You are Player {playerIndex}</div>
+        <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
         <div className="flexCol gamelog" >
         GAME LOG:
           {gameLog.map((log, ind)=>{
@@ -291,8 +293,7 @@ if(gameId > -1){
         </div>
       </div>
       <div className="flexCol">
-        <div>Current Turn: {turn}; You are Player {playerIndex}</div>
-        <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
+       
       <div className="flexRow center">
         {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
             <div

@@ -22,6 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "pretty": "prettier --single-quote --trailing-comma all --write ./src/**/*",
+    "s3sync": "aws s3 sync ./build/ s3://calling-platform --acl public-read",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

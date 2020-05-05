@@ -39,17 +39,25 @@ const App = () => {
     playCard(cardId,loc)
   };
 
+
+      if(turn == 0){
+        setTurn(1)
+        let log = "Starting first Turn: 1"
+        appendLog([...gameLog,log])
+      }
+
   const startGame = async(result, playerIndex) =>{
     // console.log('getting game '+result)
     setId(result);
-    setTurn(1)
-    getGame(result, true);
+      
+    // getGame(result);
     setPlayerIndex(playerIndex);
+    setInterval(async()=>getGame(result),2000)
   }
 
 
   //async await
-  const getGame = async (id, repeat=false) => {
+  const getGame = async (id) => {
     try{
       let theId = parseInt(id);
       console.log('getting game from '+theId)
@@ -85,22 +93,15 @@ const App = () => {
       setLocationInfo(response.data.locations);
       
       setPlayerInfo(response.data.players);
+
       console.log('currnetplayer:'+response.data.currentPlayer)
       setCurrentPlayer(response.data.currentPlayer)
-
-      if(turn == 0 && !repeat){
-        setTurn(1)
-        let log = "Starting first Turn: 1"
-        let log2 = response.data.players[currentPlayer].name + " is now First Player"
-        appendLog([...gameLog,log,log2])
-      }
-      if(repeat){
-        setTimeout(async()=>getGame(id, repeat),3000)
-      }
           }catch(e){
       console.log(e)
     }
   };
+
+
 
 
 // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
@@ -237,7 +238,7 @@ const App = () => {
           newLog.push("",log,log2)
         }
 
-        // getGame(gameId);
+        getGame(gameId);
 
         setLocationInfo(response.data.locations);
         setPlayerInfo(response.data.players)    
@@ -305,7 +306,7 @@ if(gameId > -1){
       <div className="flexCol">
        
       <div className="flexRow center">
-        {players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
+        {players && players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
             <div
               key={index}
               onDragStart={(event) => onDragStart(event, index)}

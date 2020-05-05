@@ -20,7 +20,7 @@ const App = () => {
   const [playerIndex, setPlayerIndex] = useState(-1)
 
   const onDragStart = (event, cardId) => {
-    if(currentPlayer == playerIndex-1 || playerIndex == -1){
+    if(currentPlayer == playerIndex || playerIndex == -1){
       let triggerCard = cards.find((card) => card.id == cardId);
       console.log('dragstart on div: ', cardId);
       event.dataTransfer.setData('cardId', cardId);
@@ -42,6 +42,7 @@ const App = () => {
   const startGame = async(result, playerIndex) =>{
     // console.log('getting game '+result)
     setId(result);
+    setTurn(1)
     getGame(result, true);
     setPlayerIndex(playerIndex);
   }
@@ -55,14 +56,14 @@ const App = () => {
       let query = `query Game($theId: Int) {
           players(gameId: $theId){
             name, type, firstPlayer,
-            deck{cost, draw, gold, influence, name},
-            discard{cost, draw, gold, influence, name},
-            hand{cost, draw, gold, influence, name}
+            deck{name},
+            discard{name},
+            hand{cost, draw, gold, influence, name, vitality, weary}
           },
           locations(gameId: $theId){
             name, influence,influencer, weariness,
-            market{cost,draw, gold, influence, name},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold}}
+            market{cost,draw, gold, influence, name, vitality, weary},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold, vitality, weary}}
           },
           currentPlayer(gameId: $theId)
       }`;
@@ -84,6 +85,8 @@ const App = () => {
       setLocationInfo(response.data.locations);
       
       setPlayerInfo(response.data.players);
+      console.log('currnetplayer:'+response.data.currentPlayer)
+      setCurrentPlayer(response.data.currentPlayer)
 
       if(turn == 0 && !repeat){
         setTurn(1)
@@ -91,9 +94,9 @@ const App = () => {
         let log2 = response.data.players[currentPlayer].name + " is now First Player"
         appendLog([...gameLog,log,log2])
       }
-      // if(repeat){
-      //   setTimeout(async()=>getGame(id, repeat),1000)
-      // }
+      if(repeat){
+        setTimeout(async()=>getGame(id, repeat),3000)
+      }
           }catch(e){
       console.log(e)
     }
@@ -244,6 +247,7 @@ const App = () => {
     }catch(e){
       console.log(e)
     }
+
   };
 
   let scrapPile =  <div
@@ -271,6 +275,12 @@ const App = () => {
       );
     });
   }
+  let nextButton = <div>player of {currentPlayer}/{playerIndex}</div>;
+  if(currentPlayer == playerIndex || playerIndex == -1){
+    nextButton=<Button style={{width:150, height:75}} onClick={nextPlayer} variant="contained" color="secondary">
+        Next Player {currentPlayer}/{playerIndex}
+      </Button>
+  } 
 
 let view = <PlayerDataForm playerBGs={playerBGs} startGame={startGame}/>
 if(gameId > -1){
@@ -281,8 +291,8 @@ if(gameId > -1){
       <div className="flexRow spaceBetween" style={{width:'100%'}} >
 
     <div className="flexCol" style={{width:250}}>
-     <div>Current Turn: {turn}; You are Player {playerIndex}</div>
-        <div className="title">CurrentPlayer: {playerIndex} { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
+        <div className="titlePlayer" >CurrentPlayer: { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
+     <div >Current Turn: {turn}</div>
         <div className="flexCol gamelog" >
         GAME LOG:
           {gameLog.map((log, ind)=>{
@@ -311,13 +321,7 @@ if(gameId > -1){
       </div>
 <div className="flexCol" style={{width:250}}>
       {scrapPile}
-    {currentPlayer == (playerIndex-1) || playerIndex == -1 ? 
-      <Button style={{width:150, height:75}} onClick={nextPlayer} variant="contained" color="secondary">
-        Next Player
-      </Button>
-      :
-      <div/>
-    }
+      {nextButton}
 
       </div>
       </div>

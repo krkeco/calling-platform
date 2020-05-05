@@ -176,7 +176,7 @@ const PlayerDataForm = (props) => {
       })
 
       let response = await res.json()
-      let count = response.data.joinGame.length
+      let count = response.data.joinGame.length-1
       console.log('my index should be '+count)
       setLocalPlayers(count)
 
@@ -235,16 +235,16 @@ const PlayerDataForm = (props) => {
       <div className="flexCol" style={{width:200}} >
           <Button 
           style={{margin:5}}
-          onClick={playerType == playerTypeEnum.HOST ? createGame : joinGame} 
+          onClick={(playerType == playerTypeEnum.HOST || playerType == playerTypeEnum.LAN) ? createGame : joinGame} 
           variant="contained" color="secondary">
             Create/Join Game
           </Button>
 
-          {playerType == playerTypeEnum.HOST && gameId >= 0 ?(
+          {(playerType == playerTypeEnum.HOST || playerType == playerTypeEnum.LAN) && gameId >= 0 ?(
             <Button 
               style={{margin:5}}
               onClick={startGame} variant="contained" color="secondary">
-            Start Game
+            Start Game {gameId}
           </Button>):(<div/>)}
           </div>
           <div>players in game: {waitingPlayers} </div>

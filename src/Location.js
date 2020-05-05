@@ -17,13 +17,26 @@ const Location = (props) => {
     }
 
   };
+  const refreshMarket = () => {
+    if(props.location.battlefield 
+      && props.location.battlefield[props.player]){
+      let playerField = props.location.battlefield[props.player]
+      console.log(props.players[props.player]+' could buy something with ' + playerField.gold)
+      if(playerField.gold > 0){
+            props.refreshMarket(props.location.name, props.player)
+          }
+    }else{
+      console.log('you cannot afford this!' + props.location.currentGold)
+    }
+
+  };
 
   let market = []
   if(props.location){
     props.location.market.map((card,index)=>{
       market.push(
         
-          <div className="marketcard" onClick={()=>buyCard(card,index)}>
+          <div onClick={()=>buyCard(card,index)}>
              <PlayingCard id={index}
               size="small"
               card={card}
@@ -35,6 +48,7 @@ const Location = (props) => {
       )
     }) 
   }
+  
   
     
   const battlefield = (props) => {
@@ -75,13 +89,18 @@ const Location = (props) => {
     return(<div>
     <div className="flexCol titlebar" >
         <div>( ? ) {props.location.name}</div>
-        
-        <div className="titlebarInfo">Influence:({props.location.influence})</div>
-        <div className="titlebarInfo">Influencer:{props.location.influencer}</div>
-        
-        <div className="titlebarInfo">Weariness:{props.location.weariness}</div>
+        <div className="flexRow">
+        <div className="titlebarInfo">Inf:({props.location.influence}) - Influencer:{props.location.influencer}</div>
+        </div>
+        {props.location.info.map((info,ind)=>{
+          return <div className="titlebarInfo smallText">{info}</div>
+        })}
+        {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
+        {props.location.wounds > 0 ? <div className="titlebarInfo">Wounds:{props.location.wounds}</div> : <span/>}
 
-        <div className="titlebarInfo">Wounds:{props.location.wounds || 0}</div>
+        {props.location.proselytized ? <div className="titlebarInfo">Proselytized by Paul</div> : <span/>}
+        {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
+        
       
       </div>
     </div>)
@@ -94,7 +113,16 @@ const Location = (props) => {
       onDrop={(event) => props.onDrop(event, props.name)}
     >
       {titlebar(props)}
-     <div className="flexRow flexStart">Market:{market}</div>
+     <div className="flexRow flexStart">
+     
+     <div className="flexCol flexStart">
+     Market:
+     <div className="refreshMarketBtn"
+      onClick={()=>refreshMarket()}>
+      Refresh Market
+      </div>
+    </div>
+  {market}</div>
       {battlefield(props)}
     </div>
     </div>

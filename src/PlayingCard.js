@@ -31,7 +31,7 @@ const PlayingCard = (props) => {
       }
       {props.card.influence > 0 ? (
       <div className="text">
-        {props.card.influence} Inf<span className="stat">luence</span>
+        {props.card.influence} I<span className="stat">nfluence</span>
       </div>):(<span/>)
       }
       {props.card.draw > 0 ? (
@@ -46,6 +46,10 @@ const PlayingCard = (props) => {
       }
       {props.weary > 0 ? (<div className="text">
         {props.card.weary} W<span className="stat">eary</span>
+      </div>):(<span/>)
+      }
+      {props.politics > 0 ? (<div className="text">
+        {props.card.politics} P<span className="stat">olitics</span>
       </div>):(<span/>)
       }
 

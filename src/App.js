@@ -4,8 +4,9 @@ import './App.css';
 import Location from './Location';
 import PlayingCard from './PlayingCard';
 import {HAND,URL} from './constants.js'
-import PlayerDataForm from './PlayerDataForm'
 import { Button } from '@material-ui/core';
+import CreateGame from './CreateGame'
+import GameView from './GameView'
 
 const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(0);
@@ -25,7 +26,7 @@ const App = () => {
       console.log('dragstart on div: ', cardId);
       event.dataTransfer.setData('cardId', cardId);
     }else{
-      alert("You can't playe someone else's cards!"+currentPlayer+"/"+playerIndex)
+      alert("You can't play someone else's cards!"+currentPlayer+"/"+playerIndex)
       event.preventDefault();
       
     }
@@ -40,17 +41,17 @@ const App = () => {
   };
 
 
-      if(turn == 0){
-        setTurn(1)
-        let log = "Starting first Turn: 1"
-        appendLog([...gameLog,log])
-      }
+  if(turn == 0){
+    setTurn(1)
+    let log = "Starting first Turn: 1"
+    appendLog([...gameLog,log])
+  }
 
   const startGame = async(result, playerIndex) =>{
     // console.log('getting game '+result)
     setId(result);
       
-    // getGame(result);
+    getGame(result);
     setPlayerIndex(playerIndex);
     setInterval(async()=>getGame(result),2000)
   }
@@ -69,7 +70,7 @@ const App = () => {
             hand{cost, draw, gold, influence, name, vitality, weary}
           },
           locations(gameId: $theId){
-            name, influence,influencer, weariness,
+            name, influence,influencer, weariness, info,proselytized,
             market{cost,draw, gold, influence, name, vitality, weary},
             battlefield{name,influence, gold, cards{name,draw, influence, gold, vitality, weary}}
           },
@@ -90,29 +91,56 @@ const App = () => {
       let response = await res.json()
       console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
       
+      let newLog = [...gameLog]
+      locations.map((location, index)=>{
+        if(location.influencer != response.data.locations[index].influencer){
+          console.log('new influencer!!!')
+          let log = response.data.locations[index].influencer +" took " +locations[index].name + " from "+location.influencer+ "!"
+          newLog.push(log)
+        }
+      })
+
       setLocationInfo(response.data.locations);
       
       setPlayerInfo(response.data.players);
 
       console.log('currnetplayer:'+response.data.currentPlayer)
       setCurrentPlayer(response.data.currentPlayer)
-          }catch(e){
+    }catch(e){
       console.log(e)
     }
   };
 
+ const refreshMarket = async(locationName) => {
+  try{
+    let theGame = parseInt(gameId);
+    let playerName = players[currentPlayer].name;
+    let query = `query RefreshMarket($theGame: Int, $playerName: String, $locationName: String){
+      refreshMarket(gameId: $theGame, playerName: $playerName, locationName: $locationName)
+    }`
+    let res = await fetch(URL, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body:JSON.stringify({
+          query,
+          variables: {playerName, locationName, theGame}
+        })
+      })
 
-
-
+      let response = await res.json()
+  }catch(e){
+    console.log('error refreshing market:'+e)
+  }
+ }
 // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
   const playCard = async(name, location)=>{
     let cardIndex = parseInt(name);
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
-    // let data = {"cardname":name, "player":players[currentPlayer].name, "location":location}
-    // console.log(`trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`)
        try{
-//{gameId, playerName, buyLocation}
       let query = `query Play($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
         play(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
       }`;
@@ -181,18 +209,7 @@ const App = () => {
       let query = `query NextPlayer($theGame: Int, $thePlayer: Int ) {
         nextPlayer(gameId: $theGame, currentPlayer: $thePlayer){
           turn, nextPlayer, winner
-        },
-        players(gameId: $theGame){
-            name, type, firstPlayer,
-            deck{cost, draw, gold, influence, name},
-            discard{cost, draw, gold, influence, name},
-            hand{cost, draw, gold, influence, name}
-          },
-        locations(gameId: $theGame){
-            name, influence,influencer,weariness,
-            market{cost, gold, influence, name},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold}}
-          }
+        }
       }`;
       let res = await fetch(URL, {
         method: 'POST', 
@@ -209,13 +226,6 @@ const App = () => {
       let response = await res.json()
       console.log('response to nextturn newfirst is:'+JSON.stringify(response.data))
       let newLog = [...gameLog]
-      locations.map((location, index)=>{
-        if(location.influencer != response.data.locations[index].influencer){
-          console.log('new influencer!!!')
-          let log = response.data.locations[index].influencer +" took " +locations[index].name + " from "+location.influencer+ "!"
-          newLog.push(log)
-        }
-      })
 
       if(response.data.nextPlayer.winner){
         alert(response.data.nextPlayer.winner+' is the winner!!')
@@ -240,8 +250,6 @@ const App = () => {
 
         getGame(gameId);
 
-        setLocationInfo(response.data.locations);
-        setPlayerInfo(response.data.players)    
       }
         appendLog([...newLog])
 
@@ -251,83 +259,22 @@ const App = () => {
 
   };
 
-  let scrapPile =  <div
-              className="scrapPile flexCol center"
-              onDrop={(event) => onDrop(event, 'mill')}
-              onDragOver={(event) => onDragOver(event)}>
-            Scrap Pile
-            </div> 
-  
 
-  let locCards = [];
-  if (locations) {
-    locations.map((location, index) => {
-      locCards.push(
-        <Location
-          player={currentPlayer}
-          players={players}
-          buyCard={buyCard}
-          location={location}
-          name={location.name}
-          playerBGs={playerBGs}
-          onDragOver={onDragOver}
-          onDrop={onDrop}
-        />,
-      );
-    });
-  }
-  let nextButton = <div>player of {currentPlayer}/{playerIndex}</div>;
-  if(currentPlayer == playerIndex || playerIndex == -1){
-    nextButton=<Button style={{width:150, height:75}} onClick={nextPlayer} variant="contained" color="secondary">
-        Next Player {currentPlayer}/{playerIndex}
-      </Button>
-  } 
 
-let view = <PlayerDataForm playerBGs={playerBGs} startGame={startGame}/>
+let view = <CreateGame playerBGs={playerBGs} startGame={startGame}/>
 if(gameId > -1){
-  view = <div>
-      <div className="flexRow spaceAround padded">
-        {locCards}
-      </div>
-      <div className="flexRow spaceBetween" style={{width:'100%'}} >
-
-    <div className="flexCol" style={{width:250}}>
-        <div className="titlePlayer" >CurrentPlayer: { players && players[currentPlayer] ? players[currentPlayer].name : ''}</div>
-     <div >Current Turn: {turn}</div>
-        <div className="flexCol gamelog" >
-        GAME LOG:
-          {gameLog.map((log, ind)=>{
-            return (<div>
-            {log}
-            </div>)
-          })}
-        </div>
-      </div>
-      <div className="flexCol">
-       
-      <div className="flexRow center">
-        {players && players[currentPlayer] ? players[currentPlayer].hand.map((card, index)=>{return(
-            <div
-              key={index}
-              onDragStart={(event) => onDragStart(event, index)}
-              draggable
-              style={{margin:5, backgroundColor: `${playerBGs[currentPlayer]}`, opacity: 1, borderRadius: 5 }}
-            >
-          <PlayingCard id={index}
-          card={card}
-          backgroundColor = {playerBGs[currentPlayer]}
-          player={currentPlayer}
-           /></div>)}) : <span/>}
-      </div>
-      </div>
-<div className="flexCol" style={{width:250}}>
-      {scrapPile}
-      {nextButton}
-
-      </div>
-      </div>
-
-    </div>
+  view = <GameView
+    gameLog={gameLog}
+    players={players}
+    turn={turn}
+    refreshMarket={refreshMarket}
+    buyCard={buyCard}
+    playerBGs={playerBGs}
+    nextPlayer={nextPlayer}
+    playerIndex={playerIndex}
+    onDragOver={onDragOver} onDrop={onDrop}
+    currentPlayer={currentPlayer}
+    locations={locations}/>
 }
 
   return (

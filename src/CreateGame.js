@@ -207,6 +207,20 @@ const PlayerDataForm = (props) => {
         
       </FormControl>
 
+      let joinButton =   <Button 
+          style={{margin:5}}
+          onClick={createGame} 
+          variant="contained" color="secondary">
+            Create Game
+          </Button>
+        if(playerType == playerTypeEnum.GUEST){
+          joinButton =   <Button 
+          style={{margin:5}}
+          onClick={joinGame} 
+          variant="contained" color="secondary">
+            Join Game
+          </Button>
+        }
 
   return (
     <div className="flexCol center" >
@@ -220,9 +234,9 @@ const PlayerDataForm = (props) => {
           onChange={(e)=>setType(e.target.value)}
           className="dropdownBox"
         >
-          <MenuItem value={playerTypeEnum.HOST}>Host local Game</MenuItem>
+          <MenuItem value={playerTypeEnum.HOST}>Host Local Game</MenuItem>
           <MenuItem value={playerTypeEnum.LAN}>Host Net Game</MenuItem>
-          <MenuItem value={playerTypeEnum.GUEST}>Join a Game</MenuItem>
+          <MenuItem value={playerTypeEnum.GUEST}>Join Net Game</MenuItem>
         </Select>
         
         {playerType == playerTypeEnum.GUEST ? <TextField id="game-number" className="dropdownBox" value={gameId} onChange={(e)=>setGameId(e.target.value)} label="GameId:" /> 
@@ -233,12 +247,7 @@ const PlayerDataForm = (props) => {
       
       <div className="flexRow"> {playerForm}</div>
       <div className="flexCol" style={{width:200}} >
-          <Button 
-          style={{margin:5}}
-          onClick={(playerType == playerTypeEnum.HOST || playerType == playerTypeEnum.LAN) ? createGame : joinGame} 
-          variant="contained" color="secondary">
-            Create/Join Game
-          </Button>
+        {joinButton}
 
           {(playerType == playerTypeEnum.HOST || playerType == playerTypeEnum.LAN) && gameId >= 0 ?(
             <Button 

@@ -52,7 +52,7 @@ const Location = (props) => {
   
     
   const battlefield = (props) => {
-    return (<div className="flexCol padded">
+    return (<div className="flexCol padded battlefield">
       {props.location.battlefield.length > 0 ? 
         (props.location.battlefield.map((bf, index)=>{
           let playerBF = props.location.battlefield[index]
@@ -92,15 +92,15 @@ const Location = (props) => {
         <div className="flexRow">
         <div className="titlebarInfo">Inf:({props.location.influence}) - Influencer:{props.location.influencer}</div>
         </div>
-        {props.location.info.map((info,ind)=>{
-          return <div className="titlebarInfo smallText">{info}</div>
-        })}
         {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
         {props.location.wounds > 0 ? <div className="titlebarInfo">Wounds:{props.location.wounds}</div> : <span/>}
 
         {props.location.proselytized ? <div className="titlebarInfo">Proselytized by Paul</div> : <span/>}
-        {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
+        {props.location.hardened > 0 ? <div className="titlebarInfo">Hardened:{props.location.hardened}</div> : <span/>}
         
+        {props.location.info.map((info,ind)=>{
+          return <div className="titlebarInfo smallText">{info}<hr/></div>
+        })}
       
       </div>
     </div>)
@@ -113,7 +113,7 @@ const Location = (props) => {
       onDrop={(event) => props.onDrop(event, props.name)}
     >
       {titlebar(props)}
-     <div className="flexRow flexStart">
+     <div className="flexRow flexStart ">
      
      <div className="flexCol flexStart">
      Market:

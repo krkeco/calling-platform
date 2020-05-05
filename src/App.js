@@ -19,6 +19,7 @@ const App = () => {
   const [playerCount, setPlayerCount] = useState(2)
   const [gameLog, appendLog] = useState([])
   const [playerIndex, setPlayerIndex] = useState(-1)
+  const [isQuerying, setQuerying] = useState(false)
 
   const onDragStart = (event, cardId) => {
     if(currentPlayer == playerIndex || playerIndex == -1){
@@ -59,6 +60,10 @@ const App = () => {
 
   //async await
   const getGame = async (id) => {
+    if(isQuerying){
+      setTimeout(()=>getGame(id),1000)
+    }else{
+      setQuerying(true)
     try{
       let theId = parseInt(id);
       console.log('getting game from '+theId)
@@ -67,12 +72,12 @@ const App = () => {
             name, type, firstPlayer,
             deck{name},
             discard{name},
-            hand{cost, draw, gold, influence, name, vitality, weary}
+            hand{cost, draw, gold, influence, name, vitality, weary, reinforce,abilities}
           },
           locations(gameId: $theId){
-            name, influence,influencer, weariness, info,proselytized,
-            market{cost,draw, gold, influence, name, vitality, weary},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold, vitality, weary}}
+            name, influence,influencer, weariness, info,proselytized,hardened,
+            market{cost,draw, gold, influence, name, vitality, weary, reinforce, abilities},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold, vitality, weary,reinforce,abilities}}
           },
           currentPlayer(gameId: $theId)
       }`;
@@ -106,12 +111,21 @@ const App = () => {
 
       console.log('currnetplayer:'+response.data.currentPlayer)
       setCurrentPlayer(response.data.currentPlayer)
+      setQuerying(false)
     }catch(e){
       console.log(e)
+      setQuerying(false)
     }
+  }
+  
   };
 
  const refreshMarket = async(locationName) => {
+  if(isQuerying){
+    alert('Server busy, try again')
+      // setTimeout(()=>refreshMarket(locationName),500)
+    }else{
+      setQuerying(true)
   try{
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -131,12 +145,19 @@ const App = () => {
       })
 
       let response = await res.json()
+      setQuerying(false)
   }catch(e){
     console.log('error refreshing market:'+e)
+    setQuerying(false)
   }
+}
  }
 // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
   const playCard = async(name, location)=>{
+    if(isQuerying){
+      setTimeout(()=>playCard(name,location),100)
+    }else{
+      setQuerying(true)
     let cardIndex = parseInt(name);
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -161,12 +182,19 @@ const App = () => {
       let log = players[currentPlayer].name + " " + response.data.play
       appendLog([...gameLog, log])
       getGame(gameId);
+      setQuerying(false)
     }catch(e){
       console.log(e)
+      setQuerying(false)
     }
+  }
   }
 
   const buyCard = async (index, location, card) => {
+    if(isQuerying){
+      setTimeout(()=>buyCard(index,location,card),100)
+    }else{
+      setQuerying(true)
     let cardIndex = parseInt(index);
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -194,18 +222,24 @@ const App = () => {
       let log = players[currentPlayer].name + " " + response.data.buy
       appendLog([...gameLog, log])
 
+      setQuerying(false)
       getGame(gameId);
     }catch(e){
       console.log(e)
+      setQuerying(false)
     }
-  
+  }
   }
 
   const nextPlayer = async() => {
+    if(isQuerying){
+      setTimeout(()=>nextPlayer(),100)
+    }else{
+      setQuerying(true)
+  try{
     let theGame = parseInt(gameId);
     let thePlayer = parseInt(currentPlayer);
     // console.log('next current'+currentPlayer)
-  try{
       let query = `query NextPlayer($theGame: Int, $thePlayer: Int ) {
         nextPlayer(gameId: $theGame, currentPlayer: $thePlayer){
           turn, nextPlayer, winner
@@ -252,10 +286,12 @@ const App = () => {
 
       }
         appendLog([...newLog])
-
+      setQuerying(false)
     }catch(e){
       console.log(e)
+      setQuerying(false)
     }
+  }
 
   };
 
@@ -272,7 +308,9 @@ if(gameId > -1){
     playerBGs={playerBGs}
     nextPlayer={nextPlayer}
     playerIndex={playerIndex}
-    onDragOver={onDragOver} onDrop={onDrop}
+    onDragStart={onDragStart}
+    onDragOver={onDragOver} 
+    onDrop={onDrop}
     currentPlayer={currentPlayer}
     locations={locations}/>
 }

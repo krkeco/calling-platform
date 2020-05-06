@@ -286,12 +286,12 @@ const App = () => {
 
       }
         appendLog([...newLog])
-      setQuerying(false)
+   
     }catch(e){
       console.log(e)
-      setQuerying(false)
     }
   }
+      setQuerying(false)
 
   };
 

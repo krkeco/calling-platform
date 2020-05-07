@@ -92,6 +92,7 @@ const Location = (props) => {
         <div className="flexRow">
         <div className="titlebarInfo">Inf:({props.location.influence}) {props.location.weariness > 0 ? <span>I+W:({props.location.weariness*2+props.location.influence})</span> :<span/> } </div>
         </div>
+        {props.location.name  == 'Canaan' ? <div className="titlebarInfo">Tier:{props.location.abilities[0]}</div> : <span/>}
         {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
         {props.location.wounds > 0 ? <div className="titlebarInfo">Wounds:{props.location.wounds}</div> : <span/>}
 

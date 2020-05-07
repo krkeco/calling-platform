@@ -1,7 +1,15 @@
 TODO
+commit:::
+styling
+return strings for buy and play
 
-AI
+check:::
+
+wip:::
+
+
 BANES
+
 better join screen 
 	limit char selection to those not chosen
 
@@ -15,3 +23,4 @@ react-native?
 			location specific page
 			hand zoom in (like hearthstone)
 
+AI

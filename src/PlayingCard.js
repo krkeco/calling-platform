@@ -23,7 +23,7 @@ const PlayingCard = (props) => {
       className={size(props.size)}
       style={{ backgroundColor: props.backgroundColor, opacity: opacity, borderRadius: 5 }}
     >{/** G I PE WV R A **/}
-      <div className="title">({props.card.cost}) {props.card.name} </div>
+      <div className="title">{props.card.cost > 0 ? (<span>({props.card.cost})</span>) :(<span/>)} {props.card.name} </div>
       {props.card.gold > 0 ? (
         <div className="text">
           {props.card.gold} G<span className="stat">old</span>
@@ -53,7 +53,7 @@ const PlayingCard = (props) => {
         {props.card.weary} W<span className="stat">eary</span>
       </div>):(<span/>)
       }
-      {props.card.politics > 0 ? (<div className="text">
+      {props.card.politics ? (<div className="text">
         {props.card.politics} P<span className="stat">olitics</span>
       </div>):(<span/>)
       }

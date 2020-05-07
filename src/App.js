@@ -75,12 +75,12 @@ const App = () => {
             name, type, firstPlayer,
             deck{name},
             discard{name},
-            hand{cost, draw, gold, influence, name, vitality, weary, reinforce,abilities}
+            hand{cost, draw, gold, influence, name, politics, vitality, weary, reinforce,abilities}
           },
           locations(gameId: $theId){
-            name, influence,influencer, weariness, info,proselytized,hardened,
-            market{cost,draw, gold, influence, name, vitality, weary, reinforce, abilities},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold, vitality, weary,reinforce,abilities}}
+            name, influence,influencer, weariness, info,proselytized,hardened,abilities,
+            market{cost,draw, gold, influence, name, politics, vitality, weary, reinforce, abilities},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold, politics, vitality, weary,reinforce,abilities}}
           },
           currentPlayer(gameId: $theId)
       }`;

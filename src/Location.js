@@ -40,7 +40,7 @@ const Location = (props) => {
              <PlayingCard id={index}
               size="small"
               card={card}
-              backgroundColor = "blue"
+              backgroundColor = "teal"
               player={null}
                />
             
@@ -88,9 +88,9 @@ const Location = (props) => {
   const titlebar = (props) => {
     return(<div>
     <div className="flexCol titlebar" >
-        <div>( ? ) {props.location.name}</div>
+        <div>( ? ) {props.location.name} ({props.location.influencer})</div>
         <div className="flexRow">
-        <div className="titlebarInfo">Inf:({props.location.influence}) - Influencer:{props.location.influencer}</div>
+        <div className="titlebarInfo">Inf:({props.location.influence}) {props.location.weariness > 0 ? <span>I+W:({props.location.weariness*2+props.location.influence})</span> :<span/> } </div>
         </div>
         {props.location.weariness > 0 ? <div className="titlebarInfo">Weariness:{props.location.weariness}</div> : <span/>}
         {props.location.wounds > 0 ? <div className="titlebarInfo">Wounds:{props.location.wounds}</div> : <span/>}

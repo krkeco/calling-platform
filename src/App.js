@@ -54,16 +54,19 @@ const App = () => {
       
     getGame(result);
     setPlayerIndex(playerIndex);
-    setInterval(async()=>getGame(result),2000)
+    if(playerIndex > -1){
+        setInterval(async()=>getGame(result, true),2000)
+      }
   }
 
 
   //async await
-  const getGame = async (id) => {
-    if(isQuerying){
-      setTimeout(()=>getGame(id),1000)
+  const getGame = async (id, online) => {
+    // if(currentPlayer == playerIndex ){
+      if(online && playerIndex != (currentPlayer+1) && turn != 1){
+      console.log('no need to get game data on locals turn'+playerIndex + (currentPlayer+1) )
     }else{
-      setQuerying(true)
+      console.log('getting game data')
     try{
       let theId = parseInt(id);
       console.log('getting game from '+theId)
@@ -94,7 +97,7 @@ const App = () => {
       })
 
       let response = await res.json()
-      console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
+      // console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
       
       let newLog = [...gameLog]
       locations.map((location, index)=>{
@@ -111,21 +114,18 @@ const App = () => {
 
       console.log('currnetplayer:'+response.data.currentPlayer)
       setCurrentPlayer(response.data.currentPlayer)
-      setQuerying(false)
+      // setQuerying(false)
     }catch(e){
       console.log(e)
-      setQuerying(false)
+      // setQuerying(false)
     }
-  }
+  
+    }
   
   };
 
  const refreshMarket = async(locationName) => {
-  if(isQuerying){
-    alert('Server busy, try again')
-      // setTimeout(()=>refreshMarket(locationName),500)
-    }else{
-      setQuerying(true)
+  
   try{
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -145,19 +145,17 @@ const App = () => {
       })
 
       let response = await res.json()
-      setQuerying(false)
+      getGame(gameId);
+      // setQuerying(false)
   }catch(e){
     console.log('error refreshing market:'+e)
-    setQuerying(false)
+    // setQuerying(false)
   }
-}
+
  }
 // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
   const playCard = async(name, location)=>{
-    if(isQuerying){
-      setTimeout(()=>playCard(name,location),100)
-    }else{
-      setQuerying(true)
+ 
     let cardIndex = parseInt(name);
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -182,19 +180,14 @@ const App = () => {
       let log = players[currentPlayer].name + " " + response.data.play
       appendLog([...gameLog, log])
       getGame(gameId);
-      setQuerying(false)
     }catch(e){
       console.log(e)
-      setQuerying(false)
     }
-  }
+  
   }
 
   const buyCard = async (index, location, card) => {
-    if(isQuerying){
-      setTimeout(()=>buyCard(index,location,card),100)
-    }else{
-      setQuerying(true)
+   
     let cardIndex = parseInt(index);
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
@@ -222,23 +215,21 @@ const App = () => {
       let log = players[currentPlayer].name + " " + response.data.buy
       appendLog([...gameLog, log])
 
-      setQuerying(false)
+      
       getGame(gameId);
     }catch(e){
       console.log(e)
-      setQuerying(false)
+      
     }
-  }
+  
   }
 
   const nextPlayer = async() => {
-    if(isQuerying){
-      setTimeout(()=>nextPlayer(),100)
-    }else{
-      setQuerying(true)
+    
   try{
     let theGame = parseInt(gameId);
     let thePlayer = parseInt(currentPlayer);
+    console.log('getting next player with '+theGame+"/"+thePlayer)
     // console.log('next current'+currentPlayer)
       let query = `query NextPlayer($theGame: Int, $thePlayer: Int ) {
         nextPlayer(gameId: $theGame, currentPlayer: $thePlayer){
@@ -290,8 +281,6 @@ const App = () => {
     }catch(e){
       console.log(e)
     }
-  }
-      setQuerying(false)
 
   };
 
@@ -300,6 +289,7 @@ const App = () => {
 let view = <CreateGame playerBGs={playerBGs} startGame={startGame}/>
 if(gameId > -1){
   view = <GameView
+    gameId={gameId}
     gameLog={gameLog}
     players={players}
     turn={turn}

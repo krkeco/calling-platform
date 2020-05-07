@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import {URL, playerTypeEnum} from './constants'
 
+import packageJson from '../package.json';
 
 const PlayerDataForm = (props) => {
   
@@ -221,10 +222,16 @@ const PlayerDataForm = (props) => {
             Join Game
           </Button>
         }
+  let dev;
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    dev = 'dev'
+  } else {
+    dev = 'prod'
+  }
 
   return (
     <div className="flexCol center" >
-    <div> The Calling Online Deck Building Game</div>
+    <div> The Calling Online Deck Building Game {dev}:{packageJson.version}</div>
       <FormControl className="formControl">
         <InputLabel id="player-type-label">Player Type</InputLabel>        
         <Select
@@ -256,7 +263,9 @@ const PlayerDataForm = (props) => {
             Start Game {gameId}
           </Button>):(<div/>)}
           </div>
-          <div>players in game: {waitingPlayers} </div>
+          <div>players in game: {waitingPlayers.map((player,ind)=>{
+            return <div style={{color: props.playerBGs[ind]}}>{player}</div>
+          })} </div>
           <div>players on this local: {localPlayers}</div>
     </div>
   );

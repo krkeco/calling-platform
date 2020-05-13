@@ -44,13 +44,13 @@ const PlayingCard = (props) => {
         {props.card.reinforce} R<span className="stat">einforce</span>
       </div>):(<span/>)
       }
-      {props.card.vitality > 0 ? (
+      {props.card.faith > 0 ? (
         <div className="text">
-        {props.card.vitality} V<span className="stat">itality</span>
+        {props.card.faith} F<span className="stat">aith</span>
       </div>):(<span/>)
       }
-      {props.card.weary > 0 ? (<div className="text">
-        {props.card.weary} W<span className="stat">eary</span>
+      {props.card.fear > 0 ? (<div className="text">
+        {props.card.fear} !F<span className="stat">ear</span>
       </div>):(<span/>)
       }
       {props.card.politics ? (<div className="text">

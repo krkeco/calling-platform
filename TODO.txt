@@ -1,7 +1,5 @@
 TODO
 commit:::
-styling
-return strings for buy and play
 
 check:::
 

@@ -21,10 +21,10 @@ const Location = (props) => {
     if(props.location.battlefield 
       && props.location.battlefield[props.player]){
       let playerField = props.location.battlefield[props.player]
-      console.log(props.players[props.player]+' could buy something with ' + playerField.gold)
+      console.log(props.players[props.player].name+' could buy something with ' + playerField.gold)
       if(playerField.gold > 0){
-            props.refreshMarket(props.location.name, props.player)
-          }
+        props.refreshMarket(props.location.name, props.player)
+      }
     }else{
       console.log('you cannot afford this!' + props.location.currentGold)
     }

@@ -75,14 +75,14 @@ const App = () => {
             name, type, firstPlayer,
             deck{name},
             discard{name},
-            hand{cost, draw, gold, influence, name, politics, vitality, weary, reinforce,abilities}
+            hand{cost, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
           },
           locations(gameId: $theId){
             name, influence,influencer, weariness, info,proselytized,hardened,abilities,
-            market{cost,draw, gold, influence, name, politics, vitality, weary, reinforce, abilities},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold, politics, vitality, weary,reinforce,abilities}}
+            market{cost,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
+            battlefield{name,influence, gold, cards{name,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
-          currentPlayer(gameId: $theId)
+          currentPlayer(gameId: $theId){turn,nextPlayer,winner}
       }`;
       let res = await fetch(URL, {
         method: 'POST', 
@@ -112,8 +112,14 @@ const App = () => {
       
       setPlayerInfo(response.data.players);
 
-      console.log('currnetplayer:'+response.data.currentPlayer)
-      setCurrentPlayer(response.data.currentPlayer)
+      console.log('currnetplayer:'+response.data)
+      // setCurrentPlayer(0);
+      setCurrentPlayer(response.data.currentPlayer.nextPlayer)
+      if(response.data.currentPlayer.winner != ""){
+        let winner = response.data.currentPlayer.winner
+        setWinner(winner)
+        
+      }
       // setQuerying(false)
     }catch(e){
       console.log(e)
@@ -129,6 +135,7 @@ const App = () => {
   try{
     let theGame = parseInt(gameId);
     let playerName = players[currentPlayer].name;
+    console.log('refreshing:'+playerName+theGame+"/"+locationName)
     let query = `query RefreshMarket($theGame: Int, $playerName: String, $locationName: String){
       refreshMarket(gameId: $theGame, playerName: $playerName, locationName: $locationName)
     }`
@@ -145,6 +152,7 @@ const App = () => {
       })
 
       let response = await res.json()
+      console.log('refresh?'+JSON.stringify(response))
       getGame(gameId);
       // setQuerying(false)
   }catch(e){
@@ -193,7 +201,7 @@ const App = () => {
     let playerName = players[currentPlayer].name;
     // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
     console.log(`trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`)
-        try{
+      try{
       let query = `query Buy($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
         buy(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
       }`;
@@ -222,6 +230,17 @@ const App = () => {
       
     }
   
+  }
+  const setWinner = (winner) =>{
+    let newLog = [...gameLog]    
+    alert(winner+' is the winner!!')
+    newLog.push(winner+ " won the game!")
+    setId(-1)
+    setLocationInfo([]);
+    setPlayerInfo([])    
+    setCurrentPlayer(0)
+    setTurn(1)
+    appendLog([])
   }
 
   const nextPlayer = async() => {
@@ -253,14 +272,8 @@ const App = () => {
       let newLog = [...gameLog]
 
       if(response.data.nextPlayer.winner){
-        alert(response.data.nextPlayer.winner+' is the winner!!')
-        newLog.push(response.data.nextPlayer.winner+ " won the game!")
-        setId(-1)
-        setLocationInfo([]);
-        setPlayerInfo([])    
-        setCurrentPlayer(0)
-        setTurn(1)
-        appendLog([])
+        let winner = response.data.nextPlayer.winner
+        setWinner(winner)
       
       }else{
         

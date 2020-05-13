@@ -13,11 +13,12 @@ import packageJson from '../package.json';
 
 const PlayerDataForm = (props) => {
   
-  const [players, setPlayers] = useState(1);
-  const [localPlayers, setLocalPlayers] = useState(1);
+  const [players, setPlayers] = useState(2);
+  const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
   const [playerType, setType] = useState(playerTypeEnum.HOST);
-  const [playerCharacters, setCharacter] = useState(["Jonah"])
+  const [playerCharacters, setCharacter] = useState(["Jonah","Esther"])
+  const [playerCharacterType, setCharacterType] = useState(["player","AI"])
   const [waitingPlayers, setWaitRoom] = useState([])
 
   const handleChange = (event) => {
@@ -28,6 +29,12 @@ const PlayerDataForm = (props) => {
     let newCharacters = [...playerCharacters]
     newCharacters[index] = event.target.value
     setCharacter(newCharacters)
+  }
+  const characterTypeChange = (index, event)=>{
+   let newCharacters = [...playerCharacterType]
+    newCharacters[index] = event.target.value
+    setCharacterType(newCharacters)
+
   }
 
   let playerForm = []
@@ -47,6 +54,17 @@ const PlayerDataForm = (props) => {
           <MenuItem value={"Esther"}>Esther</MenuItem>
           <MenuItem value={"Joshua"}>Joshua</MenuItem> 
           <MenuItem value={"Paul"}>Paul</MenuItem>
+         {/**
+        **/}
+        </Select>
+        <Select 
+          labelId="story-select"
+          id="story-select"
+          value={playerCharacterType[x]}
+          onChange={(e)=>characterTypeChange(x,e)}
+        >
+          <MenuItem value={"player"}>Human</MenuItem>
+          <MenuItem value={"AI"}>AI</MenuItem>
          {/**
         **/}
         </Select>
@@ -97,8 +115,8 @@ const PlayerDataForm = (props) => {
   const createGame = async() =>{
     try{
 
-      let query = `query NewGame($playerCharacters: [String]) {
-        newGame(players: $playerCharacters)
+      let query = `query NewGame($playerCharacters: [String], $playerCharacterType: [String]) {
+        newGame(players: $playerCharacters, types: $playerCharacterType)
       }`;
 
       let res = await fetch(URL, {
@@ -109,7 +127,7 @@ const PlayerDataForm = (props) => {
         },
         body:JSON.stringify({
           query,
-          variables: {playerCharacters}
+          variables: {playerCharacters, playerCharacterType}
         })
       })
 

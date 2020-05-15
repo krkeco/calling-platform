@@ -111,7 +111,8 @@ const Location = (props) => {
       <div>
         <div className={titleBar}>
           <div onClick={()=>toggleTitleBar()}>
-            ( ? ) {props.location.name} ({props.location.influencer})
+            <Button>( ? )</Button>
+            {props.location.name} ({props.location.influencer})
           </div>
           <div className="flexRow">
             <div className="titlebarInfo">

@@ -34,7 +34,7 @@ const PlayingCard = (props) => {
     >
       {/** G I PE WV R A **/}
       <div className="title">
-        {props.card.cost > 0 ?  <span>$:{props.card.cost}</span> : <span />}{' '}
+        {props.card.cost > 0 ?  <span>${props.card.cost}</span> : <span />}{' '}
         {props.card.name}{' '}
       </div>
       {props.card.gold > 0 ? (

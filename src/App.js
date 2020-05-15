@@ -320,7 +320,7 @@ const App = () => {
     );
   }
 
-  return <div className="flexCol">{view}</div>;
+  return <div className="flexCol appContainer">{view}</div>;
 };
 
 export default App;

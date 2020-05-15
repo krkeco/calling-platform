@@ -1,3 +1,9 @@
+.appContainer{
+  height:98vh;
+  /*background-color:yellow;*/
+  overflow:hidden;
+  padding:1vh;
+}
 .container {
   width: 100%;
 }

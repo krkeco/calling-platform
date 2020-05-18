@@ -147,8 +147,8 @@ const Location = (props) => {
             <span />
           )}
 
-          {props.location.proselytized ? (
-            <div className="titlebarInfo">Proselytized by Paul</div>
+          {props.location.proselytized > 0 ? (
+            <div className="titlebarInfo">Churches: {props.location.proselytized}</div>
           ) : (
             <span />
           )}

@@ -23,14 +23,13 @@ const PlayerDataForm = (props) => {
   const handleChange = (event) => {
     setPlayers(event.target.value);
     let newCharacters = [...playerCharacters];
-    let reducedChars = newCharacters.slice(0,event.target.value)
-    console.log('newchar:'+reducedChars)
-    setCharacter([...reducedChars])
+    let reducedChars = newCharacters.slice(0, event.target.value);
+    console.log('newchar:' + reducedChars);
+    setCharacter([...reducedChars]);
 
     let newTypes = [...playerCharacterType];
-    let reducedTypes = newTypes.slice(0,event.target.value)
-    setCharacterType([...reducedTypes])
-
+    let reducedTypes = newTypes.slice(0, event.target.value);
+    setCharacterType([...reducedTypes]);
   };
 
   const characterChange = (index, event) => {

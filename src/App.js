@@ -145,7 +145,7 @@ const App = () => {
     try {
       let theGame = parseInt(gameId);
       let playerId = parseInt(players[currentPlayer].id);
-      let locationId = parseInt(locId)
+      let locationId = parseInt(locId);
       // console.log('refreshing:' + playerName + theGame + '/' + locationName);
       let query = `query RefreshMarket($theGame: Int, $playerId: Int, $locationId: Int){
       refreshMarket(gameId: $theGame, playerId: $playerId, locationId: $locationId)

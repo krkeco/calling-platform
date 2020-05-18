@@ -99,20 +99,21 @@ const Location = (props) => {
   };
 
   const Titlebar = (props) => {
-    const [titleBar,setTitleBar] = useState("titlebar")
-    const toggleTitleBar = () =>{
-      if(titleBar == "titlebar"){
-        setTitleBar("titlebarBig")
-      }else{
-        setTitleBar("titlebar")
+    const [titleBar, setTitleBar] = useState('titlebar');
+    const toggleTitleBar = () => {
+      if (titleBar == 'titlebar') {
+        setTitleBar('titlebarBig');
+      } else {
+        setTitleBar('titlebar');
       }
-    }
+    };
     return (
       <div>
         <div className={titleBar}>
-          <div onClick={()=>toggleTitleBar()}>
+          <div onClick={() => toggleTitleBar()}>
             <Button>( ? )</Button>
-            {props.location.name}:{props.location.id} ({props.location.influencer})
+            {props.location.name}:{props.location.id} (
+            {props.location.influencer})
           </div>
           <div className="flexRow">
             <div className="titlebarInfo">
@@ -148,7 +149,9 @@ const Location = (props) => {
           )}
 
           {props.location.proselytized > 0 ? (
-            <div className="titlebarInfo">Churches: {props.location.proselytized}</div>
+            <div className="titlebarInfo">
+              Churches: {props.location.proselytized}
+            </div>
           ) : (
             <span />
           )}

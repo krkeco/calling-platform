@@ -20,15 +20,15 @@ const PlayerDataForm = (props) => {
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
   const [waitingPlayers, setWaitRoom] = useState([]);
 
-  const handleChange = (event) => {
-    setPlayers(event.target.value);
+  const handleChange = (value) => {
+    setPlayers(value);
     let newCharacters = [...playerCharacters];
-    let reducedChars = newCharacters.slice(0, event.target.value);
-    console.log('newchar:' + reducedChars);
+    let reducedChars = newCharacters.slice(0, value);
     setCharacter([...reducedChars]);
 
     let newTypes = [...playerCharacterType];
-    let reducedTypes = newTypes.slice(0, event.target.value);
+    let reducedTypes = newTypes.slice(0, value);
+    console.log('newchar:' + reducedTypes);
     setCharacterType([...reducedTypes]);
   };
 
@@ -191,8 +191,8 @@ const PlayerDataForm = (props) => {
   const joinGame = async () => {
     try {
       let theGame = parseInt(gameId);
-      let query = `query JoinGame($playerCharacters: [String], $theGame: Int) {
-        joinGame(players: $playerCharacters, gameId: $theGame)
+      let query = `query JoinGame($playerCharacters: [String],$playerCharacterType: [String], $theGame: Int) {
+        joinGame(players: $playerCharacters,types: $playerCharacterType, gameId: $theGame)
       }`;
       let res = await fetch(URL, {
         method: 'POST',
@@ -202,7 +202,7 @@ const PlayerDataForm = (props) => {
         },
         body: JSON.stringify({
           query,
-          variables: { theGame, playerCharacters },
+          variables: { theGame, playerCharacters, playerCharacterType },
         }),
       });
 
@@ -228,7 +228,7 @@ const PlayerDataForm = (props) => {
         labelId="player-count-label"
         id="player-count"
         value={players}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e.target.value)}
       >
         <MenuItem value={1}>One</MenuItem>
         <MenuItem value={2}>Two</MenuItem>
@@ -279,7 +279,7 @@ const PlayerDataForm = (props) => {
           labelId="player-type-label"
           id="player-type"
           value={playerType}
-          onChange={(e) => setType(e.target.value)}
+          onChange={(e) => {setType(e.target.value); handleChange(1)}}
           className="dropdownBox"
         >
           <MenuItem value={playerTypeEnum.HOST}>Host Local Game</MenuItem>

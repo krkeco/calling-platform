@@ -16,7 +16,7 @@ const Location = (props) => {
           ' could buy something with ' +
           playerField.gold,
       );
-      props.buyCard(index, props.location.name, card);
+      props.buyCard(index, props.location.id, card);
     } else {
       console.log(
         'you cannot afford this!' + card.cost + props.location.currentGold,
@@ -35,7 +35,7 @@ const Location = (props) => {
           playerField.gold,
       );
       if (playerField.gold > 0) {
-        props.refreshMarket(props.location.name, props.player);
+        props.refreshMarket(props.location.id, props.player);
       }
     } else {
       console.log('you cannot afford this!' + props.location.currentGold);
@@ -112,7 +112,7 @@ const Location = (props) => {
         <div className={titleBar}>
           <div onClick={()=>toggleTitleBar()}>
             <Button>( ? )</Button>
-            {props.location.name} ({props.location.influencer})
+            {props.location.name}:{props.location.id} ({props.location.influencer})
           </div>
           <div className="flexRow">
             <div className="titlebarInfo">
@@ -178,7 +178,7 @@ const Location = (props) => {
       <div
         className="location"
         onDragOver={(event) => props.onDragOver(event)}
-        onDrop={(event) => props.onDrop(event, props.name)}
+        onDrop={(event) => props.onDrop(event, props.location.id)}
       >
         {Titlebar(props)}
         <div className="flexRow flexStart ">

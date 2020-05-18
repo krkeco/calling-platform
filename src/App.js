@@ -78,13 +78,13 @@ const App = () => {
         console.log('getting game from ' + theId);
         let query = `query Game($theId: Int) {
           players(gameId: $theId){
-            name, type, firstPlayer,
+            name, id,type, firstPlayer,
             deck{name},
             discard{name},
             hand{cost, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
           },
           locations(gameId: $theId){
-            name, influence,influencer, weariness, info,proselytized,hardened,abilities,
+            name, id,influence,influencer, weariness, info,proselytized,hardened,abilities,
             market{cost,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
             battlefield{name,influence, gold, cards{name,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
@@ -141,13 +141,14 @@ const App = () => {
     }
   };
 
-  const refreshMarket = async (locationName) => {
+  const refreshMarket = async (locId) => {
     try {
       let theGame = parseInt(gameId);
-      let playerName = players[currentPlayer].name;
-      console.log('refreshing:' + playerName + theGame + '/' + locationName);
-      let query = `query RefreshMarket($theGame: Int, $playerName: String, $locationName: String){
-      refreshMarket(gameId: $theGame, playerName: $playerName, locationName: $locationName)
+      let playerId = parseInt(players[currentPlayer].id);
+      let locationId = parseInt(locId)
+      // console.log('refreshing:' + playerName + theGame + '/' + locationName);
+      let query = `query RefreshMarket($theGame: Int, $playerId: Int, $locationId: Int){
+      refreshMarket(gameId: $theGame, playerId: $playerId, locationId: $locationId)
     }`;
       let res = await fetch(URL, {
         method: 'POST',
@@ -157,7 +158,7 @@ const App = () => {
         },
         body: JSON.stringify({
           query,
-          variables: { playerName, locationName, theGame },
+          variables: { playerId, locationId, theGame },
         }),
       });
 
@@ -174,10 +175,10 @@ const App = () => {
   const playCard = async (name, location) => {
     let cardIndex = parseInt(name);
     let theGame = parseInt(gameId);
-    let playerName = players[currentPlayer].name;
+    let playerId = parseInt(players[currentPlayer].id);
     try {
-      let query = `query Play($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
-        play(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
+      let query = `query Play($playerId: Int, $cardIndex: Int, $location: Int, $theGame: Int) {
+        play(gameId: $theGame, playerId: $playerId, locationId: $location, cardIndex: $cardIndex)
       }`;
       let res = await fetch(URL, {
         method: 'POST',
@@ -187,7 +188,7 @@ const App = () => {
         },
         body: JSON.stringify({
           query,
-          variables: { playerName, cardIndex, location, theGame },
+          variables: { playerId, cardIndex, location, theGame },
         }),
       });
 
@@ -204,14 +205,15 @@ const App = () => {
   const buyCard = async (index, location, card) => {
     let cardIndex = parseInt(index);
     let theGame = parseInt(gameId);
-    let playerName = players[currentPlayer].name;
+    let LocationId = parseInt(location);
+    let playerName = players[currentPlayer].id;
     // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
     console.log(
       `trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`,
     );
     try {
-      let query = `query Buy($playerName: String, $cardIndex: Int, $location: String, $theGame: Int) {
-        buy(gameId: $theGame, playerName: $playerName, locationName: $location, cardIndex: $cardIndex)
+      let query = `query Buy($playerName: Int, $cardIndex: Int, $LocationId: Int, $theGame: Int) {
+        buy(gameId: $theGame, playerId: $playerName, locationId: $LocationId, cardIndex: $cardIndex)
       }`;
       let res = await fetch(URL, {
         method: 'POST',
@@ -221,7 +223,7 @@ const App = () => {
         },
         body: JSON.stringify({
           query,
-          variables: { playerName, cardIndex, location, theGame },
+          variables: { playerName, cardIndex, LocationId, theGame },
         }),
       });
 

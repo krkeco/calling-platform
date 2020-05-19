@@ -36,7 +36,7 @@
 }
 
 .location {
-  min-width: 300px;
+  min-width: 400px;
   min-height: 250px;
   border-radius: 5px;
   padding: 5px;
@@ -86,37 +86,71 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
-  width: 75px;
+  width: 60px;
   height: 100px;
-  margin: 10px;
+  margin: 5px;
   transition: width 0.15s, height 0.15s;
 }
 .small {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 60px;
   overflow: hidden;
-  margin: 5px;
+  margin: 3px;
   padding: 0px;
 }
 .playcard:hover {
-  opacity: 0.7;
+  opacity: 0.9;
   width: 150px;
   height: 200px;
   transition: width 0.25s, height 0.25s;
 }
+.cardImg{
+  position:fixed;
+  opacity:1;
+  margin-left:2px;
+  width:56px;
+  height:85px;
+  transition: width 0.25s, height 0.25s;
+}
+.small .cardImg{
+  width: 30px;
+  margin-left:7px;
+  height:35px;
+
+}
+.playcard:hover .cardImg {
+  opacity:.65;
+  z-index: -1;
+  margin-left:5px;
+  width:140px;
+  height:175px;
+  transition: width 0.25s, height 0.25s;
+
+}
 .playcard:hover .title {
-  font-size: 32px;
+  font-size: 22px;
+  height:24px;
+  overflow:visible;
+  /*white-space: normal;*/
 }
 
 .title {
   margin: 5px;
-  font-size: 14px;
+  font-size: 10px;
   transition: font-size 0.25s;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height:10px;
+  color:black;
+  /*-webkit-text-stroke: .25px white;*/
 }
 .text {
   margin: 5px;
   font-size: 12px;
   transition: font-size 0.25s;
+  color:black;
+  /*-webkit-text-stroke: 1px black;*/
 }
 .playcard:hover .text {
   font-size: 24px;
@@ -124,12 +158,15 @@
 .stat {
   visibility: hidden;
   opacity: 0;
-  width: 0px;
+  width: 1px;
+  height:1px;
+  overflow:hidden;
   transition: opacity 0.25s;
 }
 .playcard:hover .stat {
   visibility: visible;
   width: auto;
+  height:auto;
   opacity: 1;
 }
 .gamelog {

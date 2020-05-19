@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 import CreateGame from './CreateGame';
 import GameView from './GameView';
 
+
 const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [gameId, setId] = useState(-1);
@@ -81,12 +82,12 @@ const App = () => {
             name, id,type, firstPlayer,
             deck{name},
             discard{name},
-            hand{cost, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
+            hand{cost,img, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
           },
           locations(gameId: $theId){
             name, id,influence,influencer, weariness, info,proselytized,hardened,abilities,
-            market{cost,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
-            battlefield{name,influence, gold, cards{name,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
+            market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
+            battlefield{name,influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
           currentPlayer(gameId: $theId){turn,nextPlayer,winner}
       }`;

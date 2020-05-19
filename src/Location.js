@@ -3,6 +3,7 @@ import { HAND } from './constants.js';
 
 import { Button } from '@material-ui/core';
 import PlayingCard from './PlayingCard';
+import bg from  './imgs/babylon.png';
 
 const Location = (props) => {
   const buyCard = (card, index) => {
@@ -108,7 +109,7 @@ const Location = (props) => {
       }
     };
     return (
-      <div>
+      <div  >
         <div className={titleBar}>
           <div onClick={() => toggleTitleBar()}>
             <Button>( ? )</Button>
@@ -177,9 +178,13 @@ const Location = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <div
         className="location"
+      style={{
+        backgroundImage: `url("${bg}")`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',}}
         onDragOver={(event) => props.onDragOver(event)}
         onDrop={(event) => props.onDrop(event, props.location.id)}
       >

@@ -113,9 +113,12 @@ const Location = (props) => {
       <div  >
         <div className={titleBar}>
           <div onClick={() => toggleTitleBar()}>
-            <Button>( ? )</Button>
-            {props.location.name}:{props.location.id} (
-            {props.location.influencer})
+            <Button variant="contained"
+              color="secondary">( ? )</Button>
+            <span  className="locationTitle">
+              {props.location.name}:{props.location.id} 
+              ({props.location.influencer})
+            </span>
           </div>
           <div className="flexRow">
             <div className="titlebarInfo">
@@ -190,7 +193,8 @@ const Location = (props) => {
         onDrop={(event) => props.onDrop(event, props.location.id)}
       >
         {Titlebar(props)}
-        <div className="flexRow flexStart ">
+        {props.location.name != "Jerusalem" ? 
+        (<div className="flexRow flexStart marketContainer">
           <div className="flexCol flexStart">
             Market:
             <div className="refreshMarketBtn" onClick={() => refreshMarket()}>
@@ -198,7 +202,7 @@ const Location = (props) => {
             </div>
           </div>
           {market}
-        </div>
+        </div>):(<span/>)}
         {battlefield(props)}
       </div>
     </div>

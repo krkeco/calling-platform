@@ -81,6 +81,10 @@
 }
 .marketContainer{
   margin-top: 20px;
+  border-radius: 5px;
+  width: 240px;
+  height:80px;
+  background-color: #ff0;
 }
 .refreshMarketBtn {
   width: 65px;
@@ -119,7 +123,7 @@
   
 }
 .playcard:hover {
-  opacity: 0.9;
+  /*opacity: 0.9;*/
   width: 200px;
   height: 280px;
   transition: width 0.25s, height 0.25s;
@@ -157,9 +161,10 @@
 
 }
 .playcard:hover .cardImg {
+  z-index: 1;
   /*opacity:.95;*/
   position:fixed;
-  z-index: -1;
+  opacity:1;
   width:196px;
   height:276px;
   transition: width 0.25s, height 0.25s;
@@ -191,7 +196,10 @@
   text-align: center;
 }
 .playcard:hover .text {
-  font-size: 24px;
+  z-index: 2;
+  font-size: 18px;
+  background-color: #5554;
+  border-radius: 5px;
   /*-webkit-text-stroke: 1px #ddd;*/
   color: white;
   text-shadow: 2px 2px 4px #333;
@@ -207,9 +215,13 @@
 }
 .playcard:hover .stat {
   visibility: visible;
-  width: auto;
+  /*width: auto;*/
   height:auto;
   opacity: 1;
+
+  width:100%;
+  margin-right:15px;
+  text-align: right;
 }
 .gamelog {
   height: 200px;

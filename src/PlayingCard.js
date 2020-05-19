@@ -60,19 +60,22 @@ const PlayingCard = (props) => {
       draggable={props.draggable}
       className={size(props.size)}
     >
-      {/** G I PE F! R A **/}
-      <p className="title">
-        {props.card.cost > 0 ? props.card.cost : (0)}{' '}{props.card.name}{' '}
-      </p>
+    
      <img
      draggable={false}
      className="cardImg"
      src={cardImg[props.card.img]}
       />
-               
+    
+      {/** G I PE F! R A **/}
+      <p className="text">
+        {props.card.cost > 0 ? `$:(${props.card.cost})` : (0)}{' '}
+      </p>
+      <p className="text">{props.card.name}</p>
+
       {props.card.gold > 0 ? (
         <div className="text stat">
-          {props.card.gold} $<span className="stat"> Gold</span>
+          {props.card.gold} <span className="stat"> Gold</span>
         </div>
       ) : (
         <span />

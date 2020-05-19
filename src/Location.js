@@ -47,7 +47,7 @@ const Location = (props) => {
   if (props.location) {
     props.location.market.map((card, index) => {
       market.push(
-        <div onClick={() => buyCard(card, index)}>
+        <div style={{margin:3}} onClick={() => buyCard(card, index)}>
           <PlayingCard
             id={index}
             size="small"
@@ -77,7 +77,7 @@ const Location = (props) => {
                   </div>
                 </div>
                 {playerBF.cards.map((card, ind) => {
-                  return (
+                  return (<div  style={{margin:3}}>
                     <PlayingCard
                       size="small"
                       id={ind}
@@ -87,6 +87,7 @@ const Location = (props) => {
                       card={card}
                       player={props.player}
                     />
+                    </div>
                   );
                 })}
               </div>
@@ -103,7 +104,7 @@ const Location = (props) => {
     const [titleBar, setTitleBar] = useState('titlebar');
     const toggleTitleBar = () => {
       if (titleBar == 'titlebar') {
-        setTitleBar('titlebarBig');
+        setTitleBar('titlebar active');
       } else {
         setTitleBar('titlebar');
       }

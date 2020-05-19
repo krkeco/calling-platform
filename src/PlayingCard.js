@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 
-  import bg from  './imgs/babylon.png';
-  import esther from './imgs/esther.png'
-  import king from './imgs/king.png'
-  import mordecai from './imgs/mordecai.png'
-  import haman from './imgs/haman.png'
-  import taxes from './imgs/taxes.png'
-  import annihilation from './imgs/annihilation.png'
-  import eunich from './imgs/eunich.png'
+  // import bg from  './imgs/esther/babylon.png';
+  import king from './imgs/esther/king.png'
+  import mordecai from './imgs/esther/mordecai.png'
+  import haman from './imgs/esther/haman.png'
+  import taxes from './imgs/esther/taxes.png'
+  import annihilation from './imgs/esther/annihilation.png'
+  import eunich from './imgs/esther/eunich.png'
+  import esther from './imgs/esther/esther.png'
+
+  import jonah from './imgs/jonah/jonah.png'
+  import joshua from './imgs/joshua/joshua.png'
+
   import gold from './imgs/gold.png'
   import influence from './imgs/influence.png'
 
@@ -22,6 +26,11 @@ import React, { useState, useEffect } from 'react';
     'taxes':taxes,
     'annihilation':annihilation,
     'eunich':eunich,
+
+    'jonah':jonah,
+
+    'joshua':joshua,
+
     'gold':gold,    
     'influence':influence,
   }
@@ -68,10 +77,8 @@ const PlayingCard = (props) => {
       />
     
       {/** G I PE F! R A **/}
-      <p className="text">
-        {props.card.cost > 0 ? `$:(${props.card.cost})` : (0)}{' '}
-      </p>
-      <p className="text">{props.card.name}</p>
+      <p className="text titleCard">
+        {props.card.cost > 0 ? `$${props.card.cost}` : ''}{' '}{props.card.name}</p>
 
       {props.card.gold > 0 ? (
         <div className="text stat">

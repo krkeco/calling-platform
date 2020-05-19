@@ -64,7 +64,7 @@ const GameView = (props) => {
     <div>
       <div className="flexRow flexStart padded locContainer">{locCards}</div>
       <div className="flexRow spaceBetween" style={{ width: '100%' }}>
-        <div className="flexCol" style={{ width: 250 }}>
+        <div className="flexCol" style={{ width: 275 }}>
           <div className="titlePlayer">
             {props.gameId} CurrentPlayer:{' '}
             <span style={{ color: playerBGs[currentPlayer] }}>
@@ -78,9 +78,9 @@ const GameView = (props) => {
             </span>
           </div>
           <div>Current Turn: {props.turn}</div>
-          <div className="flexCol gamelog">
+          <div id="gamelog" className="flexCol gamelog">
             GAME LOG:
-            {gameLog.reverse().map((log, ind) => {
+            {gameLog.map((log, ind) => {
               return <div>{log}</div>;
             })}
           </div>

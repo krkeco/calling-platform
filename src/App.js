@@ -89,7 +89,7 @@ const App = () => {
             market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
             battlefield{name,influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
-          currentPlayer(gameId: $theId){turn,nextPlayer,winner}
+          currentPlayer(gameId: $theId){turn,nextPlayer,winner, log}
       }`;
         let res = await fetch(URL, {
           method: 'POST',
@@ -104,24 +104,26 @@ const App = () => {
         });
 
         let response = await res.json();
-        // console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
+        console.log('response for game info: currentplayer is '+JSON.stringify(response.data))
 
-        let newLog = [...gameLog];
-        locations.map((location, index) => {
-          if (
-            location.influencer != response.data.locations[index].influencer
-          ) {
-            console.log('new influencer!!!');
-            let log =
-              response.data.locations[index].influencer +
-              ' took ' +
-              locations[index].name +
-              ' from ' +
-              location.influencer +
-              '!';
-            newLog.push(log);
-          }
-        });
+        appendLog([...response.data.currentPlayer.log]);
+        let element = document.getElementById("gamelog");
+        element.scrollTop = element.scrollHeight;
+        // locations.map((location, index) => {
+        //   if (
+        //     location.influencer != response.data.locations[index].influencer
+        //   ) {
+        //     console.log('new influencer!!!');
+        //     let log =
+        //       response.data.locations[index].influencer +
+        //       ' took ' +
+        //       locations[index].name +
+        //       ' from ' +
+        //       location.influencer +
+        //       '!';
+        //     newLog.push(log);
+        //   }
+        // });
 
         setLocationInfo(response.data.locations);
 
@@ -194,9 +196,9 @@ const App = () => {
       });
 
       let response = await res.json();
-      console.log('response to playcard:' + JSON.stringify(response));
-      let log = players[currentPlayer].name + ' ' + response.data.play;
-      appendLog([...gameLog, log]);
+      // console.log('response to playcard:' + JSON.stringify(response));
+      // let log = players[currentPlayer].name + ' ' + response.data.play;
+      // appendLog([...gameLog, log]);
       getGame(gameId);
     } catch (e) {
       console.log(e);
@@ -231,8 +233,8 @@ const App = () => {
       let response = await res.json();
       console.log('response to playcard:' + JSON.stringify(response));
 
-      let log = players[currentPlayer].name + ' ' + response.data.buy;
-      appendLog([...gameLog, log]);
+      // let log = players[currentPlayer].name + ' ' + response.data.buy;
+      // appendLog([...gameLog, log]);
 
       getGame(gameId);
     } catch (e) {
@@ -240,15 +242,15 @@ const App = () => {
     }
   };
   const setWinner = (winner) => {
-    let newLog = [...gameLog];
+    // let newLog = [...gameLog];
     alert(winner + ' is the winner!!');
-    newLog.push(winner + ' won the game!');
+    // newLog.push(winner + ' won the game!');
     setId(-1);
     setLocationInfo([]);
     setPlayerInfo([]);
     setCurrentPlayer(0);
     setTurn(1);
-    appendLog([]);
+    // appendLog([]);
   };
 
   const nextPlayer = async () => {

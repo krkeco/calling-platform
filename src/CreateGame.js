@@ -8,9 +8,20 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { URL, playerTypeEnum } from './constants';
-
 import packageJson from '../package.json';
 
+  import esther from './imgs/esther/esther.png'
+  import paul from './imgs/jonah/jonah.png'
+  import jonah from './imgs/jonah/jonah.png'
+  import joshua from './imgs/joshua/joshua.png'
+
+  const cardImg ={
+    "Jonah":jonah,
+    "Esther":esther,
+    "Joshua":joshua,
+    "Paul":paul
+  }
+  
 const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
@@ -48,13 +59,10 @@ const PlayerDataForm = (props) => {
     let bgColor = props.playerBGs[x];
     playerForm.push(
       <div
-        className="flexCol center"
+        className="flexCol center userFormContainer"
         style={{
           backgroundColor: bgColor,
-          margin: 10,
-          width: 100,
-          height: 100,
-          borderRadius: 5,
+         
         }}
       >
         <div>Player {x + 1}:</div>
@@ -72,6 +80,12 @@ const PlayerDataForm = (props) => {
           {/**
            **/}
         </Select>
+
+     <img
+     draggable={false}
+     className="starterImg"
+     src={cardImg[playerCharacters[x]]}
+      />
         <Select
           labelId="story-select"
           id="story-select"

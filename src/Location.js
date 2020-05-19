@@ -3,7 +3,7 @@ import { HAND } from './constants.js';
 
 import { Button } from '@material-ui/core';
 import PlayingCard from './PlayingCard';
-import bg from  './imgs/babylon.png';
+import bg from  './imgs/esther/babylon.png';
 
 const Location = (props) => {
   const buyCard = (card, index) => {

@@ -65,6 +65,7 @@ const PlayingCard = (props) => {
         {props.card.cost > 0 ? props.card.cost : (0)}{' '}{props.card.name}{' '}
       </p>
      <img
+     draggable={false}
      className="cardImg"
      src={cardImg[props.card.img]}
       />

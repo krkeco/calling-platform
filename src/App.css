@@ -46,6 +46,7 @@
   /*border-left: 2px dotted red;*/
 }
 .locContainer{
+  margin-left:30px;
   overflow: scroll;
 }
 
@@ -56,8 +57,9 @@
 }
 
 .scrapPile {
-  width: 100%;
+  width: 200px;
   height: 100px;
+  margin-top:10px;
   margin-bottom: 5px;
   border-radius: 5px;
   background-color: gray;
@@ -80,13 +82,31 @@
 .titlePlayer {
   font-size: 24px;
 }
+.bfWrapper{
+  color:white;
+  margin:3px;
+  border-radius: 5px;
+  width:auto;
+  height:auto;
+  min-height:100px;
+  background-color: #5558;
+}
+.bfContainer{
+  color:white;
+  border-radius:5px;
+  height:60px;
+  width:60px;
+  margin:3px;
+  padding:3px;
+  background-color: #4448;
+}
 .marketContainer{
-  
+  color:white;
   margin-top: 20px;
   border-radius: 5px;
   width: 240px;
   height:80px;
-  background-color: #5558;
+  background-color: #4448;
 }
 .refreshMarketBtn {
   width: 65px;
@@ -238,15 +258,15 @@
   opacity: 0;
   visibility: hidden;
   height: 1px;
-  transition: opacity 0.25s height 0.25s;
+  transition: opacity 1s, height 0.5s;
 }
 .smallText {
   font-size: 12px;
 }
 .active{
-  min-height:auto;
-  height:150px;
-  overflow:hidden;
+  
+  height:250px;
+  /*overflow:hidden;*/
   width:400px;
   background-color:#ddd;
   opacity:.7;
@@ -255,16 +275,25 @@
 .active .titlebarInfo {
   opacity: 1;
   height: 30px;
-  position: inherit;
   visibility: visible;
-  transition: opacity 0.25s height 0.25s;
+  transition: opacity 1s, height 0.5s;
 
 }
 .helper{
+  /*position:absolute;*/
   width:100%;
   padding:0px;
   margin:0px;
   height:auto;
+  margin-bottom: -60px;
+  
+}
+.helpBtn{
+  color:magenta;
+  border: 1px solid magenta;
+  border-radius: 5px;
+  width:auto;
+  text-align: center;
 }
 .helperText{
   height:0px;
@@ -273,6 +302,12 @@
 }
 .active .helperText {
   margin:0;
+  margin-bottom: 50px;
   height:auto;
   visibility: visible;
+  color:white;
+  background-color: #222;
+}
+.hintText{
+  margin-bottom: 5px;
 }

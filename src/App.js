@@ -87,7 +87,7 @@ const App = () => {
           locations(gameId: $theId){
             name, id,influence,influencer, weariness, info,proselytized,hardened,abilities,
             market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
-            battlefield{name,influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
+            battlefield{name,poliBonus, influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
           currentPlayer(gameId: $theId){turn,nextPlayer,winner, log}
       }`;

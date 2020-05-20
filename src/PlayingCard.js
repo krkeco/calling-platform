@@ -110,14 +110,14 @@ const PlayingCard = (props) => {
       />
       {props.card.gold > 0 ? (
         <div className="text stat">
-          {props.card.gold} <span className="stat"> Gold</span>
+          {props.card.gold} <span className="stat"> Gold($)</span>
         </div>
       ) : (
         <span />
       )}
       {props.card.influence > 0 ? (
         <div className="text stat">
-          {props.card.influence} I <span className="stat">nfluence</span>
+          {props.card.influence} I<span className="stat">nfluence</span>
         </div>
       ) : (
         <span />

@@ -75,19 +75,19 @@ const Location = (props) => {
 
   const battlefield = (props) => {
     return (
-      <div className="flexCol padded battlefield">
+      <div className="flexCol">
         {props.location.battlefield.length > 0 ? (
           props.location.battlefield.map((bf, index) => {
             let playerBF = props.location.battlefield[index];
             let bgColor = props.playerBGs[index];
             return playerBF ? (
               <div className="flexRow">
-                <div className="flexCol">
+                <div className="flexCol bfContainer">
                   <div>{playerBF.name}</div>
-                  <div className="flexRow">
-                    <div>G:{playerBF.gold}</div>
-                    <div>--Inf:{playerBF.influence}</div>
-                  </div>
+                  
+                    <div>$ {playerBF.gold}</div>
+                    <div>Inf:{(playerBF.influence+playerBF.poliBonus)}</div>
+                  
                 </div>
                 {playerBF.cards.map((card, ind) => {
                   return (<div  style={{margin:3}}>
@@ -200,10 +200,8 @@ const Location = (props) => {
         className="location"
       style={{
         backgroundImage: `url("${bgGrid[props.location.name]}")`,
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',}}
-        onDragOver={(event) => props.onDragOver(event)}
-        onDrop={(event) => props.onDrop(event, props.location.id)}
       >
         {Titlebar(props)}
         {props.location.name != "Jerusalem" ? 
@@ -215,8 +213,20 @@ const Location = (props) => {
             </div>
           </div>
           {market}
-        </div>):(<span/>)}
+        </div>):(<div
+          className="scrapPile flexCol center"
+          onDrop={(event) => props.onDrop(event, -1)}
+          onDragOver={(event) => props.onDragOver(event)}
+        >
+          Scrap Pile
+        </div>
+      )}
+      <div className="bfWrapper"
+        onDragOver={(event) => props.onDragOver(event)}
+        onDrop={(event) => props.onDrop(event, props.location.id)}>
+        <span style={{padding:0, margin:0}}> Battlefield:</span>
         {battlefield(props)}
+        </div>
       </div>
     </div>
   );

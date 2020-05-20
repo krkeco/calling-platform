@@ -3,7 +3,20 @@ import { HAND } from './constants.js';
 
 import { Button } from '@material-ui/core';
 import PlayingCard from './PlayingCard';
-import bg from  './imgs/esther/babylon.png';
+
+import babylon from  './imgs/esther/babylon.png';
+import jerusalem from  './imgs/sample/sandyshore.png';
+import canaan from  './imgs/sample/seaskull.png';
+import nineveh from  './imgs/sample/dessertketchup.png';
+import rome from  './imgs/sample/fishflower.png';
+
+const bgGrid = {
+  "Nineveh":nineveh,
+  "Canaan":canaan,
+  "Jerusalem":jerusalem,
+  "Rome":rome,
+  "Babylon":babylon
+}
 
 const Location = (props) => {
   const buyCard = (card, index) => {
@@ -186,7 +199,7 @@ const Location = (props) => {
       <div
         className="location"
       style={{
-        backgroundImage: `url("${bg}")`,
+        backgroundImage: `url("${bgGrid[props.location.name]}")`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',}}
         onDragOver={(event) => props.onDragOver(event)}

@@ -109,21 +109,6 @@ const App = () => {
         appendLog([...response.data.currentPlayer.log]);
         let element = document.getElementById("gamelog");
         element.scrollTop = element.scrollHeight;
-        // locations.map((location, index) => {
-        //   if (
-        //     location.influencer != response.data.locations[index].influencer
-        //   ) {
-        //     console.log('new influencer!!!');
-        //     let log =
-        //       response.data.locations[index].influencer +
-        //       ' took ' +
-        //       locations[index].name +
-        //       ' from ' +
-        //       location.influencer +
-        //       '!';
-        //     newLog.push(log);
-        //   }
-        // });
 
         setLocationInfo(response.data.locations);
 

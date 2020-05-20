@@ -12,6 +12,21 @@ import React, { useState, useEffect } from 'react';
 
   import jonah from './imgs/jonah/jonah.png'
   import joshua from './imgs/joshua/joshua.png'
+  
+  import bedazzlejewel from './imgs/sample/bedazzlejewel.png'
+  import blossomgrove from './imgs/sample/blossomgrove.png'
+  import blunes from './imgs/sample/blunes.png'
+  import corridor from './imgs/sample/corridor.png'
+  import crackplaster from './imgs/sample/crackplaster.png'
+  import firetree from './imgs/sample/firetree.png'
+  import floralite from './imgs/sample/floralite.png'
+  import gemlightning from './imgs/sample/gemlightning.png'
+  import greenbiz from './imgs/sample/greenbiz.png'
+  import jellyfishcarn from './imgs/sample/jellyfishcarn.png'
+  import leavestreak from './imgs/sample/leavestreak.png'
+  import seacave from './imgs/sample/seacave.png'
+  import verdentfire from './imgs/sample/verdentfire.png'
+
 
   import gold from './imgs/gold.png'
   import influence from './imgs/influence.png'
@@ -33,6 +48,20 @@ import React, { useState, useEffect } from 'react';
 
     'gold':gold,    
     'influence':influence,
+
+    "bedazzlejewel":bedazzlejewel,
+    "blossomgrove":blossomgrove,
+    "blunes":blunes,
+    "corridor":corridor,
+    "crackplaster":crackplaster,
+    "firetree":firetree,
+    "floralite":floralite,
+    "gemlightning":gemlightning,
+    "greenbiz":greenbiz,
+    "jellyfishcarn":jellyfishcarn,
+    "leavestreak":leavestreak,
+    "seacave":seacave,
+    "verdentfire":verdentfire,
   }
   // if(props.card.img){
   //   bg = "./imgs/"+props.card.img+".png";

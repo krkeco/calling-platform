@@ -3,6 +3,7 @@
   /*background-color:yellow;*/
   overflow:hidden;
   padding:1vh;
+  background-image: url('./imgs/sample/blunes.png');
 }
 .container {
   width: 100%;
@@ -80,11 +81,12 @@
   font-size: 24px;
 }
 .marketContainer{
+  
   margin-top: 20px;
   border-radius: 5px;
   width: 240px;
   height:80px;
-  background-color: #ff0;
+  background-color: #5558;
 }
 .refreshMarketBtn {
   width: 65px;
@@ -176,18 +178,6 @@
   overflow:visible;
   /*white-space: normal;*/
 }
-/*
-.title {
-  margin: 5px;
-  font-size: 12px;
-  transition: font-size 0.25s;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  height:15px;
-  color:black;
- 
-}*/
 .text {
   margin: 1px;
   font-size: 12px;
@@ -252,16 +242,11 @@
 }
 .smallText {
   font-size: 12px;
-}/*
-.titlebarOpen {
-  height: 300px;
-  width: 600px;
-  -webkit-transition: height 0.5s, width 0.5s;
-  transition: height 0.5s, width 0.5s;
-  -moz-transition: height 0.5s, width 0.5s;
-}*/
+}
 .active{
-  height:300px;
+  min-height:auto;
+  height:150px;
+  overflow:hidden;
   width:400px;
   background-color:#ddd;
   opacity:.7;
@@ -274,4 +259,20 @@
   visibility: visible;
   transition: opacity 0.25s height 0.25s;
 
+}
+.helper{
+  width:100%;
+  padding:0px;
+  margin:0px;
+  height:auto;
+}
+.helperText{
+  height:0px;
+  /*margin: -10px;*/
+  visibility: hidden;
+}
+.active .helperText {
+  margin:0;
+  height:auto;
+  visibility: visible;
 }

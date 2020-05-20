@@ -6,6 +6,54 @@ import PlayingCard from './PlayingCard';
 import { HAND, URL } from './constants.js';
 import { Button } from '@material-ui/core';
 
+const Helper = () => {
+   const [titleBar, setTitleBar] = useState('helper');
+    const toggleTitleBar = () => {
+      if (titleBar == 'helper') {
+        setTitleBar('helper active');
+      } else {
+        setTitleBar('helper');
+      }
+    };
+    return (
+      <div  >
+        <div className={titleBar}>
+          <div onClick={() => toggleTitleBar()}>
+            <Button variant="outlined"
+              size="small"
+              color="secondary">
+              ( ? )
+              </Button>
+          </div>
+          <div className="flexRow">
+            <div style={{flex:1}} className="flexCol helperText">
+            <p>Game Play:</p>
+            <p>Play cards on locations</p>
+            <p>Use cards with Gold to acquire more cards</p>
+            <p>Use cards with Influence to gain influence over locations</p>
+            <p>Use the scrap pile to remove cards from your deck</p>
+            <p>Win by completing your calling, or influencing 3 locations</p>
+
+          </div>
+          <div style={{flex:1}} className="flexCol helperText">
+            <p>Strategy</p>
+            <p>It's a good idea to buy some cards with gold early on so you can buy more expensive cards</p>
+            <p>Influencing locations takes at least 4 influence (if no one else is contesting it), but gives you a powerful influence card!</p>
+            <p>Keep an eye on who influences what, you don't want to lose by a surprise influence victory</p>
+            </div>
+          <div style={{flex:1}} className="flexCol helperText">
+            <p>GamePlayer:</p>
+            Each player takes turns playing cards on locations
+            You can acquire new cards with gold on a location
+            after all players have played this turn each location will check influence1
+            if you have more influence than any other player plus the location's influnece you become the influencer!
+            </div>
+          </div>
+        </div>
+      </div>
+              )
+}
+
 const GameView = (props) => {
   let currentPlayer = props.currentPlayer;
   let players = props.players;
@@ -62,6 +110,7 @@ const GameView = (props) => {
 
   return (
     <div>
+    <Helper/>
       <div className="flexRow flexStart padded locContainer">{locCards}</div>
       <div className="flexRow spaceBetween" style={{ width: '100%' }}>
         <div className="flexCol" style={{ width: 275 }}>

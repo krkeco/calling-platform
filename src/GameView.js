@@ -5,7 +5,7 @@ import Location from './Location';
 import PlayingCard from './PlayingCard';
 import { HAND, URL } from './constants.js';
 import { Button } from '@material-ui/core';
-import Helper from './Helper'
+import Helper from './Helper';
 
 const GameView = (props) => {
   let currentPlayer = props.currentPlayer;
@@ -51,10 +51,9 @@ const GameView = (props) => {
     );
   }
 
-
   return (
     <div>
-    <Helper/>
+      <Helper />
       <div className="flexRow flexStart padded locContainer">{locCards}</div>
       <div className="flexRow spaceBetween" style={{ width: '100%' }}>
         <div className="flexCol" style={{ width: 275 }}>
@@ -141,7 +140,7 @@ const GameView = (props) => {
               Discard
             </Button>
           </div>
-          
+
           {nextButton}
         </div>
       </div>

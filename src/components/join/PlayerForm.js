@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { URL, playerTypeEnum } from '../../constants';
 
-  import esther from './../../imgs/esther/esther.png'
-  import paul from './../../imgs/jonah/jonah.png'
-  import jonah from './../../imgs/jonah/jonah.png'
-  import joshua from './../../imgs/joshua/joshua.png'
-  
+import esther from './../../imgs/esther/esther.png';
+import paul from './../../imgs/jonah/jonah.png';
+import jonah from './../../imgs/jonah/jonah.png';
+import joshua from './../../imgs/joshua/joshua.png';
 
-  const cardImg ={
-    "Jonah":jonah,
-    "Esther":esther,
-    "Joshua":joshua,
-    "Paul":paul
-  }
+const cardImg = {
+  Jonah: jonah,
+  Esther: esther,
+  Joshua: joshua,
+  Paul: paul,
+};
 const PlayerForm = ({
+  playerType,
   players,
   props,
   playerCharacters,
   characterChange,
   playerCharacterType,
   characterTypeChange,
-}) =>{
+}) => {
   let playerForm = [];
 
   for (let x = 0; x < players; x++) {
@@ -32,7 +33,6 @@ const PlayerForm = ({
         className="flexCol center userFormContainer"
         style={{
           backgroundColor: bgColor,
-         
         }}
       >
         <div>Player {x + 1}:</div>
@@ -51,11 +51,11 @@ const PlayerForm = ({
            **/}
         </Select>
 
-     <img
-     draggable={false}
-     className="starterImg"
-     src={cardImg[playerCharacters[x]]}
-      />
+        <img
+          draggable={false}
+          className="starterImg"
+          src={cardImg[playerCharacters[x]]}
+        />
         <Select
           labelId="story-select"
           id="story-select"
@@ -63,7 +63,7 @@ const PlayerForm = ({
           onChange={(e) => characterTypeChange(x, e)}
         >
           <MenuItem value={'player'}>Human</MenuItem>
-          <MenuItem value={'AI'}>AI</MenuItem>
+          { playerTypeEnum.HOST == playerType ? (<MenuItem value={'AI'}>AI</MenuItem>) : (null)}
           {/**
            **/}
         </Select>
@@ -71,6 +71,6 @@ const PlayerForm = ({
     );
   }
   return playerForm;
-}
+};
 
 export default PlayerForm;

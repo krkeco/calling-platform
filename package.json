@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "pretty": "prettier --single-quote --trailing-comma all --write ./src/*.js ./src/**/*.js",
+    "pretty": "prettier --single-quote --trailing-comma all --write ./src/*.js ./src/components/**/*.js ./src/**/*.js",
     "s3sync": "aws s3 sync ./build/ s3://calling-platform --acl public-read",
     "eject": "react-scripts eject"
   },

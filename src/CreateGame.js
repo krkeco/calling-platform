@@ -4,12 +4,14 @@ import { URL, playerTypeEnum } from './constants';
 import packageJson from '../package.json';
 
 import './App.css';
-import PlayerForm from './components/join/PlayerForm'
-import GameTypeSelector from './components/join/GameTypeSelector'
+import PlayerForm from './components/join/PlayerForm';
+import GameTypeSelector from './components/join/GameTypeSelector';
 
+const dev =
+  !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+    ? 'dev'
+    : 'prod';
 
-const dev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
-  
 const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
@@ -175,7 +177,6 @@ const PlayerDataForm = (props) => {
     }
   };
 
-
   let joinButton = (
     <Button
       style={{ margin: 5 }}
@@ -198,12 +199,10 @@ const PlayerDataForm = (props) => {
       </Button>
     );
   }
-  
 
   return (
     <div className="flexCol center ">
-    
-      <div >
+      <div>
         {' '}
         The Calling Online Deck Building Game {dev}:{packageJson.version}
       </div>
@@ -217,17 +216,18 @@ const PlayerDataForm = (props) => {
         setPlayers={setPlayers}
       />
 
-      <div className="flexRow"> 
+      <div className="flexRow">
         <PlayerForm
+          playerType={playerType}
           players={players}
           props={props}
           playerCharacters={playerCharacters}
           characterChange={characterChange}
           playerCharacterType={playerCharacterType}
           characterTypeChange={characterTypeChange}
-          />
+        />
       </div>
-      
+
       <div className="flexCol" style={{ width: 200 }}>
         {joinButton}
 
@@ -256,7 +256,5 @@ const PlayerDataForm = (props) => {
     </div>
   );
 };
-
-
 
 export default PlayerDataForm;

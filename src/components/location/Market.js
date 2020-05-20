@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PlayingCard from '../../PlayingCard';
-const Market = (props,buyCard) => {
+const Market = (props, buyCard) => {
   let market = [];
   if (props.location) {
     props.location.market.map((card, index) => {
       market.push(
-        <div style={{margin:3}} onClick={() => buyCard(card, index)}>
+        <div style={{ margin: 3 }} onClick={() => buyCard(card, index)}>
           <PlayingCard
             id={index}
             size="small"
@@ -18,5 +18,5 @@ const Market = (props,buyCard) => {
     });
   }
   return market;
-}
+};
 export default Market;

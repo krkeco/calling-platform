@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
-import './App.css';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { URL, playerTypeEnum } from './constants';
 import packageJson from '../package.json';
 
-  import esther from './imgs/esther/esther.png'
-  import paul from './imgs/jonah/jonah.png'
-  import jonah from './imgs/jonah/jonah.png'
-  import joshua from './imgs/joshua/joshua.png'
+import './App.css';
+import PlayerForm from './components/join/PlayerForm'
+import GameTypeSelector from './components/join/GameTypeSelector'
 
-  const cardImg ={
-    "Jonah":jonah,
-    "Esther":esther,
-    "Joshua":joshua,
-    "Paul":paul
-  }
+
+const dev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
   
 const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(2);
@@ -53,53 +41,6 @@ const PlayerDataForm = (props) => {
     newCharacters[index] = event.target.value;
     setCharacterType(newCharacters);
   };
-
-  let playerForm = [];
-  for (let x = 0; x < players; x++) {
-    let bgColor = props.playerBGs[x];
-    playerForm.push(
-      <div
-        className="flexCol center userFormContainer"
-        style={{
-          backgroundColor: bgColor,
-         
-        }}
-      >
-        <div>Player {x + 1}:</div>
-        <InputLabel id="player-count">Players</InputLabel>
-        <Select
-          labelId="story-select"
-          id="story-select"
-          value={playerCharacters[x]}
-          onChange={(e) => characterChange(x, e)}
-        >
-          <MenuItem value={'Jonah'}>Jonah</MenuItem>
-          <MenuItem value={'Esther'}>Esther</MenuItem>
-          <MenuItem value={'Joshua'}>Joshua</MenuItem>
-          <MenuItem value={'Paul'}>Paul</MenuItem>
-          {/**
-           **/}
-        </Select>
-
-     <img
-     draggable={false}
-     className="starterImg"
-     src={cardImg[playerCharacters[x]]}
-      />
-        <Select
-          labelId="story-select"
-          id="story-select"
-          value={playerCharacterType[x]}
-          onChange={(e) => characterTypeChange(x, e)}
-        >
-          <MenuItem value={'player'}>Human</MenuItem>
-          <MenuItem value={'AI'}>AI</MenuItem>
-          {/**
-           **/}
-        </Select>
-      </div>,
-    );
-  }
 
   const queryGameStatus = async (theTimeOut, theId, myIndex) => {
     try {
@@ -234,23 +175,6 @@ const PlayerDataForm = (props) => {
     }
   };
 
-  const playerCountToggle = (
-    <FormControl className="formControl">
-      <InputLabel id="player-count-label">Players</InputLabel>
-      <Select
-        className="dropdownBox"
-        labelId="player-count-label"
-        id="player-count"
-        value={players}
-        onChange={(e)=>handleChange(e.target.value)}
-      >
-        <MenuItem value={1}>One</MenuItem>
-        <MenuItem value={2}>Two</MenuItem>
-        <MenuItem value={3}>Three</MenuItem>
-        <MenuItem value={4}>Four</MenuItem>
-      </Select>
-    </FormControl>
-  );
 
   let joinButton = (
     <Button
@@ -274,56 +198,36 @@ const PlayerDataForm = (props) => {
       </Button>
     );
   }
-  let dev;
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    dev = 'dev';
-  } else {
-    dev = 'prod';
-  }
+  
 
   return (
-    <div className="flexCol center">
-      <div>
+    <div className="flexCol center ">
+    
+      <div >
         {' '}
         The Calling Online Deck Building Game {dev}:{packageJson.version}
       </div>
-      <FormControl className="formControl">
-        <InputLabel id="player-type-label">Player Type</InputLabel>
-        <Select
-          labelId="player-type-label"
-          id="player-type"
-          value={playerType}
-          onChange={(e) => {setType(e.target.value); handleChange(1)}}
-          className="dropdownBox"
-        >
-          <MenuItem value={playerTypeEnum.HOST}>Host Local Game</MenuItem>
-          <MenuItem value={playerTypeEnum.LAN}>Host Net Game</MenuItem>
-          <MenuItem value={playerTypeEnum.GUEST}>Join Net Game</MenuItem>
-        </Select>
+      <GameTypeSelector
+        playerType={playerType}
+        setType={setType}
+        handleChange={handleChange}
+        gameId={gameId}
+        setGameId={setGameId}
+        players={players}
+        setPlayers={setPlayers}
+      />
 
-        {playerType == playerTypeEnum.GUEST ? (
-          <TextField
-            id="game-number"
-            className="dropdownBox"
-            value={gameId}
-            onChange={(e) => setGameId(e.target.value)}
-            label="GameId:"
+      <div className="flexRow"> 
+        <PlayerForm
+          players={players}
+          props={props}
+          playerCharacters={playerCharacters}
+          characterChange={characterChange}
+          playerCharacterType={playerCharacterType}
+          characterTypeChange={characterTypeChange}
           />
-        ) : playerType == playerTypeEnum.HOST ? (
-          <div>{playerCountToggle}</div>
-        ) : (
-          <div />
-        )}
-        {(playerType == playerTypeEnum.GUEST ||
-          playerType == playerTypeEnum.LAN) &&
-        players > 1 ? (
-          setPlayers(1)
-        ) : (
-          <div />
-        )}
-      </FormControl>
-
-      <div className="flexRow"> {playerForm}</div>
+      </div>
+      
       <div className="flexCol" style={{ width: 200 }}>
         {joinButton}
 
@@ -352,4 +256,7 @@ const PlayerDataForm = (props) => {
     </div>
   );
 };
+
+
+
 export default PlayerDataForm;

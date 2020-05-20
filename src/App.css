@@ -5,6 +5,15 @@
   padding:1vh;
   background-image: url('./imgs/sample/blunes.png');
 }
+.createGameContainer{
+  background-image: url('./imgs/sample/comix.png');
+  background-size: cover;
+  opacity:.4;
+  width:98%;
+  height:98%;
+  position: absolute;
+  z-index: -1;
+}
 .container {
   width: 100%;
 }

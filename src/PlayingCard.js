@@ -11,7 +11,9 @@ import React, { useState, useEffect } from 'react';
   import esther from './imgs/esther/esther.png'
 
   import jonah from './imgs/jonah/jonah.png'
+
   import joshua from './imgs/joshua/joshua.png'
+  import spies from './imgs/joshua/spies.png'
   
   import bedazzlejewel from './imgs/sample/bedazzlejewel.png'
   import blossomgrove from './imgs/sample/blossomgrove.png'
@@ -45,6 +47,7 @@ import React, { useState, useEffect } from 'react';
     'jonah':jonah,
 
     'joshua':joshua,
+    'spies':spies,
 
     'gold':gold,    
     'influence':influence,

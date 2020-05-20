@@ -7,7 +7,7 @@ import { HAND, URL } from './constants.js';
 import { Button } from '@material-ui/core';
 import CreateGame from './CreateGame';
 import GameView from './GameView';
-
+import bg from './imgs/sample/comix.png'
 
 const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(0);
@@ -310,7 +310,13 @@ const App = () => {
     );
   }
 
-  return <div className="flexCol appContainer">{view}</div>;
+  // <img className="createGameContainer"
+  //    draggable={false}
+  //    src={bg}
+  //     />
+  return <div className="flexCol appContainer">
+      {view}
+      </div>;
 };
 
 export default App;

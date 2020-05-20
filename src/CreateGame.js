@@ -21,6 +21,15 @@ const PlayerDataForm = (props) => {
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
   const [waitingPlayers, setWaitRoom] = useState([]);
 
+  const setGameType = (e) => {
+    setType(e);
+    if(e != playerTypeEnum.HOST){
+      let newType = [...playerCharacterType]
+      newType[0] = "player"
+      setCharacterType([...newType])
+    }
+  }
+
   const handleChange = (value) => {
     setPlayers(value);
     let newCharacters = [...playerCharacters];
@@ -208,7 +217,7 @@ const PlayerDataForm = (props) => {
       </div>
       <GameTypeSelector
         playerType={playerType}
-        setType={setType}
+        setType={setGameType}
         handleChange={handleChange}
         gameId={gameId}
         setGameId={setGameId}

@@ -90,6 +90,7 @@ const Location = (props) => {
         )}
         <div
           className="bfWrapper"
+          onDragEnter={(e)=>e.preventDefault()}
           onDragOver={(event) => props.onDragOver(event)}
           onDrop={(event) => props.onDrop(event, props.location.id)}
         >

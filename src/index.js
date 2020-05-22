@@ -10,11 +10,11 @@ import {polyfill} from "mobile-drag-drop";
 import {scrollBehaviourDragImageTranslateOverride} from "mobile-drag-drop/scroll-behaviour";
 
 // options are optional ;)
-// polyfill({
-//     // use this to make use of the scroll behaviour
-//     dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride
-// });
-// window.addEventListener( 'touchmove', function() {});
+polyfill({
+    // use this to make use of the scroll behaviour
+    dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride
+});
+window.addEventListener( 'touchmove', function() {});
 
 ReactDOM.render(
   <React.StrictMode>

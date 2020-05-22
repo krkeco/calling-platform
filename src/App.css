@@ -162,6 +162,7 @@
 }
 .starterImg{
   height:150px;
+  border-radius: 5px;
   width:auto;
 }
 .userFormContainer{
@@ -194,7 +195,7 @@
 .playcard:hover .cardImg {
   z-index: 1;
   /*opacity:.95;*/
-  position:fixed;
+  /*position:fixed;*/
   opacity:1;
   width:196px;
   height:276px;

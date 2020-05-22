@@ -43,6 +43,7 @@ const App = () => {
   };
   const onDrop = (event, loc) => {
     let cardId = event.dataTransfer.getData('cardId');
+    alert('dropped card '+cardId+" on"+loc)
     console.log('drop on' + loc);
     playCard(cardId, loc);
   };

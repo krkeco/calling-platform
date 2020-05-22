@@ -71,7 +71,7 @@ const PlayingCard = (props) => {
   const [opacity, setOpacity] = useState(1);
 
   const dragStart = (event) => {
-    props.onDragStart(event, props.id);
+    // props.onDragStart(event);
   };
 
   const handleTouchMove = (e) => {
@@ -116,7 +116,7 @@ const PlayingCard = (props) => {
       <div
         key={props.id}
         onDragStart={(event) => dragStart(event)}
-        
+
         draggable={props.draggable}
         className={size(props.size)}
       >

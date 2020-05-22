@@ -51,6 +51,46 @@ const GameView = (props) => {
     );
   }
 
+  let Hand = [
+    <div
+          key={-1}
+          onDragStart={(event) => props.onDragStart(event, (-1))}
+          draggable
+          style={{
+            margin: 5,
+            backgroundColor: `${playerBGs[currentPlayer]}`,
+            opacity: 1,
+            borderRadius: 5,
+          }}
+        >
+        </div>
+  ]
+  if(players && players[currentPlayer]) {
+    players[currentPlayer].hand.map((card, index) => {
+      console.log('hand:'+index)
+      Hand.push(
+        <div
+          key={index}
+          onDragStart={(event) => props.onDragStart(event, index+"")}
+          draggable
+          style={{
+            margin: 5,
+            backgroundColor: `${playerBGs[currentPlayer]}`,
+            opacity: 1,
+            borderRadius: 5,
+          }}
+        >
+          <PlayingCard
+            id={index}
+            card={card}
+            backgroundColor={playerBGs[currentPlayer]}
+            player={currentPlayer}
+          />
+        </div>
+      );
+    })
+  }
+
   return (
     <div>
       <Helper />
@@ -79,32 +119,7 @@ const GameView = (props) => {
         </div>
         <div className="flexCol">
           <div className="flexRow flexStart">
-            {players && players[currentPlayer] ? (
-              players[currentPlayer].hand.map((card, index) => {
-                return (
-                  <div
-                    key={index}
-                    onDragStart={(event) => props.onDragStart(event, index)}
-                    draggable
-                    style={{
-                      margin: 5,
-                      backgroundColor: `${playerBGs[currentPlayer]}`,
-                      opacity: 1,
-                      borderRadius: 5,
-                    }}
-                  >
-                    <PlayingCard
-                      id={index}
-                      card={card}
-                      backgroundColor={playerBGs[currentPlayer]}
-                      player={currentPlayer}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <span />
-            )}
+          {Hand}
           </div>
         </div>
         <div className="flexCol" style={{ width: 200 }}>

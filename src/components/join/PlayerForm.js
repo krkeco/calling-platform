@@ -4,10 +4,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { URL, playerTypeEnum } from '../../constants';
 
-import esther from './../../imgs/esther/esther.png';
-import paul from './../../imgs/jonah/jonah.png';
-import jonah from './../../imgs/jonah/jonah.png';
-import joshua from './../../imgs/joshua/joshua.png';
+import esther from './../../imgs/esther/esther.jpg';
+import paul from './../../imgs/jonah/jonah.jpg';
+import jonah from './../../imgs/jonah/jonah.jpg';
+import joshua from './../../imgs/joshua/joshua.jpg';
 
 const cardImg = {
   Jonah: jonah,

@@ -6,11 +6,11 @@ import Titlebar from './components/location/TitleBar';
 import Market from './components/location/Market';
 import Battlefield from './components/location/Battlefield';
 
-import babylon from './imgs/esther/babylon.png';
-import jerusalem from './imgs/sample/sandyshore.png';
-import canaan from './imgs/sample/seaskull.png';
-import nineveh from './imgs/sample/dessertketchup.png';
-import rome from './imgs/sample/fishflower.png';
+import babylon from './imgs/esther/babylon.jpg';
+import jerusalem from './imgs/sample/sandyshore.jpg';
+import canaan from './imgs/sample/seaskull.jpg';
+import nineveh from './imgs/sample/dessertketchup.jpg';
+import rome from './imgs/sample/fishflower.jpg';
 
 const bgGrid = {
   Nineveh: nineveh,

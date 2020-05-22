@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
-// import bg from  './imgs/esther/babylon.png';
-import king from './imgs/esther/king.png';
-import mordecai from './imgs/esther/mordecai.png';
-import haman from './imgs/esther/haman.png';
-import taxes from './imgs/esther/taxes.png';
-import annihilation from './imgs/esther/annihilation.png';
-import eunich from './imgs/esther/eunich.png';
-import esther from './imgs/esther/esther.png';
+// import bg from  './imgs/esther/babylon.jpg';
+import king from './imgs/esther/king.jpg';
+import mordecai from './imgs/esther/mordecai.jpg';
+import haman from './imgs/esther/haman.jpg';
+import taxes from './imgs/esther/taxes.jpg';
+import annihilation from './imgs/esther/annihilation.jpg';
+import eunich from './imgs/esther/eunich.jpg';
+import esther from './imgs/esther/esther.jpg';
 
-import jonah from './imgs/jonah/jonah.png';
+import jonah from './imgs/jonah/jonah.jpg';
 
-import joshua from './imgs/joshua/joshua.png';
-import spies from './imgs/joshua/spies.png';
+import joshua from './imgs/joshua/joshua.jpg';
+import spies from './imgs/joshua/spies.jpg';
 
-import bedazzlejewel from './imgs/sample/bedazzlejewel.png';
-import blossomgrove from './imgs/sample/blossomgrove.png';
-import blunes from './imgs/sample/blunes.png';
-import corridor from './imgs/sample/corridor.png';
-import crackplaster from './imgs/sample/crackplaster.png';
-import firetree from './imgs/sample/firetree.png';
-import floralite from './imgs/sample/floralite.png';
-import gemlightning from './imgs/sample/gemlightning.png';
-import greenbiz from './imgs/sample/greenbiz.png';
-import jellyfishcarn from './imgs/sample/jellyfishcarn.png';
-import leavestreak from './imgs/sample/leavestreak.png';
-import seacave from './imgs/sample/seacave.png';
-import verdentfire from './imgs/sample/verdentfire.png';
+import bedazzlejewel from './imgs/sample/bedazzlejewel.jpg';
+import blossomgrove from './imgs/sample/blossomgrove.jpg';
+import blunes from './imgs/sample/blunes.jpg';
+import corridor from './imgs/sample/corridor.jpg';
+import crackplaster from './imgs/sample/crackplaster.jpg';
+import firetree from './imgs/sample/firetree.jpg';
+import floralite from './imgs/sample/floralite.jpg';
+import gemlightning from './imgs/sample/gemlightning.jpg';
+import greenbiz from './imgs/sample/greenbiz.jpg';
+import jellyfishcarn from './imgs/sample/jellyfishcarn.jpg';
+import leavestreak from './imgs/sample/leavestreak.jpg';
+import seacave from './imgs/sample/seacave.jpg';
+import verdentfire from './imgs/sample/verdentfire.jpg';
 
-import gold from './imgs/gold.png';
-import influence from './imgs/influence.png';
+import gold from './imgs/gold.jpg';
+import influence from './imgs/influence.jpg';
 
 const cardImg = {
   esther: esther,
@@ -63,7 +63,7 @@ const cardImg = {
   verdentfire: verdentfire,
 };
 // if(props.card.img){
-//   bg = "./imgs/"+props.card.img+".png";
+//   bg = "./imgs/"+props.card.img+".jpg";
 // }
 
 const PlayingCard = (props) => {
@@ -73,6 +73,25 @@ const PlayingCard = (props) => {
   const dragStart = (event) => {
     props.onDragStart(event, props.id);
   };
+
+  const handleTouchMove = (e) => {
+    console.log('touch started');
+    // grab the loaction of the touch
+    var touchLocation = e.targetTouches[0];
+    dragStart(e)
+    // this.setState({
+    //   left: touchLocation.pageX + 'px',
+    //   top: touchLocation.pageY + 'px'
+    // })
+  }
+
+  const handleTouchEnd = (e) => {
+    // var dragElement = this.dragElementRef.current;
+    // var x = parseInt(dragElement.style.left, 10);
+    // var y = parseInt(dragElement.style.top, 10);
+
+    // console.log('Drop position x, y: ', x, y)
+  }
   const size = (size) => {
     if (size == 'small') {
       return 'playcard small';
@@ -100,16 +119,18 @@ const PlayingCard = (props) => {
         draggable={props.draggable}
         className={size(props.size)}
       >
-        {/** G I PE F! R A **/}
-        <p className="text titleCard">
-          {props.card.cost > 0 ? `$${props.card.cost}` : ''} {props.card.name}
-        </p>
+        {/** 
+        G I PE F! R A 
 
         <img
           draggable={false}
           className="cardImg"
           src={cardImg[props.card.img]}
         />
+        **/}
+        <p className="text titleCard">
+          {props.card.cost > 0 ? `$${props.card.cost}` : ''} {props.card.name}
+        </p>
         {props.card.gold > 0 ? (
           <div className="text stat">
             {props.card.gold} <span className="stat"> Gold($)</span>

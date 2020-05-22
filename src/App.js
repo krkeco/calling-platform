@@ -14,13 +14,14 @@ const App = () => {
   const [gameId, setId] = useState(-1);
   const [locations, setLocationInfo] = useState([]);
   const [players, setPlayerInfo] = useState([]);
-  const [playerBGs, setBGs] = useState(['red', 'blue', 'green', 'yellow']);
+  const [playerBGs, setBGs] = useState(['#e53935', '#5e35b1', '#43a047', '#eeff41']);
   const [cards, setCards] = useState([]);
   const [turn, setTurn] = useState(0);
   const [playerCount, setPlayerCount] = useState(2);
   const [gameLog, appendLog] = useState([]);
   const [playerIndex, setPlayerIndex] = useState(-1);
   const [isQuerying, setQuerying] = useState(false);
+  const [loser, setLoser] = useState(false);
 
   const onDragStart = (event, cardId) => {
     if (currentPlayer == playerIndex || playerIndex == -1) {
@@ -85,11 +86,11 @@ const App = () => {
             hand{cost,img, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
           },
           locations(gameId: $theId){
-            name, id,influence,influencer, weariness, info,proselytized,hardened,abilities,
+            name, id,influence,influencer, weariness, info,proselytized,wounds,hardened,abilities,
             market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
             battlefield{name,poliBonus, influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },
-          currentPlayer(gameId: $theId){turn,nextPlayer,winner, log}
+          currentPlayer(gameId: $theId){turn,nextPlayer,winner,loser, log}
       }`;
         let res = await fetch(URL, {
           method: 'POST',
@@ -123,6 +124,13 @@ const App = () => {
         if (response.data.currentPlayer.winner != '') {
           let winner = response.data.currentPlayer.winner;
           setWinner(winner);
+        }
+        if (response.data.currentPlayer.loser != '') {
+          if(!loser){
+            let loser = response.data.currentPlayer.loser;
+            alert("uh-oh: "+loser+" fell for their bane :(")
+            setLoser(true)
+          }
         }
         // setQuerying(false)
       } catch (e) {
@@ -249,7 +257,7 @@ const App = () => {
       // console.log('next current'+currentPlayer)
       let query = `query NextPlayer($theGame: Int, $thePlayer: Int ) {
         nextPlayer(gameId: $theGame, currentPlayer: $thePlayer){
-          turn, nextPlayer, winner
+          turn, nextPlayer, winner, loser, log
         }
       }`;
       let res = await fetch(URL, {

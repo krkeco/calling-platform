@@ -62,7 +62,7 @@ const GameView = (props) => {
             <span style={{ color: playerBGs[currentPlayer] }}>
               {players && players[currentPlayer] ? (
                 <span>
-                  {players[currentPlayer].name} {players[currentPlayer.id]}
+                  {players[currentPlayer].name}-{players[currentPlayer].id}
                 </span>
               ) : (
                 ''

@@ -21,15 +21,6 @@ const PlayerDataForm = (props) => {
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
   const [waitingPlayers, setWaitRoom] = useState([]);
 
-  const setGameType = (e) => {
-    setType(e);
-    if(e != playerTypeEnum.HOST){
-      let newType = [...playerCharacterType]
-      newType[0] = "player"
-      setCharacterType([...newType])
-    }
-  }
-
   const handleChange = (value) => {
     setPlayers(value);
     let newCharacters = [...playerCharacters];
@@ -186,17 +177,16 @@ const PlayerDataForm = (props) => {
     }
   };
 
-  let joinButton = (
-    <Button
+  let joinButton = <Button
       style={{ margin: 5 }}
       onClick={createGame}
       variant="contained"
-      color="secondary"
-    >
+      color="secondary">
       Create Game
     </Button>
-  );
-  if (playerType == playerTypeEnum.GUEST) {
+  
+
+  if(playerType == playerTypeEnum.GUEST) {
     joinButton = (
       <Button
         style={{ margin: 5 }}
@@ -217,7 +207,6 @@ const PlayerDataForm = (props) => {
       </div>
       <GameTypeSelector
         playerType={playerType}
-        setType={setGameType}
         handleChange={handleChange}
         gameId={gameId}
         setGameId={setGameId}

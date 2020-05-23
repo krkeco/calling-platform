@@ -11,6 +11,8 @@ import esther from './imgs/esther/esther.jpg';
 
 import jonah from './imgs/jonah/jonah.jpg';
 
+import paul from './imgs/paul/paul.jpg';
+
 import joshua from './imgs/joshua/joshua.jpg';
 import spies from './imgs/joshua/spies.jpg';
 
@@ -41,6 +43,8 @@ const cardImg = {
   eunich: eunich,
 
   jonah: jonah,
+
+  paul: paul,
 
   joshua: joshua,
   spies: spies,
@@ -78,20 +82,19 @@ const PlayingCard = (props) => {
     console.log('touch started');
     // grab the loaction of the touch
     var touchLocation = e.targetTouches[0];
-    dragStart(e)
+    dragStart(e);
     // this.setState({
     //   left: touchLocation.pageX + 'px',
     //   top: touchLocation.pageY + 'px'
     // })
-  }
+  };
 
   const handleTouchEnd = (e) => {
     // var dragElement = this.dragElementRef.current;
     // var x = parseInt(dragElement.style.left, 10);
     // var y = parseInt(dragElement.style.top, 10);
-
     // console.log('Drop position x, y: ', x, y)
-  }
+  };
   const size = (size) => {
     if (size == 'small') {
       return 'playcard small';
@@ -116,7 +119,6 @@ const PlayingCard = (props) => {
       <div
         key={props.id}
         onDragStart={(event) => dragStart(event)}
-
         draggable={props.draggable}
         className={size(props.size)}
         style={{
@@ -124,8 +126,9 @@ const PlayingCard = (props) => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           borderRadius: 5,
-          margin:5,
-        }}>
+          margin: 5,
+        }}
+      >
         {/** 
         G I PE F! R A 
         <img

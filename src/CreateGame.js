@@ -23,14 +23,13 @@ const PlayerDataForm = (props) => {
 
   const setGameType = (eNum) => {
     setType(eNum);
-    if(eNum == playerTypeEnum.HOST){
-
-    }else{
+    if (eNum == playerTypeEnum.HOST) {
+    } else {
       setCharacter([...playerCharacters[0]]);
       setCharacterType([...playerCharacterType[0]]);
-      setLocalPlayers(1)
+      setLocalPlayers(1);
     }
-  }
+  };
 
   const handleChange = (value) => {
     setPlayers(value);
@@ -188,16 +187,18 @@ const PlayerDataForm = (props) => {
     }
   };
 
-  let joinButton = <Button
+  let joinButton = (
+    <Button
       style={{ margin: 5 }}
       onClick={createGame}
       variant="contained"
-      color="secondary">
+      color="secondary"
+    >
       Create Game
     </Button>
-  
+  );
 
-  if(playerType == playerTypeEnum.GUEST) {
+  if (playerType == playerTypeEnum.GUEST) {
     joinButton = (
       <Button
         style={{ margin: 5 }}
@@ -226,7 +227,7 @@ const PlayerDataForm = (props) => {
         setPlayers={setPlayers}
       />
 
-      <div className="flexRow">
+      <div className="flexRow center scroll">
         <PlayerForm
           playerType={playerType}
           players={players}

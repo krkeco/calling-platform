@@ -4,21 +4,6 @@ commit:::
 check:::
 
 wip:::
+rejoin game???
 
-
-BANES
-
-better join screen 
-	limit char selection to those not chosen
-
-	someday: subscriptions
-
-react-native?
-	apis: same as react
-	views:
-		start page (basically same)
-		game page (3 locations and small hand) -- tablet same as desktop?
-			location specific page
-			hand zoom in (like hearthstone)
-
-AI
+someday: subscriptions

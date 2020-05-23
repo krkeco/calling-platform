@@ -45,15 +45,22 @@ const Titlebar = (props) => {
         )}
         {props.location.wounds && props.location.wounds.length > 0 ? (
           <div className="titlebarInfo">
-          Wounds: {props.location.wounds.map((w,i)=> w > 0 ? "P"+i+":("+w+")"+ " " : "")}
+            Wounds:{' '}
+            {props.location.wounds.map((w, i) =>
+              w > 0 ? 'P' + i + ':(' + w + ')' + ' ' : '',
+            )}
           </div>
         ) : (
           <span />
         )}
 
-        {props.location.proselytized && props.location.proselytized.length > 0 ? (
+        {props.location.proselytized &&
+        props.location.proselytized.length > 0 ? (
           <div className="titlebarInfo">
-            Churches: {props.location.proselytized.map((w,i)=> w > 0 ? "P"+i+":("+w+")"+ " " : "")}
+            Churches:{' '}
+            {props.location.proselytized.map((w, i) =>
+              w > 0 ? 'P' + i + ':(' + w + ')' + ' ' : '',
+            )}
           </div>
         ) : (
           <span />

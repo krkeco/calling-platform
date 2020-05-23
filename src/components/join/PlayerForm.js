@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import { URL, playerTypeEnum } from '../../constants';
 
 import esther from './../../imgs/esther/esther.jpg';
-import paul from './../../imgs/jonah/jonah.jpg';
+import paul from './../../imgs/paul/paul.jpg';
 import jonah from './../../imgs/jonah/jonah.jpg';
 import joshua from './../../imgs/joshua/joshua.jpg';
 
@@ -32,6 +32,7 @@ const PlayerForm = ({
       <div
         className="flexCol center userFormContainer"
         style={{
+          minWidth: 150,
           backgroundColor: bgColor,
         }}
       >
@@ -63,7 +64,9 @@ const PlayerForm = ({
           onChange={(e) => characterTypeChange(x, e)}
         >
           <MenuItem value={'player'}>Human</MenuItem>
-          { playerTypeEnum.HOST == playerType ? (<MenuItem value={'AI'}>AI</MenuItem>) : (null)}
+          {playerTypeEnum.HOST == playerType ? (
+            <MenuItem value={'AI'}>AI</MenuItem>
+          ) : null}
           {/**
            **/}
         </Select>

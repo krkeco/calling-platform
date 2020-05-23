@@ -14,7 +14,12 @@ const App = () => {
   const [gameId, setId] = useState(-1);
   const [locations, setLocationInfo] = useState([]);
   const [players, setPlayerInfo] = useState([]);
-  const [playerBGs, setBGs] = useState(['#e53935', '#5e35b1', '#43a047', '#eeff41']);
+  const [playerBGs, setBGs] = useState([
+    '#e53935',
+    '#5e35b1',
+    '#43a047',
+    '#eeff41',
+  ]);
   const [cards, setCards] = useState([]);
   const [turn, setTurn] = useState(0);
   const [playerCount, setPlayerCount] = useState(2);
@@ -43,7 +48,7 @@ const App = () => {
   };
   const onDrop = (event, loc) => {
     let cardId = event.dataTransfer.getData('cardId');
-    alert('dropped card '+cardId+" on"+loc)
+    // alert('dropped card '+cardId+" on"+loc)
     console.log('drop on' + loc);
     playCard(cardId, loc);
   };
@@ -127,10 +132,10 @@ const App = () => {
           setWinner(winner);
         }
         if (response.data.currentPlayer.loser != '') {
-          if(!loser){
+          if (!loser) {
             let loser = response.data.currentPlayer.loser;
-            alert("uh-oh: "+loser+" fell for their bane :(")
-            setLoser(true)
+            alert('uh-oh: ' + loser + ' fell for their bane :(');
+            setLoser(true);
           }
         }
         // setQuerying(false)
@@ -321,11 +326,6 @@ const App = () => {
       />
     );
   }
-
-  // <img className="createGameContainer"
-  //    draggable={false}
-  //    src={bg}
-  //     />
   return <div className="flexCol appContainer">{view}</div>;
 };
 

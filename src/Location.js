@@ -82,6 +82,7 @@ const Location = (props) => {
         ) : (
           <div
             className="scrapPile flexCol center"
+            onDragEnter={(e) => e.preventDefault()}
             onDrop={(event) => props.onDrop(event, -1)}
             onDragOver={(event) => props.onDragOver(event)}
           >
@@ -90,7 +91,7 @@ const Location = (props) => {
         )}
         <div
           className="bfWrapper"
-          onDragEnter={(e)=>e.preventDefault()}
+          onDragEnter={(e) => e.preventDefault()}
           onDragOver={(event) => props.onDragOver(event)}
           onDrop={(event) => props.onDrop(event, props.location.id)}
         >

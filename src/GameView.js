@@ -41,7 +41,7 @@ const GameView = (props) => {
   if (currentPlayer == playerIndex || playerIndex == -1) {
     nextButton = (
       <Button
-        style={{ width: '100%', height: 75 }}
+        style={{ width: '100%', height: 75, margin: 5 }}
         onClick={props.nextPlayer}
         variant="contained"
         color="secondary"
@@ -51,27 +51,14 @@ const GameView = (props) => {
     );
   }
 
-  let Hand = [
-    <div
-          key={-1}
-          onDragStart={(event) => props.onDragStart(event, (-1))}
-          draggable
-          style={{
-            margin: 5,
-            backgroundColor: `${playerBGs[currentPlayer]}`,
-            opacity: 1,
-            borderRadius: 5,
-          }}
-        >
-        </div>
-  ]
-  if(players && players[currentPlayer]) {
+  let Hand = [];
+  if (players && players[currentPlayer]) {
     players[currentPlayer].hand.map((card, index) => {
-      console.log('hand:'+index)
+      console.log('hand:' + index);
       Hand.push(
         <div
           key={index}
-          onDragStart={(event) => props.onDragStart(event, index+"")}
+          onDragStart={(event) => props.onDragStart(event, index + '')}
           draggable
           style={{
             margin: 5,
@@ -86,17 +73,15 @@ const GameView = (props) => {
             backgroundColor={playerBGs[currentPlayer]}
             player={currentPlayer}
           />
-        </div>
+        </div>,
       );
-    })
+    });
   }
 
-  return (
-    <div>
-      <Helper />
-      <div className="flexRow flexStart padded locContainer">{locCards}</div>
-      <div className="flexRow spaceBetween" style={{ width: '100%' }}>
-        <div className="flexCol" style={{ width: 275 }}>
+  const logView = (
+    <div className="flexRow">
+      <div className="flexRow spaceBetween" style={{ width: 150 }}>
+        <div className="flexCol" style={{ width: 150 }}>
           <div className="titlePlayer">
             {props.gameId} CurrentPlayer:{' '}
             <span style={{ color: playerBGs[currentPlayer] }}>
@@ -117,47 +102,55 @@ const GameView = (props) => {
             })}
           </div>
         </div>
-        <div className="flexCol">
-          <div className="flexRow flexStart">
-          {Hand}
-          </div>
-        </div>
-        <div className="flexCol" style={{ width: 200 }}>
-          <div className="flexRow">
-            <Button
-              style={{ width: '50%', margin: 5 }}
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                alert(
-                  'Deck:\n' +
-                    players[currentPlayer].deck.map(
-                      (card, ind) => '\n' + card.name,
-                    ),
-                );
-              }}
-            >
-              Deck
-            </Button>
-            <Button
-              style={{ width: '50%', margin: 5 }}
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                alert(
-                  'Discard:\n' +
-                    players[currentPlayer].discard.map(
-                      (card, ind) => '\n' + card.name,
-                    ),
-                );
-              }}
-            >
-              Discard
-            </Button>
-          </div>
+      </div>
+    </div>
+  );
+  const guiView = (
+    <div className="flexCol" style={{ width: 100, margin:5 }}>
+      <Button
+        style={{ width: '100%', margin: 5 }}
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          alert(
+            'Deck:\n' +
+              players[currentPlayer].deck.map((card, ind) => '\n' + card.name),
+          );
+        }}
+      >
+        Deck
+      </Button>
+      <Button
+        style={{ width: '100%', margin: 5 }}
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          alert(
+            'Discard:\n' +
+              players[currentPlayer].discard.map(
+                (card, ind) => '\n' + card.name,
+              ),
+          );
+        }}
+      >
+        Discard
+      </Button>
 
-          {nextButton}
+      {nextButton}
+    </div>
+  );
+
+  return (
+    <div>
+      <Helper />
+      <div className="flexRow flexStart padded locContainer">{locCards}</div>
+
+      <div className="flexRow spaceBetween guiContainer">
+        {logView}
+        <div className="flexRow handContainer" >
+          {Hand}
         </div>
+        {guiView}
       </div>
     </div>
   );

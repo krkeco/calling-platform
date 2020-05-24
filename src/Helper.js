@@ -7,7 +7,7 @@ const Helper = () => {
   const [titleBar, setTitleBar] = useState('helper');
   const toggleTitleBar = () => {
     if (titleBar == 'helper') {
-      setTitleBar('helper active');
+      setTitleBar('helperActive');
     } else {
       setTitleBar('helper');
     }

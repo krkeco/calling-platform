@@ -79,10 +79,9 @@ const GameView = (props) => {
   }
 
   const logView = (
-    <div className="flexRow">
-      <div className="flexRow spaceBetween" style={{ width: 150 }}>
+      <div className="flexRow spaceBetween" style={{ width: 150,marginTop:35 }}>
         <div className="flexCol" style={{ width: 150 }}>
-          <div className="titlePlayer">
+          <div className="titlePlayer flexRow" style={{ width: 150 }}>
             {props.gameId} CurrentPlayer:{' '}
             <span style={{ color: playerBGs[currentPlayer] }}>
               {players && players[currentPlayer] ? (
@@ -103,7 +102,6 @@ const GameView = (props) => {
           </div>
         </div>
       </div>
-    </div>
   );
   const guiView = (
     <div className="flexCol" style={{ width: 100, margin:5 }}>
@@ -142,9 +140,11 @@ const GameView = (props) => {
 
   return (
     <div>
-      <Helper />
-      <div className="flexRow flexStart padded locContainer">{locCards}</div>
-
+      
+      <div className="flexRow flexStart locContainer">{locCards}</div>
+      
+<Helper/>
+      
       <div className="flexRow spaceBetween guiContainer">
         {logView}
         <div className="flexRow handContainer" >

@@ -43,7 +43,10 @@ const Titlebar = (props) => {
         ) : (
           <span />
         )}
-        {props.location.wounds && props.location.wounds.length > 0 ? (
+        {props.location.wounds[0] > 0 
+        ||props.location.wounds[1] > 0
+        ||props.location.wounds[2] > 0
+        ||props.location.wounds[3] > 0 ? (
           <div className="titlebarInfo">
             Wounds:{' '}
             {props.location.wounds.map((w, i) =>
@@ -54,8 +57,10 @@ const Titlebar = (props) => {
           <span />
         )}
 
-        {props.location.proselytized &&
-        props.location.proselytized.length > 0 ? (
+        {props.location.proselytized[0] > 0
+        ||props.location.proselytized[1] > 0
+        ||props.location.proselytized[2] > 0
+        ||props.location.proselytized[3] > 0 ? (
           <div className="titlebarInfo">
             Churches:{' '}
             {props.location.proselytized.map((w, i) =>

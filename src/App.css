@@ -56,13 +56,10 @@
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
-  /*background-color: #9e9e9e;*/
-  /*border-left: 2px dotted red;*/
 }
 .locContainer{
-  margin-left:30px;
   overflow: scroll;
-  height:50%;
+  height:auto;
 }
 
 .dropdownBox {
@@ -119,7 +116,7 @@
   color:white;
   margin-top: 20px;
   border-radius: 5px;
-  width: 240px;
+  width: 260px;
   height:80px;
   background-color: #4448;
 }
@@ -152,6 +149,7 @@
   justify-content: flex-start;
   flex-direction: column;
   transition: width 0.15s, height 0.15s;
+  
 }
 .small {
   width: 45px;
@@ -163,6 +161,7 @@
   /*opacity: 0.9;*/
   width: 200px;
   height: 280px;
+
   transition: width 0.25s, height 0.25s;
 
 }
@@ -199,7 +198,7 @@
 
 }
 .playcard:hover .cardImg {
-  z-index: 1;
+  
   /*opacity:.95;*/
   /*position:fixed;*/
   opacity:1;
@@ -225,7 +224,7 @@
   text-align: center;
 }
 .playcard:hover .text {
-  z-index: 2;
+  /*z-index: 2;*/
   font-size: 18px;
   border-radius: 5px;
 
@@ -294,20 +293,36 @@
   transition: opacity 1s, height 0.5s;
 
 }
-.helper{
-  /*position:absolute;*/
+.helperActive{
+
+  /*background-color: red;*/
+  
   width:100%;
   padding:0px;
   margin:0px;
   height:auto;
-  margin-bottom: -60px;
+  max-height: 350px;
+  overflow:scroll;
+}
+.helper{
+  /*position:absolute;*/
+  /*width:45px;*/
+  padding:0px;
+  margin:0px;
+  height:auto;
+  /*background-color: red;*/
+  /*align-items: flex-start;*/
+  /*justify-content: flex-start;*/
+  /*margin-bottom: -60px;*/
   
 }
 .helpBtn{
+  position:fixed;
   color:magenta;
   border: 1px solid magenta;
   border-radius: 5px;
   width:auto;
+  height:30px;
   text-align: center;
 }
 .helperText{
@@ -315,14 +330,15 @@
   /*margin: -10px;*/
   visibility: hidden;
 }
-.active .helperText {
-  margin:0;
-  margin-bottom: 50px;
+.helperActive .helperText {
+  /*margin:0;*/
+  /*padding:0;*/
+  /*margin-bottom: 50px;*/
   height:auto;
   visibility: visible;
   color:white;
-  background-color: #222;
+  background-color: #333;
 }
 .hintText{
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }

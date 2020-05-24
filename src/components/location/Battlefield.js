@@ -8,13 +8,15 @@ const Battlefield = (props) => {
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];
           let bgColor = props.playerBGs[index];
+
+          
           return playerBF ? (
             <div className="flexRow">
               <div className="flexCol bfContainer">
                 <div>{playerBF.name}</div>
 
                 <div>$ {playerBF.gold}</div>
-                <div>Inf:{playerBF.influence + playerBF.poliBonus}</div>
+                <div>Inf:{playerBF.influence + playerBF.poliBonus < 0 ? 0 : playerBF.influence + playerBF.poliBonus }</div>
               </div>
               {playerBF.cards.map((card, ind) => {
                 return (

@@ -148,7 +148,7 @@ const PlayingCard = (props) => {
         ) : (
           <span />
         )}
-        {props.card.influence > 0 ? (
+        {props.card.influence != 0 ? (
           <div className="text stat">
             {props.card.influence} I<span className="stat">nfluence</span>
           </div>

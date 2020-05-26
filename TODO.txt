@@ -2,9 +2,9 @@ TODO
 commit:::
 
 check:::
-remove wounds and churchs when 0
-remove -1 influence when politics
-haman glitch (play infinite?) also babylon influence
+
+simplify
+
 
 wip:::
 rejoin game???

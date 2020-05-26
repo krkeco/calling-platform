@@ -81,8 +81,9 @@ const GameView = (props) => {
   const logView = (
       <div className="flexRow spaceBetween" style={{ width: 150,marginTop:35 }}>
         <div className="flexCol" style={{ width: 150 }}>
-          <div className="titlePlayer flexRow" style={{ width: 150 }}>
-            {props.gameId} CurrentPlayer:{' '}
+          <div className="titlePlayer flexCol" style={{ width: 150 }}>
+            <div className="flexRow">Game: {props.gameId}</div>
+            <div className="flexRow">Player:{' '}
             <span style={{ color: playerBGs[currentPlayer] }}>
               {players && players[currentPlayer] ? (
                 <span>
@@ -92,7 +93,7 @@ const GameView = (props) => {
                 ''
               )}
             </span>
-          </div>
+          </div></div>
           <div>Current Turn: {props.turn}</div>
           <div id="gamelog" className="flexCol gamelog">
             GAME LOG:

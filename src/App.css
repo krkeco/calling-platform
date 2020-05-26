@@ -280,7 +280,7 @@
 .active{
   
   height:250px;
-  /*overflow:hidden;*/
+  overflow:scroll;
   width:400px;
   background-color:#ddd;
   opacity:.7;

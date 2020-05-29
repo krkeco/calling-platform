@@ -252,12 +252,12 @@ const PlayerDataForm = (props) => {
       <div className="flexCol" style={{ width: 200 }}>
         
         <ActionButton
-        gameId={gameId}
-        startGame={startGame}
-        awake={awake}
-        joinGame={joinGame}
-        playerType={playerType}
-        createGame={createGame}/>
+          gameId={gameId}
+          startGame={startGame}
+          awake={awake}
+          joinGame={joinGame}
+          playerType={playerType}
+          createGame={createGame}/>
 
       </div>
       <div>

@@ -239,6 +239,7 @@ const PlayerDataForm = (props) => {
 
       <div className="flexRow center scroll">
         <PlayerForm
+          gameId={gameId}
           playerType={playerType}
           players={players}
           props={props}

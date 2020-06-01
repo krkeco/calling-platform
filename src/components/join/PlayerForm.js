@@ -19,6 +19,7 @@ const PlayerForm = ({
   playerType,
   players,
   props,
+  gameId,
   playerCharacters,
   characterChange,
   playerCharacterType,
@@ -39,6 +40,7 @@ const PlayerForm = ({
         <div>Player {x + 1}:</div>
         <InputLabel id="player-count">Players</InputLabel>
         <Select
+          disabled={gameId > -1 ? true : false}
           labelId="story-select"
           id="story-select"
           value={playerCharacters[x]}
@@ -58,6 +60,7 @@ const PlayerForm = ({
           src={cardImg[playerCharacters[x]]}
         />
         <Select
+          disabled={gameId > -1 ? true : false}
           labelId="story-select"
           id="story-select"
           value={playerCharacterType[x]}

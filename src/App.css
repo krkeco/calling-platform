@@ -59,8 +59,10 @@
 }
 .locContainer{
   overflow: scroll;
-  height:auto;
+  height:50%;
+  z-index: 5;
 }
+
 
 .dropdownBox {
   margin: 5px;
@@ -119,6 +121,12 @@
   width: 260px;
   height:80px;
   background-color: #4448;
+
+  transition: margin-top .5s;
+}
+.marketContainer:hover{
+  margin-top:-40px;
+  transition: margin-top .5s;
 }
 .refreshMarketBtn {
   width: 65px;
@@ -159,6 +167,7 @@
 }
 .playcard:hover {
   /*opacity: 0.9;*/
+
   width: 200px;
   height: 280px;
 
@@ -264,7 +273,17 @@
   /*-moz-transition: height 0.5s, width 0.5s;*/
 }
 .locationTitle{
-  background-color:#7773;
+  font-size:24px;
+  color:white;
+  text-shadow: 2px 2px 4px #333;
+  background-color:#aaa3;
+  border-radius: 5px;
+  padding:5px;
+
+}
+.titleBtnBar {
+  height:35px;
+  padding:5px;
 }
 .titlebarInfo {
   color:black;

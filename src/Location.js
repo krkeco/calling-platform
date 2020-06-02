@@ -80,14 +80,13 @@ const Location = (props) => {
         }}
       >
 
-        <div onClick={() => toggleTitleBar()}>
-          <Button variant="contained" color="secondary">
+        <div className="flexRow">
+          <Button onClick={() => toggleTitleBar()} variant="contained" color="secondary">
             ( ? )
           </Button>
-           <span className="locationTitle">
-            {props.location.name}:{props.location.id}(
-            {props.location.influencer})
-          </span>
+           <div className="locationTitle">
+            {props.location.name}({props.location.influencer})
+          </div>
       </div>
         {props.location.name != 'Jerusalem' ? (
           <div className="flexRow flexStart marketContainer">

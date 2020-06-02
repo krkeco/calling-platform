@@ -6,16 +6,17 @@ const Titlebar = (props, toggleTitleBar) => {
     <div>
         <div className="flexRow">
           <div className="titlebarInfo">
-         <div onClick={() => toggleTitleBar()}>
-          <Button variant="contained" color="secondary">
-            ( X )
-          </Button>
-           <div className="">
-            {props.location.name}:{props.location.id}(
-            {props.location.influencer})
-            Inf:({props.location.influence}){' '}
-          </div>
-      </div>
+            <div className="flexRow titleBtnBar" >
+              <Button onClick={() => toggleTitleBar()} variant="contained" color="secondary">
+                ( X )
+              </Button>
+               <div className="locationTitle">
+                {props.location.name}:{props.location.id}(
+                {props.location.influencer})
+                Inf:({props.location.influence}){' '}
+              </div>
+            </div>
+      
             {props.location.weariness > 0 ? (
               <div>
                 I+F!:({props.location.weariness + props.location.influence})

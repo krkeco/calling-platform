@@ -1,47 +1,39 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
-const Titlebar = (props) => {
-  const [titleBar, setTitleBar] = useState('titlebar');
-  const toggleTitleBar = () => {
-    if (titleBar == 'titlebar') {
-      setTitleBar('titlebar active');
-    } else {
-      setTitleBar('titlebar');
-    }
-  };
+const Titlebar = (props, toggleTitleBar) => {
+ 
   return (
     <div>
-      <div className={titleBar}>
-        <div onClick={() => toggleTitleBar()}>
-          <Button variant="contained" color="secondary">
-            ( ? )
-          </Button>
-          <span className="locationTitle">
-            {props.location.name}:{props.location.id}(
-            {props.location.influencer})
-          </span>
-        </div>
         <div className="flexRow">
           <div className="titlebarInfo">
+         <div onClick={() => toggleTitleBar()}>
+          <Button variant="contained" color="secondary">
+            ( X )
+          </Button>
+           <div className="">
+            {props.location.name}:{props.location.id}(
+            {props.location.influencer})
             Inf:({props.location.influence}){' '}
+          </div>
+      </div>
             {props.location.weariness > 0 ? (
-              <span>
-                I+F!:({props.location.weariness * 2 + props.location.influence})
-              </span>
+              <div>
+                I+F!:({props.location.weariness + props.location.influence})
+              </div>
             ) : (
-              <span />
+              <div />
             )}{' '}
           </div>
         </div>
         {props.location.name == 'Canaan' ? (
           <div className="titlebarInfo">Tier:{props.location.abilities[0]}</div>
         ) : (
-          <span />
+          <div />
         )}
         {props.location.weariness > 0 ? (
           <div className="titlebarInfo">Fear:{props.location.weariness}</div>
         ) : (
-          <span />
+          <div />
         )}
         {props.location.wounds[0] > 0 
         ||props.location.wounds[1] > 0
@@ -54,7 +46,7 @@ const Titlebar = (props) => {
             )}
           </div>
         ) : (
-          <span />
+          <div />
         )}
 
         {props.location.proselytized[0] > 0
@@ -68,12 +60,12 @@ const Titlebar = (props) => {
             )}
           </div>
         ) : (
-          <span />
+          <div />
         )}
         {props.location.hardened > 0 ? (
           <div className="titlebarInfo">Hardened:{props.location.hardened}</div>
         ) : (
-          <span />
+          <div />
         )}
 
         {props.location.info.map((info, ind) => {
@@ -84,7 +76,6 @@ const Titlebar = (props) => {
             </div>
           );
         })}
-      </div>
     </div>
   );
 };

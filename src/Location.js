@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HAND } from './constants.js';
+import { Button } from '@material-ui/core';
 
 import PlayingCard from './PlayingCard';
 import Titlebar from './components/location/TitleBar';
@@ -57,9 +58,19 @@ const Location = (props) => {
       console.log('you cannot afford this!' + props.location.currentGold);
     }
   };
-
+ const [titleBar, setTitleBar] = useState('titlebar');
+  const toggleTitleBar = () => {
+    if (titleBar == 'titlebar') {
+      setTitleBar('titlebar active');
+    } else {
+      setTitleBar('titlebar');
+    }
+  };
   return (
-    <div>
+    <div className="flexRow">
+        <div className={titleBar}>
+          {Titlebar(props,toggleTitleBar)}
+        </div>
       <div
         className="location"
         style={{
@@ -68,7 +79,16 @@ const Location = (props) => {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        {Titlebar(props)}
+
+        <div onClick={() => toggleTitleBar()}>
+          <Button variant="contained" color="secondary">
+            ( ? )
+          </Button>
+           <span className="locationTitle">
+            {props.location.name}:{props.location.id}(
+            {props.location.influencer})
+          </span>
+      </div>
         {props.location.name != 'Jerusalem' ? (
           <div className="flexRow flexStart marketContainer">
             <div className="flexCol flexStart">

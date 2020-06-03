@@ -11,7 +11,7 @@ import ActionButton from './components/join/JoinButton'
 const dev =
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
     ? 'dev'
-    : '';
+    : 'v';
 
 const PlayerDataForm = (props) => {
   const [awake, setWoke] = useState(false)
@@ -227,7 +227,7 @@ const PlayerDataForm = (props) => {
     <div className="flexCol center ">
       <div>
         {' '}
-        The Calling Online Deck Building Game {dev}:{packageJson.version}
+        The Calling Online Deck Building Game {dev}{packageJson.version}
       </div>
       <GameTypeSelector
         playerType={playerType}

@@ -126,7 +126,7 @@ const Location = (props) => {
         <div
           className="bfWrapper"
         >
-          <span style={{ padding: 0, margin: 0 }}> Battlefield:</span>
+          
           {Battlefield(props)}
         </div>
       </div>

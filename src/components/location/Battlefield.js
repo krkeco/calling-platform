@@ -20,7 +20,7 @@ const Battlefield = (props) => {
               </div>
               {playerBF.cards.map((card, ind) => {
                 return (
-                  <div style={{ margin: 3 }}>
+                  <div style={{  }}>
                     <PlayingCard
                       size="small"
                       id={ind}
@@ -37,7 +37,7 @@ const Battlefield = (props) => {
           ) : null;
         })
       ) : (
-        <div></div>
+        <div><span style={{ padding: 0, margin: 0 }}> Battlefield:</span></div>
       )}
     </div>
   );

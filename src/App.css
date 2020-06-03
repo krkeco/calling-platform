@@ -52,7 +52,9 @@
 }
 .location {
   min-width: 400px;
-  min-height: 250px;
+  /*min-height: 250px;*/
+  height:280px;
+  overflow:scroll;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
@@ -73,7 +75,7 @@
 .scrapPile {
   width: 200px;
   height: 100px;
-  margin-top:10px;
+  margin-top:5px;
   margin-bottom: 5px;
   border-radius: 5px;
   background-color: gray;
@@ -118,22 +120,23 @@
   color:white;
   margin-left:5px;
   padding-left:5px;
-  margin-top: 20px;
+  margin-top: 5px;
   border-radius: 5px;
-  width: 260px;
-  height:80px;
+  min-width: 260px;
+  min-height:80px;
   background-color: #4448;
 }
 
 .refreshMarketBtn {
   width: 65px;
   height: 45px;
+  padding:3px;
   border-radius: 2px;
   text-align: center;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
-  background-color: #777;
+  background-color: #922;
   opacity: 1;
 }
 .refreshMarketBtn:hover {

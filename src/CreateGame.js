@@ -227,7 +227,7 @@ const PlayerDataForm = (props) => {
     <div className="flexCol center ">
       <div>
         {' '}
-        The Calling Online Deck Building Game {dev}:{packageJson.version}:{awake.toString()}
+        The Calling Online Deck Building Game {dev}:{packageJson.version}
       </div>
       <GameTypeSelector
         playerType={playerType}

@@ -18,6 +18,7 @@ const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
+  const [joinGameId, setJoinId] = useState(-1);
   const [playerType, setType] = useState(playerTypeEnum.HOST);
   const [playerCharacters, setCharacter] = useState(['Jonah', 'Esther']);
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
@@ -182,7 +183,7 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       console.log('response to newgame:' + JSON.stringify(response));
-      // setGameId(response.data.newGame)
+      
       // props.startGame(response.data.startGame, localPlayers)
     } catch (e) {
       console.log(e);
@@ -190,7 +191,7 @@ const PlayerDataForm = (props) => {
   };
   const joinGame = async () => {
     try {
-      let theGame = parseInt(gameId);
+      let theGame = parseInt(joinGameId);
       let query = `query JoinGame($playerCharacters: [String],$playerCharacterType: [String], $theGame: Int) {
         joinGame(players: $playerCharacters,types: $playerCharacterType, gameId: $theGame)
       }`;
@@ -208,6 +209,7 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       let count = response.data.joinGame.length - 1;
+      setGameId(theGame)
       console.log('my index should be ' + count);
       setLocalPlayers(count);
 
@@ -231,8 +233,9 @@ const PlayerDataForm = (props) => {
         playerType={playerType}
         handleChange={handleChange}
         gameId={gameId}
+        joinGameId={joinGameId}
         setType={setGameType}
-        setGameId={setGameId}
+        setJoinId={setJoinId}
         players={players}
         setPlayers={setPlayers}
       />

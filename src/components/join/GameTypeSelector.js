@@ -13,7 +13,8 @@ const GameTypeSelector = ({
   setType,
   handleChange,
   gameId,
-  setGameId,
+  joinGameId,
+  setJoinId,
   players,
   setPlayers,
 }) => {
@@ -38,10 +39,11 @@ const GameTypeSelector = ({
 
       {playerType == playerTypeEnum.GUEST ? (
         <TextField
+          disabled={gameId > -1 ? true : false}
           id="game-number"
           className="dropdownBox"
-          value={gameId}
-          onChange={(e) => setGameId(e.target.value)}
+          value={joinGameId}
+          onChange={(e) => setJoinId(e.target.value)}
           label="GameId:"
         />
       ) : playerType == playerTypeEnum.HOST ? (

@@ -48,20 +48,22 @@
   overflow:scroll;
   width:auto;
   
-  height:50%;
+  min-height:200px;
+  overflow:scroll;
+  /*background-color: red;*/
 }
 .location {
   min-width: 400px;
   /*min-height: 250px;*/
-  height:280px;
-  overflow:scroll;
+  min-height:280px;
+  /*overflow:scroll;*/
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
 }
 .locContainer{
   overflow: scroll;
-  height:320px;
+  min-height:320px;
   z-index: 5;
 }
 
@@ -95,7 +97,8 @@
 .zoom .titleCard{
   height:auto;
 }
-.zoom{}
+.zoom{
+}
 .titlePlayer {
   font-size: 24px;
 }
@@ -106,6 +109,8 @@
   width:auto;
   height:auto;
   min-height:100px;
+  max-height:250px;
+  overflow:scroll;
   background-color: #5558;
 }
 .bfContainer{

@@ -25,11 +25,11 @@ const App = () => {
   const [playerCount, setPlayerCount] = useState(2);
   const [gameLog, appendLog] = useState([]);
   const [playerIndex, setPlayerIndex] = useState(-1);
-  const [isQuerying, setQuerying] = useState(false);
+  // const [isQuerying, setQuerying] = useState(false);
   const [loser, setLoser] = useState(false);
+ const [gameUpdateIntervalId,setGameUpdateIntervalId] = useState(-1)
 
   const [useCookie, setCookie] = useCookies(['tcoTutorial']);
- 
   // function onChange(newName) {
     // setCookie('tcoTutorial', true, { path: '/' });
   // }
@@ -73,7 +73,7 @@ const App = () => {
     getGame(result);
     setPlayerIndex(playerIndex);
     if (playerIndex > -1) {
-      setInterval(async () => getGame(result, true), 2000);
+      setGameUpdateIntervalId(setInterval(async () => getGame(result, true), 2000));
     }
   };
 
@@ -154,34 +154,37 @@ const App = () => {
   };
 
   const refreshMarket = async (locId) => {
-    try {
-      let theGame = parseInt(gameId);
-      let playerId = parseInt(players[currentPlayer].id);
-      let locationId = parseInt(locId);
-      // console.log('refreshing:' + playerName + theGame + '/' + locationName);
-      let query = `query RefreshMarket($theGame: Int, $playerId: Int, $locationId: Int){
-      refreshMarket(gameId: $theGame, playerId: $playerId, locationId: $locationId)
-    }`;
-      let res = await fetch(URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          variables: { playerId, locationId, theGame },
-        }),
-      });
 
-      let response = await res.json();
-      console.log('refresh?' + JSON.stringify(response));
-      getGame(gameId);
-      // setQuerying(false)
-    } catch (e) {
-      console.log('error refreshing market:' + e);
-      // setQuerying(false)
-    }
+    if (currentPlayer == playerIndex || playerIndex == -1) {
+      try {
+        let theGame = parseInt(gameId);
+        let playerId = parseInt(players[currentPlayer].id);
+        let locationId = parseInt(locId);
+        // console.log('refreshing:' + playerName + theGame + '/' + locationName);
+        let query = `query RefreshMarket($theGame: Int, $playerId: Int, $locationId: Int){
+        refreshMarket(gameId: $theGame, playerId: $playerId, locationId: $locationId)
+      }`;
+        let res = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            query,
+            variables: { playerId, locationId, theGame },
+          }),
+        });
+
+        let response = await res.json();
+        console.log('refresh?' + JSON.stringify(response));
+        getGame(gameId);
+        // setQuerying(false)
+      } catch (e) {
+        console.log('error refreshing market:' + e);
+        // setQuerying(false)
+      }
+    }else{alert("you can't refresh when it isn't your turn!")}
   };
   // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
   const playCard = async (name, location) => {
@@ -215,46 +218,50 @@ const App = () => {
   };
 
   const buyCard = async (index, location, card) => {
-    let cardIndex = parseInt(index);
-    let theGame = parseInt(gameId);
-    let LocationId = parseInt(location);
-    let playerName = players[currentPlayer].id;
-    // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
-    console.log(
-      `trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`,
-    );
-    try {
-      let query = `query Buy($playerName: Int, $cardIndex: Int, $LocationId: Int, $theGame: Int) {
-        buy(gameId: $theGame, playerId: $playerName, locationId: $LocationId, cardIndex: $cardIndex)
-      }`;
-      let res = await fetch(URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          variables: { playerName, cardIndex, LocationId, theGame },
-        }),
-      });
 
-      let response = await res.json();
-      console.log('response to playcard:' + JSON.stringify(response));
+    if (currentPlayer == playerIndex || playerIndex == -1) {
+      let cardIndex = parseInt(index);
+      let theGame = parseInt(gameId);
+      let LocationId = parseInt(location);
+      let playerName = players[currentPlayer].id;
+      // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
+      console.log(
+        `trying to play card with index${cardIndex} player${playerName} loc${location} game${gameId}`,
+      );
+      try {
+        let query = `query Buy($playerName: Int, $cardIndex: Int, $LocationId: Int, $theGame: Int) {
+          buy(gameId: $theGame, playerId: $playerName, locationId: $LocationId, cardIndex: $cardIndex)
+        }`;
+        let res = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            query,
+            variables: { playerName, cardIndex, LocationId, theGame },
+          }),
+        });
 
-      // let log = players[currentPlayer].name + ' ' + response.data.buy;
-      // appendLog([...gameLog, log]);
+        let response = await res.json();
+        console.log('response to playcard:' + JSON.stringify(response));
 
-      getGame(gameId);
-    } catch (e) {
-      console.log(e);
-    }
+        // let log = players[currentPlayer].name + ' ' + response.data.buy;
+        // appendLog([...gameLog, log]);
+
+        getGame(gameId);
+      } catch (e) {
+        console.log(e);
+      }
+    }else{alert("you can't buy when it isn't your turn!")}
   };
   const setWinner = (winner) => {
     setCookie('tcoTutorial', true, { path: '/' });
     // let newLog = [...gameLog];
     alert(winner + ' is the winner!!');
     // newLog.push(winner + ' won the game!');
+    clearInterval(gameUpdateIntervalId);
     setId(-1);
     setLocationInfo([]);
     setPlayerInfo([]);

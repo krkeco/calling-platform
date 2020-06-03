@@ -18,7 +18,7 @@ const PlayerDataForm = (props) => {
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
-  const [joinGameId, setJoinId] = useState(-1);
+  const [joinGameId, setJoinId] = useState('');
   const [playerType, setType] = useState(playerTypeEnum.HOST);
   const [playerCharacters, setCharacter] = useState(['Jonah', 'Esther']);
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);

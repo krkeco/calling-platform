@@ -1,6 +1,9 @@
 import React, { useEffect, useState, Component } from 'react';
 
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestion } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 
 const Helper = () => {
@@ -12,13 +15,13 @@ const Helper = () => {
       setTitleBar('helper');
     }
   };
-  return (
+  return (<div>
+        <IconButton onClick={() => toggleTitleBar()}>
+        <FontAwesomeIcon  className="infoBtn" icon={faQuestion} />
+        </IconButton>
     <div className={titleBar}>
-      <div onClick={() => toggleTitleBar()}>
-        <button className="helpBtn">( ? )</button>
-      </div>
       <div className="flexRow">
-        <div style={{ flex: 1, padding: 5 }} className="flexCol helperText">
+        <div className="flexCol helperText">
           <p>Game Play:</p>
           <div className="hintText">
             ->You win the game by completing your calling, or influencing 3
@@ -48,7 +51,7 @@ const Helper = () => {
             button to see more special rules
           </div>
         </div>
-        <div style={{ flex: 1, padding: 5 }} className="flexCol helperText">
+        <div className="flexCol helperText">
           <p>Gold and Markets:</p>
           <div className="hintText">
             ->Play cards that have gold to get more cards from the market
@@ -66,7 +69,7 @@ const Helper = () => {
             (remove the old market and get 3 random new cards)
           </div>
         </div>
-        <div style={{ flex: 1, padding: 5 }} className="flexCol helperText">
+        <div className="flexCol helperText">
           <p>Influence and locations:</p>
           <div className="hintText">
             ->Play cards with Influence to contest locations
@@ -90,6 +93,7 @@ const Helper = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

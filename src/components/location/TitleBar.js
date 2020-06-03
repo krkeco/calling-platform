@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
+
+
 const Titlebar = (props, toggleTitleBar) => {
  
   return (
-    <div>
+    <div  >
         <div className="flexRow">
           <div className="titlebarInfo">
             <div className="flexRow titleBtnBar" >
-              <Button onClick={() => toggleTitleBar()} variant="contained" color="secondary">
-                ( X )
-              </Button>
+              <IconButton  onClick={() => toggleTitleBar()} variant="contained" color="secondary">
+                <FontAwesomeIcon className="infoBtn" icon={faTimes} />
+              </IconButton>
                <div className="locationTitle">
                 {props.location.name}:{props.location.id}(
                 {props.location.influencer})

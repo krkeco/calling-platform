@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { HAND } from './constants.js';
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestion } from '@fortawesome/free-solid-svg-icons'
 
 import PlayingCard from './PlayingCard';
 import Titlebar from './components/location/TitleBar';
@@ -81,9 +83,9 @@ const Location = (props) => {
       >
 
         <div className="flexRow">
-          <Button onClick={() => toggleTitleBar()} variant="contained" color="secondary">
-            ( ? )
-          </Button>
+          <IconButton  onClick={() => toggleTitleBar()} variant="contained" color="secondary">
+            <FontAwesomeIcon  className="infoBtn" icon={faQuestion} />
+          </IconButton>
            <div className="locationTitle">
             {props.location.name}({props.location.influencer})
           </div>

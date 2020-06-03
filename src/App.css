@@ -59,7 +59,7 @@
 }
 .locContainer{
   overflow: scroll;
-  height:50%;
+  height:300px;
   z-index: 5;
 }
 
@@ -121,13 +121,8 @@
   width: 260px;
   height:80px;
   background-color: #4448;
+}
 
-  transition: margin-top .5s;
-}
-.marketContainer:hover{
-  margin-top:-40px;
-  transition: margin-top .5s;
-}
 .refreshMarketBtn {
   width: 65px;
   height: 45px;
@@ -165,9 +160,15 @@
   overflow: hidden;
   
 }
+.infoBtn{
+  padding:5px;
+  width:15px;
+  height:15px;
+  border-radius:15px;
+  background-color:#bbb;
+}
 .playcard:hover {
   /*opacity: 0.9;*/
-
   width: 200px;
   height: 280px;
 
@@ -262,6 +263,7 @@
   overflow: scroll;
 }
 .titlebar {
+  margin:5px;
   font-size: 24px;
   border-radius: 5px;
   width: 0px;
@@ -317,11 +319,13 @@
 
   /*background-color: red;*/
   
-  width:100%;
   padding:0px;
   margin:0px;
+  margin-top:-40px;
+  width:100%;
   height:auto;
-  max-height: 350px;
+  max-height:250px;
+  /*background-color:red;*/
   overflow:scroll;
 }
 .helper{
@@ -329,21 +333,14 @@
   /*width:45px;*/
   padding:0px;
   margin:0px;
-  height:auto;
+  height:0px;
+
+  margin-top:-40px;
   /*background-color: red;*/
   /*align-items: flex-start;*/
   /*justify-content: flex-start;*/
   /*margin-bottom: -60px;*/
   
-}
-.helpBtn{
-  position:fixed;
-  color:magenta;
-  border: 1px solid magenta;
-  border-radius: 5px;
-  width:auto;
-  height:30px;
-  text-align: center;
 }
 .helperText{
   height:0px;
@@ -360,7 +357,7 @@
   background-color: #333;
 }
 .hintText{
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
 }
 
 .loader {

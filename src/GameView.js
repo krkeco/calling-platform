@@ -4,7 +4,7 @@ import './App.css';
 import Location from './Location';
 import PlayingCard from './PlayingCard';
 import { HAND, URL } from './constants.js';
-import { Button } from '@material-ui/core';
+import { IconButton, Button } from '@material-ui/core';
 import Helper from './Helper';
 
 const GameView = (props) => {

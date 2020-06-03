@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/free-solid-svg-icons'
 
 import PlayingCard from './PlayingCard';
-import Titlebar from './components/location/TitleBar';
+import LocationInfo from './components/location/LocationInfo';
 import Market from './components/location/Market';
 import Battlefield from './components/location/Battlefield';
 
@@ -72,7 +72,7 @@ const Location = (props) => {
   return (
     <div className="flexRow">
         <div className={titleBar}>
-          {Titlebar(props,toggleTitleBar)}
+          {LocationInfo(props,toggleTitleBar)}
         </div>
       <div
         className="location"
@@ -93,6 +93,7 @@ const Location = (props) => {
             <FontAwesomeIcon  className="infoBtn" icon={faQuestion} />
           </IconButton>
             {props.location.name}({props.location.influencer})
+            Inf:({props.location.influence})
           </div>
       </div>
 

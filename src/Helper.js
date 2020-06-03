@@ -8,7 +8,7 @@ import './App.css';
 
 const Helper = ({useCookie}) => {
   const [titleBar, setTitleBar] = useState(!useCookie['tcoTutorial'] ? 'helperActive' : 'helper');
-  const [icon, setIcon] = useState(faTimes)
+  const [icon, setIcon] = useState(!useCookie['tcoTutorial'] ? faTimes : faQuestion)
   const toggleTitleBar = () => {
     if (titleBar == 'helper') {
       setTitleBar('helperActive');
@@ -30,11 +30,14 @@ const Helper = ({useCookie}) => {
             ->Win by completing your calling, or influencing 3 locations
           </div>
           <div className="hintText">
-            ->Your deck has 10 cards: 6 gold, 3 influence, 1 character
+            ->Your deck starts with 10 cards: 6 gold, 3 influence, 1 character
           </div>
-        {/*
-          <div className="hintText">->Every turn you draw 5 cards</div>
-        */}
+        
+          <div className="hintText">->Every turn you draw 5 cards from your deck. At the end of the turn, discard all cards.  Shuffle your discard into your deck when you run out of cards to draw</div>
+        
+          <div className="hintText">
+            ->You can view the current player's hand below.  To view the current player's deck or discard pile, click on the buttons on the right.
+          </div> 
           <div className="hintText">
             ->Drag cards onto locations to play them there
           </div>
@@ -42,8 +45,7 @@ const Helper = ({useCookie}) => {
             ->Check your gold and influence under your character's name on a battlefield
           </div>
           <div className="hintText">
-            ->Play a card on the scrap pile to remove it from your deck once a
-            turn
+            ->Once a turn you can play a card on the scrap pile to remove it from your deck 
           </div>
           <div className="hintText">
             ->There are many special rules: Click on a location's (?)
@@ -57,11 +59,10 @@ const Helper = ({useCookie}) => {
             ->Play cards with gold to acquire cards from the market
           </div>
           <div className="hintText">
-            ->hover over a card to zoom in- The cost is on top,
-            then the name, and then what it does
+            ->hover over a card to zoom in on it- The $cost and name are on the first line, what the card does is below that
           </div>
           <div className="hintText">
-            ->Click on a card to acquire it, it goes into your discard and you will draw it later
+            ->If you have enough gold on a location you may click on a card to acquire it- it goes into your discard pile for now
           </div>
           <div className="hintText">
             ->It's a good idea to acquire cards with 2+ gold early on so you can
@@ -69,7 +70,11 @@ const Helper = ({useCookie}) => {
           </div>
           <div className="hintText">
             ->After the first turn, you can spend 1 gold to refresh the market
-            (remove the old market cards and get 3 random cards from the market deck)
+             to remove the old market cards and get 3 random cards from the market deck
+          </div>
+
+          <div className="hintText">
+            ->A market has 18 cards, so if there are only a couple cards left, it means almost everything has been acquired
           </div>
         </div>
         <div className="flexCol helperText">

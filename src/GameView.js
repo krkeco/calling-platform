@@ -76,7 +76,7 @@ const GameView = (props) => {
           className={zoom[index]}
           onClick={()=>checkZoom(index)}
           key={index}
-          onDragStart={(event) => {setZoom([]);props.onDragStart(event, index + '')}}
+          onDragStart={(event) => {let newZoo = [];newZoo[index]='zoom';setZoom([...newZoo]);props.onDragStart(event, index + '')}}
           draggable
           style={{
             margin: 5,

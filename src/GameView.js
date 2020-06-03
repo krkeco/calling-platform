@@ -18,8 +18,12 @@ const GameView = (props) => {
   const [zoom,setZoom] = useState([])
     const checkZoom = (index) =>{
       let newZoo = []
-      newZoo[index]='zoom'
-      setZoom([...newZoo])
+      if(zoom[index] != 'zoom'){
+        newZoo[index]='zoom'
+        setZoom([...newZoo])
+      }else{
+        setZoom([])
+      }
       // if(zoom == 'zoom'){
       //   setZoom('')
       //   buyCard(card, index)

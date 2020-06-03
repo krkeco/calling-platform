@@ -24,6 +24,15 @@ const bgGrid = {
 };
 
 const Location = (props) => {
+  const [dragOver, setDrag] = useState('none')
+ const [titleBar, setTitleBar] = useState('titlebar');
+  const toggleTitleBar = () => {
+    if (titleBar == 'titlebar') {
+      setTitleBar('titlebar active');
+    } else {
+      setTitleBar('titlebar');
+    }
+  };
   const buyCard = (card, index) => {
     if (
       props.location.battlefield &&
@@ -60,14 +69,6 @@ const Location = (props) => {
       console.log('you cannot afford this!' + props.location.currentGold);
     }
   };
- const [titleBar, setTitleBar] = useState('titlebar');
-  const toggleTitleBar = () => {
-    if (titleBar == 'titlebar') {
-      setTitleBar('titlebar active');
-    } else {
-      setTitleBar('titlebar');
-    }
-  };
   return (
     <div className="flexRow">
         <div className={titleBar}>
@@ -75,6 +76,10 @@ const Location = (props) => {
         </div>
       <div
         className="location"
+
+        onDragEnter={(e) => e.preventDefault()}
+        onDragOver={(event) => props.onDragOver(event)}
+        onDrop={(event) => dragOver != 'scrap' ? props.onDrop(event, props.location.id) : null}
         style={{
           backgroundImage: `url("${bgGrid[props.location.name]}")`,
           backgroundSize: 'cover',
@@ -83,13 +88,14 @@ const Location = (props) => {
       >
 
         <div className="flexRow">
+           <div className="locationTitle">
           <IconButton  onClick={() => toggleTitleBar()} variant="contained" color="secondary">
             <FontAwesomeIcon  className="infoBtn" icon={faQuestion} />
           </IconButton>
-           <div className="locationTitle">
             {props.location.name}({props.location.influencer})
           </div>
       </div>
+
         {props.location.name != 'Jerusalem' ? (
           <div className="flexRow flexStart marketContainer">
             <div className="flexCol flexStart">
@@ -104,17 +110,21 @@ const Location = (props) => {
           <div
             className="scrapPile flexCol center"
             onDragEnter={(e) => e.preventDefault()}
-            onDrop={(event) => props.onDrop(event, -1)}
-            onDragOver={(event) => props.onDragOver(event)}
+            onDragLeave={(e)=> setDrag('none')}
+            onDrop={(event) => {
+              setDrag('none')
+              props.onDrop(event, -1)
+            }}
+            onDragOver={(event) => {
+              setDrag('scrap')
+              props.onDragOver(event)
+            }}
           >
             Scrap Pile
           </div>
         )}
         <div
           className="bfWrapper"
-          onDragEnter={(e) => e.preventDefault()}
-          onDragOver={(event) => props.onDragOver(event)}
-          onDrop={(event) => props.onDrop(event, props.location.id)}
         >
           <span style={{ padding: 0, margin: 0 }}> Battlefield:</span>
           {Battlefield(props)}

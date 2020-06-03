@@ -11,16 +11,16 @@ const Titlebar = (props, toggleTitleBar) => {
     <div  >
         <div className="flexRow">
           <div className="titlebarInfo">
-            <div className="flexRow titleBtnBar" >
+            
+               <div className="locationTitle">
               <IconButton  onClick={() => toggleTitleBar()} variant="contained" color="secondary">
                 <FontAwesomeIcon className="infoBtn" icon={faTimes} />
               </IconButton>
-               <div className="locationTitle">
                 {props.location.name}:{props.location.id}(
                 {props.location.influencer})
                 Inf:({props.location.influence}){' '}
               </div>
-            </div>
+            
       
             {props.location.weariness > 0 ? (
               <div>

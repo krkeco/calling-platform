@@ -33,6 +33,14 @@ const Location = (props) => {
       setTitleBar('titlebar');
     }
   };
+  const [zoom,setZoom] = useState('')
+  const checkZoom = () =>{
+    if(zoom == 'zoom'){
+      setZoom('')
+    }else{
+      setZoom('zoom')
+    }
+  }
   const buyCard = (card, index) => {
     if (
       props.location.battlefield &&
@@ -98,14 +106,14 @@ const Location = (props) => {
       </div>
 
         {props.location.name != 'Jerusalem' ? (
-          <div className="flexRow flexStart marketContainer">
+          <div onClick={checkZoom} className="flexRow flexStart marketContainer">
             <div className="flexCol flexStart">
               Market:
               <div className="refreshMarketBtn" onClick={() => refreshMarket()}>
                 Refresh Market
               </div>
             </div>
-            {Market(props, buyCard)}
+            {Market(props, buyCard, zoom)}
           </div>
         ) : (
           <div

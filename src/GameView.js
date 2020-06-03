@@ -15,7 +15,18 @@ const GameView = (props) => {
   let locCards = [];
   let gameLog = props.gameLog;
   let playerBGs = props.playerBGs;
-
+  const [zoom,setZoom] = useState([])
+    const checkZoom = (index) =>{
+      let newZoo = []
+      newZoo[index]='zoom'
+      setZoom([...newZoo])
+      // if(zoom == 'zoom'){
+      //   setZoom('')
+      //   buyCard(card, index)
+      // }else{
+      //   setZoom('zoom')
+      // }
+    }
   if (locations) {
     locations.map((location, index) => {
       locCards.push(
@@ -55,10 +66,13 @@ const GameView = (props) => {
   if (players && players[currentPlayer]) {
     players[currentPlayer].hand.map((card, index) => {
       console.log('hand:' + index);
+
       Hand.push(
         <div
+          className={zoom[index]}
+          onClick={()=>checkZoom(index)}
           key={index}
-          onDragStart={(event) => props.onDragStart(event, index + '')}
+          onDragStart={(event) => {setZoom([]);props.onDragStart(event, index + '')}}
           draggable
           style={{
             margin: 5,

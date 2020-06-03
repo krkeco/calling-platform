@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PlayingCard from '../../PlayingCard';
-const Market = (props, buyCard) => {
+const Market = (props, buyCard, zoom) => {
+    
   let market = [];
   if (props.location) {
     props.location.market.map((card, index) => {
       market.push(
-        <div style={{ margin: 3 }} onClick={() => buyCard(card, index)}>
+        <div className={zoom} style={{ margin: 3 }} onClick={() => zoom == 'zoom' ? buyCard(card,index) : null}>
           <PlayingCard
             id={index}
             size="small"

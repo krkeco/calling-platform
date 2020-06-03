@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import PlayingCard from '../../PlayingCard';
 
 const Battlefield = (props) => {
+  const [zoom,setZoom] = useState('')
+  const checkZoom = (card, index) =>{
+    if(zoom == 'zoom'){
+      setZoom('')
+    }else{
+      setZoom('zoom')
+    }
+  }
   return (
-    <div className="flexCol">
+    <div onClick={checkZoom} className="flexCol">
       {props.location.battlefield.length > 0 ? (
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];
@@ -20,7 +28,7 @@ const Battlefield = (props) => {
               </div>
               {playerBF.cards.map((card, ind) => {
                 return (
-                  <div style={{  }}>
+                  <div className={zoom} style={{ margin:3 }}>
                     <PlayingCard
                       size="small"
                       id={ind}

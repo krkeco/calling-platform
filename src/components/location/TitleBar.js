@@ -22,25 +22,23 @@ const Titlebar = (props, toggleTitleBar) => {
               </div>
             
       
-            {props.location.weariness > 0 ? (
-              <div>
-                I+F!:({props.location.weariness + props.location.influence})
-              </div>
-            ) : (
-              <div />
-            )}{' '}
           </div>
         </div>
-        {props.location.name == 'Canaan' ? (
-          <div className="titlebarInfo">Tier:{props.location.abilities[0]}</div>
-        ) : (
-          <div />
-        )}
         {props.location.weariness > 0 ? (
-          <div className="titlebarInfo">Fear:{props.location.weariness}</div>
+          <div  className="titlebarInfo">
+            I+F!:({props.location.weariness + props.location.influence})
+            , Fear:{props.location.weariness}
+        {props.location.name == 'Canaan' ? (
+          <span>, Tier:{props.location.abilities[0]}</span>
         ) : (
-          <div />
+          <span />
         )}
+
+          </div>
+        ) : (
+          <span />
+        )}{' '}
+
         {props.location.wounds[0] > 0 
         ||props.location.wounds[1] > 0
         ||props.location.wounds[2] > 0

@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 
 import { polyfill } from 'mobile-drag-drop';
 
+import { CookiesProvider } from 'react-cookie';
+
 // optional import of scroll behaviour
 import { scrollBehaviourDragImageTranslateOverride } from 'mobile-drag-drop/scroll-behaviour';
 
@@ -18,7 +20,9 @@ window.addEventListener('touchmove', function () {});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider>
+    	<App />
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

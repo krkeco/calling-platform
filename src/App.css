@@ -59,7 +59,7 @@
 }
 .locContainer{
   overflow: scroll;
-  height:300px;
+  height:320px;
   z-index: 5;
 }
 
@@ -302,7 +302,7 @@
 }
 .active{
   
-  height:250px;
+  height:280px;
   overflow:scroll;
   width:400px;
   background-color:#ddd;
@@ -320,46 +320,48 @@
 .helperActive{
 
   /*background-color: red;*/
-  
+  border-radius: 5px;
   padding:0px;
   margin:0px;
-  margin-top:-40px;
-  width:100%;
-  height:auto;
-  max-height:250px;
+  margin-top:-50px;
+  margin-left:50px;
+  width:auto;
+  /*height:auto;*/
+
   /*background-color:red;*/
-  overflow:scroll;
+  /*overflow:scroll;*/
+
+  transition: opacity 1s, width .5s, height 0.5s;
 }
 .helper{
-  /*position:absolute;*/
-  /*width:45px;*/
   padding:0px;
   margin:0px;
-  height:0px;
-
-  margin-top:-40px;
-  /*background-color: red;*/
-  /*align-items: flex-start;*/
-  /*justify-content: flex-start;*/
-  /*margin-bottom: -60px;*/
-  
+  /*height:0px;*/
+  /*visibility: hidden;*/
+  width:0px;
 }
 .helperText{
   height:0px;
-  /*margin: -10px;*/
+  width:0px;
+  padding:10px;
+  margin:5px;
+  padding-bottom:50px;
+
+  overflow:scroll;
   visibility: hidden;
-}
-.helperActive .helperText {
-  /*margin:0;*/
-  /*padding:0;*/
-  /*margin-bottom: 50px;*/
-  height:auto;
-  visibility: visible;
+  transition: width .5s;
   color:white;
+  border-radius: 5px;
   background-color: #333;
 }
+.helperActive .helperText {
+  height:220px;
+  width:300px;
+  visibility: visible;
+  transition: width .5s;
+}
 .hintText{
-  /*margin-bottom: 10px;*/
+  margin-bottom: 10px;
 }
 
 .loader {

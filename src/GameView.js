@@ -79,7 +79,7 @@ const GameView = (props) => {
   }
 
   const logView = (
-      <div className="flexRow spaceBetween" style={{ width: 150,marginTop:35 }}>
+      <div className="flexRow spaceBetween" style={{ width: 150}}>
         <div className="flexCol" style={{ width: 150 }}>
           <div className="titlePlayer flexCol" style={{ width: 150 }}>
             <div className="flexRow">Game: {props.gameId}</div>
@@ -142,9 +142,11 @@ const GameView = (props) => {
   return (
     <div>
       
-      <div className="flexRow flexStart locContainer">{locCards}</div>
+      <div className="flexRow flexStart locContainer">
+      <Helper useCookie={props.useCookie}/>
+      {locCards}
+      </div>
       
-<Helper/>
       
       <div className="flexRow spaceBetween guiContainer">
         {logView}

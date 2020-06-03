@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Component } from 'react';
 import './App.css';
-
+import { useCookies } from 'react-cookie';
 import Location from './Location';
 import PlayingCard from './PlayingCard';
 import { HAND, URL } from './constants.js';
@@ -27,6 +27,13 @@ const App = () => {
   const [playerIndex, setPlayerIndex] = useState(-1);
   const [isQuerying, setQuerying] = useState(false);
   const [loser, setLoser] = useState(false);
+
+  const [useCookie, setCookie] = useCookies(['tcoTutorial']);
+ 
+  // function onChange(newName) {
+    // setCookie('tcoTutorial', true, { path: '/' });
+  // }
+  // alert(JSON.stringify(useCookie['tcoTutorial']))
 
   const onDragStart = (event, cardId) => {
     if (currentPlayer == playerIndex || playerIndex == -1) {
@@ -244,6 +251,7 @@ const App = () => {
     }
   };
   const setWinner = (winner) => {
+    setCookie('tcoTutorial', true, { path: '/' });
     // let newLog = [...gameLog];
     alert(winner + ' is the winner!!');
     // newLog.push(winner + ' won the game!');
@@ -309,6 +317,7 @@ const App = () => {
   if (gameId > -1) {
     view = (
       <GameView
+        useCookie={useCookie}
         gameId={gameId}
         gameLog={gameLog}
         players={players}

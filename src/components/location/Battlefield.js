@@ -14,14 +14,14 @@ const Battlefield = (props) => {
       setZoom('zoom')
     }
   }
+      // <Tooltip arrow  title="Zoom in">
+      //   <Button style={{margin:5,width:50}} size="small" color="primary" variant="contained"   onClick={checkZoom}>
+      //     <FontAwesomeIcon  icon={zoomIcon} />
+      //   </Button>
+      // </Tooltip>
   return (
-    <div className="flexCol">
+    <div onClick={checkZoom} className="flexCol">
               
-      <Tooltip arrow  title="Zoom in">
-        <Button style={{margin:5,width:50}} size="small" color="primary" variant="contained"   onClick={checkZoom}>
-          <FontAwesomeIcon  icon={zoomIcon} />
-        </Button>
-      </Tooltip>
       {props.location.battlefield.length > 0 ? (
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];

@@ -74,8 +74,11 @@ const Helper = ({ useCookie }) => {
               ->Play cards with gold to acquire cards from the market
             </div>
             <div className="hintText">
-              ->hover over a card to zoom in on it- The $cost and name are on
+              ->Click on the zoom icon to zoom in on the market cards- The $cost and name are on
               the first line, what the card does is below that
+            </div>
+            <div className="hintText">
+              ->You can also zoom in on the battlefield by clicking inside it, or click a card in your hand to zoom in on it.
             </div>
             <div className="hintText">
               ->If you have enough gold on a location you may click on a card to
@@ -104,14 +107,13 @@ const Helper = ({ useCookie }) => {
             <div className="hintText">
               ->At the end of the turn, if your influence on a location is
               greater than any other player PLUS the location's influence
-              (usually 3), you become influencer
+              (usually 4), you become influencer
             </div>
-            {/*
+            
           <div className="hintText">
-            ->If no one else is on the location, you still need to have more
-            than the location's influence
+            -> This means you need at least 5 influence to capture a location
           </div>
-        */}
+        
             <div className="hintText">
               ->By Influencing locations you acquire powerful influence cards
             </div>

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import PlayingCard from '../../PlayingCard';
+import { IconButton, Button, Fab,Tooltip } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestion, faSearchPlus,faSearchMinus, faRecycle } from '@fortawesome/free-solid-svg-icons'
 
 const Battlefield = (props) => {
   const [zoom,setZoom] = useState('')
+  const[zoomIcon,setIcon] = useState(zoom != 'zoom' ? faSearchPlus : faSearchMinus )
   const checkZoom = (card, index) =>{
     if(zoom == 'zoom'){
       setZoom('')
@@ -11,13 +15,18 @@ const Battlefield = (props) => {
     }
   }
   return (
-    <div onClick={checkZoom} className="flexCol">
+    <div className="flexCol">
+              
+      <Tooltip arrow  title="Zoom in">
+        <Button style={{margin:5,width:50}} size="small" color="primary" variant="contained"   onClick={checkZoom}>
+          <FontAwesomeIcon  icon={zoomIcon} />
+        </Button>
+      </Tooltip>
       {props.location.battlefield.length > 0 ? (
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];
           let bgColor = props.playerBGs[index];
 
-          
           return playerBF ? (
             <div className="flexRow">
               <div className="flexCol bfContainer">

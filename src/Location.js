@@ -128,10 +128,10 @@ const Location = (props) => {
               <div  className="infoBtnBig"/>
               
               <Tooltip arrow  title="Zoom in">
-              <Button color="primary" variant="contained"   onClick={checkZoom}>
-              <FontAwesomeIcon  icon={zoomIcon} />
-              </Button>
-            </Tooltip>
+                <Button color="primary" variant="contained"   onClick={checkZoom}>
+                  <FontAwesomeIcon  icon={zoomIcon} />
+                </Button>
+              </Tooltip>
               </div>
             
             {Market(props, buyCard, zoom)}

@@ -6,15 +6,13 @@ import packageJson from '../package.json';
 import './App.css';
 import PlayerForm from './components/join/PlayerForm';
 import GameTypeSelector from './components/join/GameTypeSelector';
-import ActionButton from './components/join/JoinButton'
+import ActionButton from './components/join/JoinButton';
 
 const dev =
-  !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-    ? 'dev'
-    : 'v';
+  !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'v';
 
 const PlayerDataForm = (props) => {
-  const [awake, setWoke] = useState(false)
+  const [awake, setWoke] = useState(false);
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
@@ -24,36 +22,34 @@ const PlayerDataForm = (props) => {
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
   const [waitingPlayers, setWaitRoom] = useState([]);
 
-  const wakeServer = async()=>{
-    if(!awake){
-        try {
-          let query = `query {wakeup}`;
-    
-          let res = await fetch(URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            body: JSON.stringify({
-              query
-            }),
-          });
-    
-          let response = await res.json();
-          console.log('response to gamestatus:' + JSON.stringify(response));
-          if(response.data.wakeup == "awake"){
-            setWoke(true);
-            // console.log(awake.toString())
-          }
-    
-        } catch (e) {
-          console.log(e);
+  const wakeServer = async () => {
+    if (!awake) {
+      try {
+        let query = `query {wakeup}`;
+
+        let res = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            query,
+          }),
+        });
+
+        let response = await res.json();
+        console.log('response to gamestatus:' + JSON.stringify(response));
+        if (response.data.wakeup == 'awake') {
+          setWoke(true);
+          // console.log(awake.toString())
         }
+      } catch (e) {
+        console.log(e);
       }
     }
-    wakeServer();
-  
+  };
+  wakeServer();
 
   const setGameType = (eNum) => {
     setType(eNum);
@@ -183,7 +179,7 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       console.log('response to newgame:' + JSON.stringify(response));
-      
+
       // props.startGame(response.data.startGame, localPlayers)
     } catch (e) {
       console.log(e);
@@ -209,7 +205,7 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       let count = response.data.joinGame.length - 1;
-      setGameId(theGame)
+      setGameId(theGame);
       console.log('my index should be ' + count);
       setLocalPlayers(count);
 
@@ -222,12 +218,12 @@ const PlayerDataForm = (props) => {
     }
   };
 
-
   return (
     <div className="flexCol center ">
       <div>
         {' '}
-        The Calling Online Deck Building Game {dev}{packageJson.version}
+        The Calling Online Deck Building Game {dev}
+        {packageJson.version}
       </div>
       <GameTypeSelector
         playerType={playerType}
@@ -254,15 +250,14 @@ const PlayerDataForm = (props) => {
       </div>
 
       <div className="flexCol" style={{ width: 200 }}>
-        
         <ActionButton
           gameId={gameId}
           startGame={startGame}
           awake={awake}
           joinGame={joinGame}
           playerType={playerType}
-          createGame={createGame}/>
-
+          createGame={createGame}
+        />
       </div>
       <div>
         players in game:{' '}
@@ -274,6 +269,5 @@ const PlayerDataForm = (props) => {
     </div>
   );
 };
-
 
 export default PlayerDataForm;

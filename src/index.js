@@ -21,7 +21,7 @@ window.addEventListener('touchmove', function () {});
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-    	<App />
+      <App />
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root'),

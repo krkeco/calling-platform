@@ -15,22 +15,22 @@ const GameView = (props) => {
   let locCards = [];
   let gameLog = props.gameLog;
   let playerBGs = props.playerBGs;
-  const [zoom,setZoom] = useState([])
-    const checkZoom = (index) =>{
-      let newZoo = []
-      if(zoom[index] != 'zoom'){
-        newZoo[index]='zoom'
-        setZoom([...newZoo])
-      }else{
-        setZoom([])
-      }
-      // if(zoom == 'zoom'){
-      //   setZoom('')
-      //   buyCard(card, index)
-      // }else{
-      //   setZoom('zoom')
-      // }
+  const [zoom, setZoom] = useState([]);
+  const checkZoom = (index) => {
+    let newZoo = [];
+    if (zoom[index] != 'zoom') {
+      newZoo[index] = 'zoom';
+      setZoom([...newZoo]);
+    } else {
+      setZoom([]);
     }
+    // if(zoom == 'zoom'){
+    //   setZoom('')
+    //   buyCard(card, index)
+    // }else{
+    //   setZoom('zoom')
+    // }
+  };
   if (locations) {
     locations.map((location, index) => {
       locCards.push(
@@ -74,9 +74,14 @@ const GameView = (props) => {
       Hand.push(
         <div
           className={zoom[index]}
-          onClick={()=>checkZoom(index)}
+          onClick={() => checkZoom(index)}
           key={index}
-          onDragStart={(event) => {let newZoo = [];newZoo[index]='zoom';setZoom([...newZoo]);props.onDragStart(event, index + '')}}
+          onDragStart={(event) => {
+            let newZoo = [];
+            newZoo[index] = 'zoom';
+            setZoom([...newZoo]);
+            props.onDragStart(event, index + '');
+          }}
           draggable
           style={{
             margin: 5,
@@ -97,11 +102,12 @@ const GameView = (props) => {
   }
 
   const logView = (
-      <div className="flexRow spaceBetween" style={{ width: 150}}>
-        <div className="flexCol" style={{ width: 150 }}>
-          <div className="titlePlayer flexCol" style={{ width: 150 }}>
-            <div className="flexRow">Game: {props.gameId}</div>
-            <div className="flexRow">Player:{' '}
+    <div className="flexRow spaceBetween" style={{ width: 150 }}>
+      <div className="flexCol" style={{ width: 150 }}>
+        <div className="titlePlayer flexCol" style={{ width: 150 }}>
+          <div className="flexRow">Game: {props.gameId}</div>
+          <div className="flexRow">
+            Player:{' '}
             <span style={{ color: playerBGs[currentPlayer] }}>
               {players && players[currentPlayer] ? (
                 <span>
@@ -111,19 +117,20 @@ const GameView = (props) => {
                 ''
               )}
             </span>
-          </div></div>
-          <div>Current Turn: {props.turn}</div>
-          <div id="gamelog" className="flexCol gamelog">
-            GAME LOG:
-            {gameLog.map((log, ind) => {
-              return <div className="logText">{log}</div>;
-            })}
           </div>
         </div>
+        <div>Current Turn: {props.turn}</div>
+        <div id="gamelog" className="flexCol gamelog">
+          GAME LOG:
+          {gameLog.map((log, ind) => {
+            return <div className="logText">{log}</div>;
+          })}
+        </div>
       </div>
+    </div>
   );
   const guiView = (
-    <div className="flexCol" style={{ width: 100, margin:5 }}>
+    <div className="flexCol" style={{ width: 100, margin: 5 }}>
       <Button
         style={{ width: '100%', margin: 5 }}
         variant="contained"
@@ -159,18 +166,14 @@ const GameView = (props) => {
 
   return (
     <div>
-      
       <div className="flexRow flexStart locContainer">
-      <Helper useCookie={props.useCookie}/>
-      {locCards}
+        <Helper useCookie={props.useCookie} />
+        {locCards}
       </div>
-      
-      
+
       <div className="flexRow spaceBetween guiContainer">
         {logView}
-        <div className="flexRow handContainer" >
-          {Hand}
-        </div>
+        <div className="flexRow handContainer">{Hand}</div>
         {guiView}
       </div>
     </div>

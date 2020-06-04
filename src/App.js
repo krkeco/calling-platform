@@ -27,11 +27,11 @@ const App = () => {
   const [playerIndex, setPlayerIndex] = useState(-1);
   // const [isQuerying, setQuerying] = useState(false);
   const [loser, setLoser] = useState(false);
- const [gameUpdateIntervalId,setGameUpdateIntervalId] = useState(-1)
+  const [gameUpdateIntervalId, setGameUpdateIntervalId] = useState(-1);
 
   const [useCookie, setCookie] = useCookies(['tcoTutorial']);
   // function onChange(newName) {
-    // setCookie('tcoTutorial', true, { path: '/' });
+  // setCookie('tcoTutorial', true, { path: '/' });
   // }
   // alert(JSON.stringify(useCookie['tcoTutorial']))
 
@@ -73,7 +73,9 @@ const App = () => {
     getGame(result);
     setPlayerIndex(playerIndex);
     if (playerIndex > -1) {
-      setGameUpdateIntervalId(setInterval(async () => getGame(result, true), 2000));
+      setGameUpdateIntervalId(
+        setInterval(async () => getGame(result, true), 2000),
+      );
     }
   };
 
@@ -154,7 +156,6 @@ const App = () => {
   };
 
   const refreshMarket = async (locId) => {
-
     if (currentPlayer == playerIndex || playerIndex == -1) {
       try {
         let theGame = parseInt(gameId);
@@ -184,7 +185,9 @@ const App = () => {
         console.log('error refreshing market:' + e);
         // setQuerying(false)
       }
-    }else{alert("you can't refresh when it isn't your turn!")}
+    } else {
+      alert("you can't refresh when it isn't your turn!");
+    }
   };
   // play(gameId:0, playerName:"Jonah", locationName:"nineveh", cardIndex:0)
   const playCard = async (name, location) => {
@@ -218,7 +221,6 @@ const App = () => {
   };
 
   const buyCard = async (index, location, card) => {
-
     if (currentPlayer == playerIndex || playerIndex == -1) {
       let cardIndex = parseInt(index);
       let theGame = parseInt(gameId);
@@ -254,7 +256,9 @@ const App = () => {
       } catch (e) {
         console.log(e);
       }
-    }else{alert("you can't buy when it isn't your turn!")}
+    } else {
+      alert("you can't buy when it isn't your turn!");
+    }
   };
   const setWinner = (winner) => {
     setCookie('tcoTutorial', true, { path: '/' });

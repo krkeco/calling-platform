@@ -47,7 +47,11 @@ const GameTypeSelector = ({
           label="GameId:"
         />
       ) : playerType == playerTypeEnum.HOST ? (
-        <PlayerCountToggle gameId={gameId} players={players} handleChange={handleChange} />
+        <PlayerCountToggle
+          gameId={gameId}
+          players={players}
+          handleChange={handleChange}
+        />
       ) : (
         <div />
       )}
@@ -63,7 +67,7 @@ const GameTypeSelector = ({
   return gameTypeSelector;
 };
 
-const PlayerCountToggle = ({ players,gameId, handleChange }) => {
+const PlayerCountToggle = ({ players, gameId, handleChange }) => {
   let playerCountToggle = (
     <FormControl className="formControl">
       <InputLabel id="player-count-label">Local Players</InputLabel>

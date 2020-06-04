@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { HAND } from './constants.js';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Button, Fab,Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestion } from '@fortawesome/free-solid-svg-icons'
+import { faQuestion, faSearchPlus,faSearchMinus, faRecycle } from '@fortawesome/free-solid-svg-icons'
 
 import PlayingCard from './PlayingCard';
 import LocationInfo from './components/location/LocationInfo';
@@ -26,19 +26,23 @@ const bgGrid = {
 const Location = (props) => {
   const [dragOver, setDrag] = useState('none')
  const [titleBar, setTitleBar] = useState('titlebar');
+  const [zoom,setZoom] = useState('')
+ const[zoomIcon,setIcon] = useState(zoom != 'zoom' ? faSearchPlus : faSearchMinus )
   const toggleTitleBar = () => {
     if (titleBar == 'titlebar') {
       setTitleBar('titlebar active');
+
     } else {
       setTitleBar('titlebar');
     }
   };
-  const [zoom,setZoom] = useState('')
   const checkZoom = () =>{
     if(zoom == 'zoom'){
       setZoom('')
+      setIcon(faSearchPlus)
     }else{
       setZoom('zoom')
+      setIcon(faSearchMinus)
     }
   }
   const buyCard = (card, index) => {
@@ -114,13 +118,22 @@ const Location = (props) => {
 
         {props.location.name != 'Jerusalem' ? (
           <div  className="flexRow flexStart marketContainer">
-            <div className="flexCol flexStart">
-              Market:
-              <div className="refreshMarketBtn" onClick={() => refreshMarket()}>
-                Refresh Market
+            
+              <div  className="infoBtnBig flexCol">
+              <Tooltip arrow  title="Refresh Market">
+              <Button color="primary" variant="contained"  aria-label="Refresh Market" onClick={() => refreshMarket()}>
+                <FontAwesomeIcon  icon={faRecycle} />
+              </Button>
+              </Tooltip>
+              <div  className="infoBtnBig"/>
+              
+              <Tooltip arrow  title="Zoom in">
+              <Button color="primary" variant="contained"   onClick={checkZoom}>
+              <FontAwesomeIcon  icon={zoomIcon} />
+              </Button>
+            </Tooltip>
               </div>
-            </div>
-              <div className="zoomMarketBtn" onClick={checkZoom}>Zoom</div>
+            
             {Market(props, buyCard, zoom)}
 
           </div>

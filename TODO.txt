@@ -3,10 +3,7 @@ commit:::
 
 check:::
 
-simplify
-
-
 wip:::
-rejoin game???
 
+rejoin game???
 someday: subscriptions

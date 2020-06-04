@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Component } from 'react';
 
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -19,9 +19,12 @@ const Helper = ({useCookie}) => {
     }
   };
   return (<div>
-        <IconButton onClick={() => toggleTitleBar()}>
-        <FontAwesomeIcon  className="infoBtn" icon={icon} />
-        </IconButton>
+
+        <Tooltip arrow  title="Help">
+          <IconButton onClick={() => toggleTitleBar()}>
+          <FontAwesomeIcon  className="infoBtn" icon={icon} />
+          </IconButton>
+        </Tooltip>
     <div className={titleBar}>
       <div className="flexRow">
         <div className="flexCol helperText">

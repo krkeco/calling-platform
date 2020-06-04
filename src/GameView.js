@@ -116,7 +116,7 @@ const GameView = (props) => {
           <div id="gamelog" className="flexCol gamelog">
             GAME LOG:
             {gameLog.map((log, ind) => {
-              return <div>{log}</div>;
+              return <div className="logText">{log}</div>;
             })}
           </div>
         </div>

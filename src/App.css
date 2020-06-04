@@ -102,6 +102,9 @@
 .titlePlayer {
   font-size: 24px;
 }
+.logText{
+  border-bottom: 1px solid #777;
+}
 .bfWrapper{
   color:white;
   margin:3px;
@@ -132,12 +135,23 @@
   min-height:80px;
   background-color: #4448;
 }
-
+.zoomMarketBtn{
+  width: 65px;
+  height: 45px;
+  margin:5px;  
+  border-radius: 5px;
+  text-align: center;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+  background-color: #229;
+  opacity: 1;
+}
 .refreshMarketBtn {
   width: 65px;
   height: 45px;
-  padding:3px;
-  border-radius: 2px;
+  margin:5px;
+  border-radius: 5px;
   text-align: center;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */
@@ -292,7 +306,9 @@
   background-color:#aaa3;
   border-radius: 5px;
   padding:5px;
-
+  height:45px;
+  white-space: nowrap;
+  min-width:200px;
 }
 .titleBtnBar {
   height:35px;

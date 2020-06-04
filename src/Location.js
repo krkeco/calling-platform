@@ -102,18 +102,27 @@ const Location = (props) => {
           </IconButton>
             {props.location.name}({props.location.influencer})
             Inf:({props.location.influence})
+            {props.location.weariness > 0 ? ` F!:${props.location.weariness}`:''}
+            
+            {props.location.hardened > 0 ? ` H:${props.location.hardened}`:''}
+            {props.location.abilities[0] > 0 ? ` T:${props.location.abilities[0]}`:''}
+            {props.location.edicts > 0 ? ` E:${props.location.edicts}`:''}
+            {props.location.proselytized.map((p,i) => p > 0 ? ` C${i}:${p}`:'')}
+            {props.location.wounds.map((p,i) => p > 0 ? ` W${i}:${p}`:'')}
           </div>
       </div>
 
         {props.location.name != 'Jerusalem' ? (
-          <div onClick={checkZoom} className="flexRow flexStart marketContainer">
+          <div  className="flexRow flexStart marketContainer">
             <div className="flexCol flexStart">
               Market:
               <div className="refreshMarketBtn" onClick={() => refreshMarket()}>
                 Refresh Market
               </div>
             </div>
+              <div className="zoomMarketBtn" onClick={checkZoom}>Zoom</div>
             {Market(props, buyCard, zoom)}
+
           </div>
         ) : (
           <div

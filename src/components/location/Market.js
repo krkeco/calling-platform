@@ -6,7 +6,7 @@ const Market = (props, buyCard, zoom) => {
   if (props.location) {
     props.location.market.map((card, index) => {
       market.push(
-        <div className={zoom} style={{ margin: 3 }} onClick={() => zoom == 'zoom' ? buyCard(card,index) : null}>
+        <div className={zoom} style={{ margin: 3 }} onClick={() => buyCard(card,index) }>
           <PlayingCard
             id={index}
             size="small"
@@ -14,6 +14,7 @@ const Market = (props, buyCard, zoom) => {
             backgroundColor="teal"
             player={null}
           />
+
         </div>,
       );
     });

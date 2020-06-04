@@ -99,7 +99,7 @@ const App = () => {
             hand{cost,img, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
           },
           locations(gameId: $theId){
-            name, id,influence,influencer, weariness, info,proselytized,wounds,hardened,abilities,
+            name, id,influence,influencer,edicts, weariness, info,proselytized,wounds,hardened,abilities,
             market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
             battlefield{name,poliBonus, influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
           },

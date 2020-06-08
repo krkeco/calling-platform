@@ -114,20 +114,23 @@ const Location = (props) => {
             >
               <FontAwesomeIcon className="infoBtn" icon={faQuestion} />
             </IconButton>
-            {props.location.name}({props.location.influencer}) Inf:(
+            {props.location.name}
+            <Tooltip arrow title="Current Influencer"><span>({props.location.influencer})</span></Tooltip>
+             <Tooltip arrow title="Location Influence"><span>Inf:(
             {props.location.influence})
+            </span></Tooltip>
             {props.location.weariness > 0
-              ? ` F!:${props.location.weariness}`
+              ? <Tooltip arrow title="Fear"><span> F!:{props.location.weariness}</span></Tooltip>
               : ''}
-            {props.location.hardened > 0 ? ` H:${props.location.hardened}` : ''}
+            {props.location.hardened > 0 ? <Tooltip arrow title="Hardened"><span> H:{props.location.hardened}</span></Tooltip> : ''}
             {props.location.abilities[0] > 0
               ? ` T:${props.location.abilities[0]}`
               : ''}
-            {props.location.edicts > 0 ? ` E:${props.location.edicts}` : ''}
+            {props.location.edicts > 0 ? <Tooltip arrow title="Edicts"><span> E:{props.location.edicts}</span></Tooltip> : ''}
             {props.location.proselytized.map((p, i) =>
-              p > 0 ? ` C${i}:${p}` : '',
+              p > 0 ? <Tooltip arrow title="Player#:Churches"><span> C{i}:{p}</span></Tooltip> : '',
             )}
-            {props.location.wounds.map((p, i) => (p > 0 ? ` W${i}:${p}` : ''))}
+            {props.location.wounds.map((p, i) => (p > 0 ? <Tooltip arrow title="Player#:Wounds"><span> W{i}:{p}</span></Tooltip> : ''))}
           </div>
         </div>
 

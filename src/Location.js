@@ -31,6 +31,7 @@ const bgGrid = {
 const Location = (props) => {
   const [dragOver, setDrag] = useState('none');
   const [titleBar, setTitleBar] = useState('titlebar');
+  const [scrapBg, setScrapBg] = useState({});
   const [zoom, setZoom] = useState('');
   const [zoomIcon, setIcon] = useState(
     zoom != 'zoom' ? faSearchPlus : faSearchMinus,
@@ -168,14 +169,23 @@ const Location = (props) => {
         ) : (
           <div
             className="scrapPile flexCol center"
-            onDragEnter={(e) => e.preventDefault()}
-            onDragLeave={(e) => setDrag('none')}
+            style={scrapBg}
+            onDragEnter={(e) => {
+              e.preventDefault()
+              setScrapBg({backgroundColor:'maroon'})
+            }}
+            onDragLeave={(e) => {
+              setDrag('none')
+              setScrapBg({})
+            }}
             onDrop={(event) => {
               setDrag('none');
               props.onDrop(event, -1);
             }}
             onDragOver={(event) => {
               setDrag('scrap');
+              
+              setScrapBg({backgroundColor:'maroon'})
               props.onDragOver(event);
             }}
           >

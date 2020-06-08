@@ -105,13 +105,12 @@ const Helper = ({ useCookie }) => {
               ->Play cards with Influence to contest locations
             </div>
             <div className="hintText">
-              ->At the end of the turn, if your influence on a location is
-              greater than any other player PLUS the location's influence
-              (usually 4), you become influencer
+              ->At the end of the turn the highest and second highest players influence are subtracted
+              if the remaining total influence is greater than the locations influence (usually 4) then the highest player is now influencing
             </div>
             
           <div className="hintText">
-            -> This means you need at least 5 influence to capture a location
+            -> You will always need at least 5 influence to capture a location
           </div>
         
             <div className="hintText">

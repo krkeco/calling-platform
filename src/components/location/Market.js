@@ -8,7 +8,7 @@ const Market = (props, buyCard, zoom) => {
       market.push(
         <div
           className={zoom}
-          
+          style={{margin:3}}
           onClick={() => {
             buyCard(card, index)
             let newBuy = []

@@ -105,8 +105,7 @@ const Helper = ({ useCookie }) => {
               ->Play cards with Influence to contest locations
             </div>
             <div className="hintText">
-              ->At the end of the turn the highest and second highest players influence are subtracted
-              if the remaining total influence is greater than the locations influence (usually 4) then the highest player is now influencing
+              ->At the end of the turn compare influences.  the player with the most will subtract the second most from their influence.  if the remaining influence is more than the location's influence, the player becomes the influencer
             </div>
             
           <div className="hintText">

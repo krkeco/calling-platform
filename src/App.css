@@ -163,6 +163,15 @@
   opacity: 0.6;
   transition: opacity 0.25s;
 }
+
+.buyCard {
+  animation: fade-in-keyframes 1s;
+}
+@keyframes fade-in-keyframes {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 .playcard {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */

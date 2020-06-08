@@ -180,11 +180,12 @@ const Location = (props) => {
             }}
             onDrop={(event) => {
               setDrag('none');
+              setScrapBg({})
               props.onDrop(event, -1);
             }}
             onDragOver={(event) => {
               setDrag('scrap');
-              
+
               setScrapBg({backgroundColor:'maroon'})
               props.onDragOver(event);
             }}

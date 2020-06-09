@@ -37,7 +37,7 @@ const Helper = ({ useCookie }) => {
               ->Win by completing your calling, or influencing 3 locations
             </div>
             <div className="hintText">
-              ->Your deck starts with 10 cards: 6 gold, 3 influence, 1 character
+              ->Your deck starts with 10 cards: 5 gold, 4 influence, 1 character
             </div>
 
             <div className="hintText">

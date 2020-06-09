@@ -124,8 +124,9 @@ const Location = (props) => {
               ? <Tooltip arrow title="Fear"><span> F!:{props.location.weariness}</span></Tooltip>
               : ''}
             {props.location.hardened > 0 ? <Tooltip arrow title="Hardened"><span> H:{props.location.hardened}</span></Tooltip> : ''}
+            
             {props.location.abilities[0] > 0
-              ? ` T:${props.location.abilities[0]}`
+              ? <Tooltip arrow title="Edicts"><span> T:{props.location.abilities[0]}</span></Tooltip>
               : ''}
             {props.location.edicts > 0 ? <Tooltip arrow title="Edicts"><span> E:{props.location.edicts}</span></Tooltip> : ''}
             {props.location.proselytized.map((p, i) =>

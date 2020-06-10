@@ -15,7 +15,7 @@ import Market from './components/location/Market';
 import Battlefield from './components/location/Battlefield';
 
 import babylon from './imgs/esther/babylon.jpg';
-import jerusalem from './imgs/sample/sandyshore.jpg';
+import jerusalem from './imgs/jerusalem.jpg';
 import canaan from './imgs/sample/seaskull.jpg';
 import nineveh from './imgs/sample/dessertketchup.jpg';
 import rome from './imgs/sample/fishflower.jpg';

@@ -166,6 +166,9 @@
 
 .buyCard {
   animation: fade-in-keyframes 1s;
+  
+  height:0px;
+  transition: height 0.5s;
 }
 @keyframes fade-in-keyframes {
   from {opacity: 0}

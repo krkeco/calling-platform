@@ -436,6 +436,7 @@ padding:3px;
 
 
 .dot-pulse {
+  top: 20px;
   position: relative;
   left: -100px;
   width: 20px;
@@ -451,10 +452,11 @@ padding:3px;
 }
 
 .dot-pulse::before, .dot-pulse::after {
+
   content: '';
   display: inline-block;
   position: absolute;
-  top: 0;
+  /*top: 10px;*/
   width: 20px;
   height: 20px;
   border-radius: 10px;

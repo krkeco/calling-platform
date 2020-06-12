@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { URL, playerTypeEnum } from '../../constants';
+import loader from '../../imgs/loading.gif';
 
 const JoinButton = ({
   awake,
@@ -10,9 +11,10 @@ const JoinButton = ({
   startGame,
   gameId,
 }) => {
-  if (!awake) {
-    return <div className="loader"> </div>;
-  }
+  // if (!awake) {
+  //   return <img src={loader} alt="loading..." />
+  // }
+    // <div className="loader"> </div>;
 
   if (playerType == playerTypeEnum.GUEST) {
     return (

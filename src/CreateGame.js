@@ -7,6 +7,7 @@ import './App.css';
 import PlayerForm from './components/join/PlayerForm';
 import GameTypeSelector from './components/join/GameTypeSelector';
 import ActionButton from './components/join/JoinButton';
+import loader from './imgs/loading.gif'
 
 const dev =
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'v';
@@ -217,6 +218,29 @@ const PlayerDataForm = (props) => {
       console.log(e);
     }
   };
+  let actionButton = <div className="dot-pulse"/>
+  if(awake){
+    actionButton = <div>  <div className="flexCol" style={{ width: 200 }}>
+        <ActionButton
+          gameId={gameId}
+          startGame={startGame}
+          awake={awake}
+          joinGame={joinGame}
+          playerType={playerType}
+          createGame={createGame}
+        />
+      </div>
+      
+      {waitingPlayers.length > 0 ? <div className="flexCol center">
+        players in game:
+        {waitingPlayers.map((player, ind) => {
+          return <div style={{ color: props.playerBGs[ind] }}>{player}</div>;
+        })}
+        </div>
+      : <span/>}
+      
+      </div>
+  }
 
   return (
     <div className="flexCol center ">
@@ -249,23 +273,7 @@ const PlayerDataForm = (props) => {
         />
       </div>
 
-      <div className="flexCol" style={{ width: 200 }}>
-        <ActionButton
-          gameId={gameId}
-          startGame={startGame}
-          awake={awake}
-          joinGame={joinGame}
-          playerType={playerType}
-          createGame={createGame}
-        />
-      </div>
-      <div>
-        players in game:{' '}
-        {waitingPlayers.map((player, ind) => {
-          return <div style={{ color: props.playerBGs[ind] }}>{player}</div>;
-        })}{' '}
-      </div>
-      <div>players on this local: {localPlayers}</div>
+    {actionButton}
     </div>
   );
 };

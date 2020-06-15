@@ -27,7 +27,7 @@ const Battlefield = (props) => {
   //   </Button>
   // </Tooltip>
   return (
-    <div onClick={checkZoom} className="flexCol">
+    <div onClick={checkZoom} >
       {props.location.battlefield.length > 0 ? (
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];
@@ -35,17 +35,33 @@ const Battlefield = (props) => {
 
           return playerBF ? (
             <div className="flexRow">
-              <div className="flexCol bfContainer">
+
+              <div className="flexRow bfPlayerInfo">
+
+              <div className="flexCol">
                 <div>{playerBF.name}</div>
 
-                <div>$ {playerBF.gold}</div>
-                <div>
+                <Tooltip arrow title="Gold"><div>$ {playerBF.gold}</div></Tooltip>
+                <Tooltip arrow title="Total Influence"><div>
                   Inf:
-                  {playerBF.influence + playerBF.poliBonus < 0
-                    ? 0
-                    : playerBF.influence + playerBF.poliBonus}
+                  {playerBF.influence + playerBF.poliBonus}
+                </div></Tooltip>
                 </div>
+              <div className="flexCol">
+              <div>.</div>
+                <Tooltip arrow title="Fear- this will reduce other player's influence"><div>
+                {playerBF.fear > 0 ? `F!:${playerBF.fear}` : ``}
+                </div></Tooltip>
+
+                <Tooltip arrow title="Faith- this will replace influence if player has 0 influence"><div>
+                  {playerBF.faith > 0 ? `F:${playerBF.faith}` : ``}
+                </div></Tooltip>
+              
               </div>
+              </div>
+            
+            <div className="flexRow">
+
               {playerBF.cards.map((card, ind) => {
                 return (
                   <div className={zoom} style={{ margin: 3 }}>
@@ -61,6 +77,7 @@ const Battlefield = (props) => {
                   </div>
                 );
               })}
+            </div>
             </div>
           ) : null;
         })

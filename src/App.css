@@ -116,11 +116,20 @@
   overflow:scroll;
   background-color: #5558;
 }
-.bfContainer{
+.bfPlayerInfo{
   color:white;
   border-radius:5px;
   height:60px;
-  width:60px;
+  min-width:50px;
+  margin:3px;
+  padding:3px;
+  background-color: #4448;
+}
+.bfExtraInfo{
+  color:white;
+  border-radius:5px;
+  height:60px;
+  width:50px;
   margin:3px;
   padding:3px;
   background-color: #4448;

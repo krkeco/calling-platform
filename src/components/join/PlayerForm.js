@@ -40,6 +40,7 @@ const PlayerForm = ({
         <div>Player {x + 1}:</div>
         <InputLabel id="player-count">Players</InputLabel>
         <Select
+          className="dropdownBox"
           disabled={gameId > -1 ? true : false}
           labelId="story-select"
           id="story-select"
@@ -60,6 +61,7 @@ const PlayerForm = ({
           src={cardImg[playerCharacters[x]]}
         />
         <Select
+        className="dropdownBox"
           disabled={gameId > -1 ? true : false}
           labelId="story-select"
           id="story-select"

@@ -275,21 +275,20 @@ const PlayerDataForm = (props) => {
         players={players}
         setPlayers={setPlayers}
       />
-      
+
       {actionButton}
 
-        <PlayerForm
-          stories={stories}
-          gameId={gameId}
-          playerType={playerType}
-          players={players}
-          props={props}
-          playerCharacters={playerCharacters}
-          characterChange={characterChange}
-          playerCharacterType={playerCharacterType}
-          characterTypeChange={characterTypeChange}
-        />
-
+      <PlayerForm
+        stories={stories}
+        gameId={gameId}
+        playerType={playerType}
+        players={players}
+        props={props}
+        playerCharacters={playerCharacters}
+        characterChange={characterChange}
+        playerCharacterType={playerCharacterType}
+        characterTypeChange={characterTypeChange}
+      />
     </div>
   );
 };

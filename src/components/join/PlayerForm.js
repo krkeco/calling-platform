@@ -161,11 +161,17 @@ const PlayerForm = ({
                     })}
                   </div>
                 </div>
-                <div className={titleBar}>
+                <div className={titleBar} >
                   {story.name}
+                  <div style={{
+                    alignItems: 'center',
+                    overflow: 'scroll',
+                    height: 350,
+                  }}>
                   {story.info.map((info, ind) => {
                     return <div style={{ margin: 5 }}>{info}</div>;
                   })}
+                </div>
                 </div>
               </div>
             );

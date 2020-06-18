@@ -10,7 +10,7 @@ import eunich from './imgs/esther/eunich.jpg';
 import esther from './imgs/esther/esther.jpg';
 
 import jonah from './imgs/jonah/jonah.jpg';
-import warrior from './imgs/jonah/warrior.png';
+import wicked from './imgs/jonah/warrior.png';
 
 import paul from './imgs/paul/paul.jpg';
 
@@ -44,33 +44,38 @@ const cardImg = {
   eunich: eunich,
 
   jonah: jonah,
-  ninwarrior: warrior,
+  foolish: bedazzlejewel,
+  wicked: wicked,
+  vine: greenbiz,
+  scorching: firetree,
+  ship: floralite,
+  hugefish: blunes,
+
 
   paul: paul,
+  exhortation:blossomgrove,
+  epistle: crackplaster,
+  barbs: gemlightning,
+  titus: bedazzlejewel,
+  timmy: jellyfishcarn,
+  mob:corridor,
+  angelic:floralite,
+  prison:verdentfire,
+  storm:seacave,
 
   joshua: joshua,
+  milkhoney: blossomgrove,
   spies: spies,
+  faithfulreport: floralite,
+  anak: corridor,
+  natsots: gemlightning,
+  gerazim: firetree,
+  ebal: corridor,
 
   gold: gold,
   influence: influence,
 
-  bedazzlejewel: bedazzlejewel,
-  blossomgrove: blossomgrove,
-  blunes: blunes,
-  corridor: corridor,
-  crackplaster: crackplaster,
-  firetree: firetree,
-  floralite: floralite,
-  gemlightning: gemlightning,
-  greenbiz: greenbiz,
-  jellyfishcarn: jellyfishcarn,
-  leavestreak: leavestreak,
-  seacave: seacave,
-  verdentfire: verdentfire,
 };
-// if(props.card.img){
-//   bg = "./imgs/"+props.card.img+".jpg";
-// }
 
 const PlayingCard = (props) => {
   // const [isDragging, setDragging] = useState(false);

@@ -90,10 +90,7 @@ const Location = (props) => {
   };
   return (
     <div className="flexRow">
-      <div className={titleBar}
-        >
-        {LocationInfo(props, toggleTitleBar)}
-      </div>
+      <div className={titleBar}>{LocationInfo(props, toggleTitleBar)}</div>
       <div
         className="location"
         onDragEnter={(e) => e.preventDefault()}
@@ -117,23 +114,68 @@ const Location = (props) => {
               <FontAwesomeIcon className="infoBtn" icon={faQuestion} />
             </IconButton>
             {props.location.name}
-            <Tooltip arrow title="Current Influencer"><span>({props.location.influencer})</span></Tooltip>
-             <Tooltip arrow title="Location Influence"><span>Inf:(
-            {props.location.influence})
-            </span></Tooltip>
-            {props.location.weariness > 0
-              ? <Tooltip arrow title="Fear"><span> F!:{props.location.weariness}</span></Tooltip>
-              : ''}
-            {props.location.hardened > 0 ? <Tooltip arrow title="Hardened"><span> H:{props.location.hardened}</span></Tooltip> : ''}
-            
-            {props.location.abilities[0] > 0
-              ? <Tooltip arrow title="Canaan Tier (of 3)"><span> T:{props.location.abilities[0]}</span></Tooltip>
-              : ''}
-            {props.location.edicts > 0 ? <Tooltip arrow title="Edicts"><span> E:{props.location.edicts}</span></Tooltip> : ''}
-            {props.location.proselytized.map((p, i) =>
-              p > 0 ? <Tooltip arrow title="Player#:Churches"><span> C{i}:{p}</span></Tooltip> : '',
+            <Tooltip arrow title="Current Influencer">
+              <span>({props.location.influencer})</span>
+            </Tooltip>
+            <Tooltip arrow title="Location Influence">
+              <span>
+                Inf:(
+                {props.location.influence})
+              </span>
+            </Tooltip>
+            {props.location.weariness > 0 ? (
+              <Tooltip arrow title="Fear">
+                <span> F!:{props.location.weariness}</span>
+              </Tooltip>
+            ) : (
+              ''
             )}
-            {props.location.wounds.map((p, i) => (p > 0 ? <Tooltip arrow title="Player#:Wounds"><span> W{i}:{p}</span></Tooltip> : ''))}
+            {props.location.hardened > 0 ? (
+              <Tooltip arrow title="Hardened">
+                <span> H:{props.location.hardened}</span>
+              </Tooltip>
+            ) : (
+              ''
+            )}
+
+            {props.location.abilities[0] > 0 ? (
+              <Tooltip arrow title="Canaan Tier (of 3)">
+                <span> T:{props.location.abilities[0]}</span>
+              </Tooltip>
+            ) : (
+              ''
+            )}
+            {props.location.edicts > 0 ? (
+              <Tooltip arrow title="Edicts">
+                <span> E:{props.location.edicts}</span>
+              </Tooltip>
+            ) : (
+              ''
+            )}
+            {props.location.proselytized.map((p, i) =>
+              p > 0 ? (
+                <Tooltip arrow title="Player#:Churches">
+                  <span>
+                    {' '}
+                    C{i}:{p}
+                  </span>
+                </Tooltip>
+              ) : (
+                ''
+              ),
+            )}
+            {props.location.wounds.map((p, i) =>
+              p > 0 ? (
+                <Tooltip arrow title="Player#:Wounds">
+                  <span>
+                    {' '}
+                    W{i}:{p}
+                  </span>
+                </Tooltip>
+              ) : (
+                ''
+              ),
+            )}
           </div>
         </div>
 
@@ -142,7 +184,7 @@ const Location = (props) => {
             <div className="infoBtnBig flexCol">
               <Tooltip arrow title="Refresh Market">
                 <Button
-                size="large"
+                  size="large"
                   color="secondary"
                   variant="contained"
                   aria-label="Refresh Market"
@@ -173,22 +215,22 @@ const Location = (props) => {
             className="scrapPile flexCol center"
             style={scrapBg}
             onDragEnter={(e) => {
-              e.preventDefault()
-              setScrapBg({backgroundColor:'maroon'})
+              e.preventDefault();
+              setScrapBg({ backgroundColor: 'maroon' });
             }}
             onDragLeave={(e) => {
-              setDrag('none')
-              setScrapBg({})
+              setDrag('none');
+              setScrapBg({});
             }}
             onDrop={(event) => {
               setDrag('none');
-              setScrapBg({})
+              setScrapBg({});
               props.onDrop(event, -1);
             }}
             onDragOver={(event) => {
               setDrag('scrap');
 
-              setScrapBg({backgroundColor:'maroon'})
+              setScrapBg({ backgroundColor: 'maroon' });
               props.onDragOver(event);
             }}
           >

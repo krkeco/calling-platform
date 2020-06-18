@@ -141,83 +141,79 @@ const PlayingCard = (props) => {
 
         **/}
         <div className="cardBox flexCol spaceBetween">
-        <div>
-        <p className="text titleCard">
-          {props.card.cost > 0 ? `$${props.card.cost}` : ''} {props.card.name}
-        </p>
-        {props.card.gold > 0 ? (
-          <div className="text stat">
-            {props.card.gold} <span className="stat"> Gold($)</span>
+          <div>
+            <p className="text titleCard">
+              {props.card.cost > 0 ? `$${props.card.cost}` : ''}{' '}
+              {props.card.name}
+            </p>
+            {props.card.gold > 0 ? (
+              <div className="text stat">
+                {props.card.gold} <span className="stat"> Gold($)</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.influence != 0 ? (
+              <div className="text stat">
+                {props.card.influence} I<span className="stat">nfluence</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.draw > 0 ? (
+              <div className="text stat">
+                {props.card.draw} D<span className="stat">raw</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.provision > 0 ? (
+              <div className="text stat">
+                {props.card.provision} Pr<span className="stat">ovision</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.faith > 0 ? (
+              <div className="text stat">
+                {props.card.faith} F<span className="stat">aith</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.fear > 0 ? (
+              <div className="text stat">
+                {props.card.fear} !F<span className="stat">ear</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.politics ? (
+              <div className="text stat">
+                {props.card.politics} P<span className="stat">olitics</span>
+              </div>
+            ) : (
+              <span />
+            )}
+            {props.card.abilities && props.card.abilities.length > 0 ? (
+              <div className="text stat">
+                A:{' '}
+                <span className="stat">
+                  {props.card.abilities.map((a, i) => {
+                    return <span>{a} </span>;
+                  })}
+                </span>
+              </div>
+            ) : (
+              <span />
+            )}
           </div>
-        ) : (
-          <span />
-        )}
-        {props.card.influence != 0 ? (
-          <div className="text stat">
-            {props.card.influence} I<span className="stat">nfluence</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.draw > 0 ? (
-          <div className="text stat">
-            {props.card.draw} D<span className="stat">raw</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.provision > 0 ? (
-          <div className="text stat">
-            {props.card.provision} Pr<span className="stat">ovision</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.faith > 0 ? (
-          <div className="text stat">
-            {props.card.faith} F<span className="stat">aith</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.fear > 0 ? (
-          <div className="text stat">
-            {props.card.fear} !F<span className="stat">ear</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.politics ? (
-          <div className="text stat">
-            {props.card.politics} P<span className="stat">olitics</span>
-          </div>
-        ) : (
-          <span />
-        )}
-        {props.card.abilities && props.card.abilities.length > 0 ? (
-          <div className="text stat">
-            A:{' '}
-            <span className="stat">
-              {props.card.abilities.map((a, i) => {
-                return <span>{a} </span>;
-              })}
-            </span>
-          </div>
-        ) : (
-          <span />
-        )}
 
-        </div>
-
-        
-        {props.card.quote ? (
-          <div className="stat textQuote">
-            {props.card.quote}
-          </div>
-        ) : (
-          <span />
-        )}
-        
+          {props.card.quote ? (
+            <div className="stat textQuote">{props.card.quote}</div>
+          ) : (
+            <span />
+          )}
         </div>
       </div>
     </div>

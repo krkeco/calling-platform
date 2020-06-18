@@ -14,7 +14,7 @@ const JoinButton = ({
   // if (!awake) {
   //   return <img src={loader} alt="loading..." />
   // }
-    // <div className="loader"> </div>;
+  // <div className="loader"> </div>;
 
   if (playerType == playerTypeEnum.GUEST) {
     return (

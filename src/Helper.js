@@ -74,11 +74,12 @@ const Helper = ({ useCookie }) => {
               ->Play cards with gold to acquire cards from the market
             </div>
             <div className="hintText">
-              ->Click on the zoom icon to zoom in on the market cards- The $cost and name are on
-              the first line, what the card does is below that
+              ->Click on the zoom icon to zoom in on the market cards- The $cost
+              and name are on the first line, what the card does is below that
             </div>
             <div className="hintText">
-              ->You can also zoom in on the battlefield by clicking inside it, or click a card in your hand to zoom in on it.
+              ->You can also zoom in on the battlefield by clicking inside it,
+              or click a card in your hand to zoom in on it.
             </div>
             <div className="hintText">
               ->If you have enough gold on a location you may click on a card to
@@ -105,13 +106,16 @@ const Helper = ({ useCookie }) => {
               ->Play cards with Influence to contest locations
             </div>
             <div className="hintText">
-              ->At the end of the turn compare influences.  the player with the most will subtract the second most from their influence.  if the remaining influence is more than the location's influence, the player becomes the influencer
+              ->At the end of the turn compare influences. the player with the
+              most will subtract the second most from their influence. if the
+              remaining influence is more than the location's influence, the
+              player becomes the influencer
             </div>
-            
-          <div className="hintText">
-            -> You will always need at least 5 influence to capture a location
-          </div>
-        
+
+            <div className="hintText">
+              -> You will always need at least 5 influence to capture a location
+            </div>
+
             <div className="hintText">
               ->By Influencing locations you acquire powerful influence cards
             </div>

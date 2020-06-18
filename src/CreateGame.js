@@ -22,11 +22,19 @@ const PlayerDataForm = (props) => {
   const [playerCharacters, setCharacter] = useState(['Jonah', 'Esther']);
   const [playerCharacterType, setCharacterType] = useState(['player', 'AI']);
   const [waitingPlayers, setWaitRoom] = useState([]);
+  const [stories, setStories] = useState(null);
 
   const wakeServer = async () => {
     if (!awake) {
       try {
-        let query = `query {wakeup}`;
+        let query = `query {
+            wakeup {
+              name,
+              info
+              infoDeck{name,quote, cost, gold, influence, abilities, politics, fear, faith, provision, img},
+              character{name,quote, cost, gold, influence, abilities, politics, fear, faith, provision, img},
+            }
+          }`;
 
         let res = await fetch(URL, {
           method: 'POST',
@@ -41,8 +49,9 @@ const PlayerDataForm = (props) => {
 
         let response = await res.json();
         console.log('response to gamestatus:' + JSON.stringify(response));
-        if (response.data.wakeup == 'awake') {
+        if (response.data.wakeup != null) {
           setWoke(true);
+          setStories(response.data.wakeup);
           // console.log(awake.toString())
         }
       } catch (e) {
@@ -262,6 +271,7 @@ const PlayerDataForm = (props) => {
 
       <div className="flexRow center scroll">
         <PlayerForm
+          stories={stories}
           gameId={gameId}
           playerType={playerType}
           players={players}

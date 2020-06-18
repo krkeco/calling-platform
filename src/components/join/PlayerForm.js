@@ -3,11 +3,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { URL, playerTypeEnum } from '../../constants';
-
+import PlayingCard from '../../PlayingCard';
 import esther from './../../imgs/esther/esther.jpg';
 import paul from './../../imgs/paul/paul.jpg';
 import jonah from './../../imgs/jonah/jonah.jpg';
 import joshua from './../../imgs/joshua/joshua.jpg';
+
+import { IconButton, Tooltip } from '@material-ui/core';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const cardImg = {
   Jonah: jonah,
@@ -15,7 +20,14 @@ const cardImg = {
   Joshua: joshua,
   Paul: paul,
 };
+const storyKey = {
+'Jonah':'Nineveh',
+'Esther':'Babylon',
+'Joshua':'Canaan',
+'Paul':'Rome'
+}
 const PlayerForm = ({
+  stories,
   playerType,
   players,
   props,
@@ -27,6 +39,21 @@ const PlayerForm = ({
 }) => {
   let playerForm = [];
 
+const [titleBar, setTitleBar] = useState('storyHidden');
+const [storyId, setStoryId] = useState(0);
+  const [icon, setIcon] = useState(faQuestion);
+  const toggleTitleBar = (id) => {
+    if (titleBar == 'storyHidden') {
+      setTitleBar('storyActive');
+      setIcon(faTimes);
+
+    } else {
+      setTitleBar('storyHidden');
+      setIcon(faQuestion);
+    }
+    setStoryId(id);
+  };
+
   for (let x = 0; x < players; x++) {
     let bgColor = props.playerBGs[x];
     playerForm.push(
@@ -37,23 +64,29 @@ const PlayerForm = ({
           backgroundColor: bgColor,
         }}
       >
-        <div>Player {x + 1}:</div>
+        <div>
+          Player {x + 1}:
+        </div>
         <InputLabel id="player-count">Players</InputLabel>
+        <div className="flexRow">
+          <IconButton onClick={() => toggleTitleBar(playerCharacters[x])}>
+          <FontAwesomeIcon className="infoBtn" icon={icon} />
+          </IconButton>
         <Select
           className="dropdownBox"
           disabled={gameId > -1 ? true : false}
           labelId="story-select"
           id="story-select"
           value={playerCharacters[x]}
-          onChange={(e) => characterChange(x, e)}
+          onChange={(e) => {characterChange(x, e); setTitleBar('storyHidden');setIcon(faQuestion);}}
         >
           <MenuItem value={'Jonah'}>Jonah</MenuItem>
           <MenuItem value={'Esther'}>Esther</MenuItem>
           <MenuItem value={'Joshua'}>Joshua</MenuItem>
           <MenuItem value={'Paul'}>Paul</MenuItem>
-          {/**
-           **/}
+          
         </Select>
+        </div>
 
         <img
           draggable={false}
@@ -78,7 +111,58 @@ const PlayerForm = ({
       </div>,
     );
   }
-  return playerForm;
+
+  let storyInfo = <div className={titleBar}>
+          </div>
+
+  if(stories != null){
+    storyInfo = <div >
+          {stories.map((story,index)=>{
+            if(story.name == storyKey[storyId]){
+            return <div className="flexRow">
+              <div className={titleBar}>
+              Story Cards:
+              <div className="flexCol" style={{alignItems:'center', overflow:'scroll', height:350}}>
+              <div className="zoom">
+              <PlayingCard
+                id={-1}
+                draggable={false}
+                onDragStart={null}
+                card={story.character}
+                player={-1}
+              />
+              </div>
+              {story.infoDeck.map((card,ind)=>{
+                return <div className="zoom">
+                <PlayingCard
+                      id={ind}
+                      draggable={false}
+                      onDragStart={null}
+                      card={card}
+                      player={-1}
+                    />
+                    </div>
+              })}
+              </div>
+              </div>
+              <div className={titleBar}>
+              {story.name}
+              {story.info.map((info, ind)=>{
+                return <div style={{margin:5}} >{info}</div>
+              })}
+              </div>
+
+            </div>
+            }
+            })}
+          </div>
+  }
+
+  return <div className="flexRow">
+          {storyInfo}
+          {playerForm}
+          
+          </div>;
 };
 
 export default PlayerForm;

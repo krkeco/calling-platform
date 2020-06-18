@@ -98,12 +98,12 @@ const App = () => {
             name, id,type, firstPlayer,
             deck{name},
             discard{name},
-            hand{cost,img, draw, gold, influence, name, politics, faith, fear, reinforce,abilities}
+            hand{cost,quote,img, draw, gold, influence, name, politics, faith, fear, provision,abilities}
           },
           locations(gameId: $theId){
             name, id,influence,influencer,edicts, weariness, info,proselytized,wounds,hardened,abilities,
-            market{cost,img,draw, gold, influence, name, politics, faith, fear, reinforce, abilities},
-            battlefield{name,poliBonus,faith, fear, influence, gold, cards{name,img,draw, influence, gold, politics, faith, fear,reinforce,abilities}}
+            market{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
+            battlefield{name,poliBonus,faith, fear, influence, gold, cards{name,quote,img,draw, influence, gold, politics, faith, fear,provision,abilities}}
           },
           currentPlayer(gameId: $theId){turn,nextPlayer,winner,loser, log}
       }`;

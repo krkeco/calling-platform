@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const LocationInfo = (props, toggleTitleBar) => {
   return (
-    <div>
+    <div >
       <div className="flexRow">
         <div className="titlebarInfo">
           <div className="locationTitle">

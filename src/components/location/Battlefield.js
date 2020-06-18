@@ -17,8 +17,10 @@ const Battlefield = (props) => {
   const checkZoom = (card, index) => {
     if (zoom == 'zoom') {
       setZoom('');
+      setIcon(faSearchPlus)
     } else {
       setZoom('zoom');
+      setIcon(faSearchMinus)
     }
   };
   // <Tooltip arrow  title="Zoom in">
@@ -27,7 +29,20 @@ const Battlefield = (props) => {
   //   </Button>
   // </Tooltip>
   return (
-    <div onClick={checkZoom} >
+    <div style={{position:'relative'}} >
+
+                  <span className="bfZoom">
+              <Tooltip arrow title="Zoom in">
+                <Button
+                  size="large"
+                  color="primary"
+                  variant="contained"
+                  onClick={checkZoom}
+                >
+                  <FontAwesomeIcon icon={zoomIcon} />
+                </Button>
+              </Tooltip>
+              </span>
       {props.location.battlefield.length > 0 ? (
         props.location.battlefield.map((bf, index) => {
           let playerBF = props.location.battlefield[index];

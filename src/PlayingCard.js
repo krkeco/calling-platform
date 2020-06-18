@@ -10,6 +10,7 @@ import eunich from './imgs/esther/eunich.jpg';
 import esther from './imgs/esther/esther.jpg';
 
 import jonah from './imgs/jonah/jonah.jpg';
+import warrior from './imgs/jonah/warrior.png';
 
 import paul from './imgs/paul/paul.jpg';
 
@@ -43,6 +44,7 @@ const cardImg = {
   eunich: eunich,
 
   jonah: jonah,
+  ninwarrior: warrior,
 
   paul: paul,
 
@@ -138,6 +140,8 @@ const PlayingCard = (props) => {
         />
 
         **/}
+        <div className="cardBox flexCol spaceBetween">
+        <div>
         <p className="text titleCard">
           {props.card.cost > 0 ? `$${props.card.cost}` : ''} {props.card.name}
         </p>
@@ -162,9 +166,9 @@ const PlayingCard = (props) => {
         ) : (
           <span />
         )}
-        {props.card.reinforce > 0 ? (
+        {props.card.provision > 0 ? (
           <div className="text stat">
-            {props.card.reinforce} R<span className="stat">einforce</span>
+            {props.card.provision} Pr<span className="stat">ovision</span>
           </div>
         ) : (
           <span />
@@ -202,6 +206,19 @@ const PlayingCard = (props) => {
         ) : (
           <span />
         )}
+
+        </div>
+
+        
+        {props.card.quote ? (
+          <div className="stat textQuote">
+            {props.card.quote}
+          </div>
+        ) : (
+          <span />
+        )}
+        
+        </div>
       </div>
     </div>
   );

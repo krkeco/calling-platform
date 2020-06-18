@@ -86,6 +86,11 @@
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
 }
+.cardBox{
+  height:100%;
+  /*max-height:220px;*/
+  /*background-color:red; */
+}
 .titleCard{
   /*border-bottom: 1px solid black;*/
   width:80%;
@@ -105,6 +110,11 @@
 }
 .logText{
   border-bottom: 1px solid #777;
+}
+.bfZoom{
+  position:absolute;
+  right:0px;
+  top:0px;
 }
 .bfWrapper{
   color:white;
@@ -293,6 +303,19 @@ padding:3px;
 
   text-align: center;
 }
+.textQuote {
+  padding: 5px;
+  margin:5px;
+  max-width:170px;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: font-size 0.25s;
+  color:white;
+  text-shadow: 2px 2px 4px #333;
+  background-color: #5558;
+  align-self: left;
+  text-align: left;
+}
 .zoom .text {
   /*z-index: 2;*/
   font-size: 18px;
@@ -438,11 +461,24 @@ padding:3px;
   align-self: center;
 }
 
+
+.storyHidden{
+  width:0px;
+  overflow:hidden;
+}
+.storyActive{
+  width:300px;
+  padding:10px;
+  margin:5px;
+  background-color:#555;
+  color:#eee;
+  border-radius: 5px;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 
 
 .dot-pulse {

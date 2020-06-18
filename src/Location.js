@@ -90,7 +90,8 @@ const Location = (props) => {
   };
   return (
     <div className="flexRow">
-      <div className={titleBar}>
+      <div className={titleBar}
+        >
         {LocationInfo(props, toggleTitleBar)}
       </div>
       <div
@@ -142,7 +143,7 @@ const Location = (props) => {
               <Tooltip arrow title="Refresh Market">
                 <Button
                 size="large"
-                  color="primary"
+                  color="secondary"
                   variant="contained"
                   aria-label="Refresh Market"
                   onClick={() => refreshMarket()}

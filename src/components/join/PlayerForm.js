@@ -50,7 +50,7 @@ const PlayerForm = ({
       setTitleBar('storyHidden');
       setIcon(faQuestion);
     }
-    setStoryId(id);
+    
   };
 
   for (let x = 0; x < players; x++) {
@@ -66,9 +66,12 @@ const PlayerForm = ({
         <div>Player {x + 1}:</div>
         <InputLabel id="player-count">Players</InputLabel>
         <div className="flexRow">
-          <IconButton onClick={() => toggleTitleBar(playerCharacters[x])}>
-            <FontAwesomeIcon className="infoBtn" icon={icon} />
-          </IconButton>
+        {x == 0 ? (
+                  <IconButton onClick={() => {toggleTitleBar(playerCharacters[x]);setStoryId(playerCharacters[x]);}}>
+                    <FontAwesomeIcon className="infoBtn" icon={icon} />
+                  </IconButton>)
+                  : (<span/>)
+        }
           <Select
             className="dropdownBox"
             disabled={gameId > -1 ? true : false}
@@ -77,8 +80,6 @@ const PlayerForm = ({
             value={playerCharacters[x]}
             onChange={(e) => {
               characterChange(x, e);
-              setTitleBar('storyHidden');
-              setIcon(faQuestion);
             }}
           >
             <MenuItem value={'Jonah'}>Jonah</MenuItem>
@@ -118,7 +119,7 @@ const PlayerForm = ({
     storyInfo = (
       <div>
         {stories.map((story, index) => {
-          if (story.name == storyKey[storyId]) {
+          if (story.name == storyKey[playerCharacters[0]]) {
             return (
               <div className="flexRow">
                 <div className={titleBar}>

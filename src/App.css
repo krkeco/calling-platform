@@ -88,6 +88,9 @@
 }
 .cardBox{
   height:100%;
+  width:100%;
+  /*padding:5px;*/
+  /*margin:5px;*/
   /*max-height:220px;*/
   /*background-color:red; */
 }
@@ -318,9 +321,9 @@ padding:3px;
   transition: opacity 0.25s;
 }
 .textQuote {
-  padding: 5px;
-  margin:5px;
-  max-width:180px;
+  /*padding: 5px;*/
+  /*margin:5px;*/
+  /*width:90%;*/
   border-radius: 5px;
   font-size: 12px;
   transition: font-size 0.25s;

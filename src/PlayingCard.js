@@ -222,7 +222,7 @@ const PlayingCard = (props) => {
           </div>
 
           {props.card.quote ? (
-            <div className="stat textQuote">{props.card.quote}</div>
+            <div style={{textAlign:'center'}} className="stat textQuote">{props.card.quote}</div>
           ) : (
             <span />
           )}

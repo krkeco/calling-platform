@@ -24,8 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "pretty": "prettier --single-quote --trailing-comma all --write ./src/*.js ./src/components/**/*.js ./src/**/*.js",
-    "s3sync": "npm version patch && npm run build && aws s3 sync ./build/ s3://calling-platform --acl public-read",
-    "s3json": "npm version patch && npm run build && aws s3 sync ./json/ s3://calling-platform --acl public-read",
+    "s3sync": "react-scripts build && npm version patch && npm run build && aws s3 sync ./build/ s3://calling-platform --acl public-read",
+    "s3json": "aws s3 sync ./json/ s3://calling-platform --acl public-read",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

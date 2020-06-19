@@ -303,19 +303,6 @@ padding:3px;
 
   text-align: center;
 }
-.textQuote {
-  padding: 5px;
-  margin:5px;
-  max-width:170px;
-  border-radius: 5px;
-  font-size: 12px;
-  transition: font-size 0.25s;
-  color:white;
-  text-shadow: 2px 2px 4px #333;
-  background-color: #5558;
-  align-self: left;
-  text-align: left;
-}
 .zoom .text {
   /*z-index: 2;*/
   font-size: 18px;
@@ -329,6 +316,19 @@ padding:3px;
   height:1px;
   overflow:hidden;
   transition: opacity 0.25s;
+}
+.textQuote {
+  padding: 5px;
+  margin:5px;
+  max-width:180px;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: font-size 0.25s;
+  color:white;
+  text-shadow: 2px 2px 4px #333;
+  background-color: #5558;
+  align-self: left;
+  text-align: left;
 }
 .zoom .stat {
   visibility: visible;

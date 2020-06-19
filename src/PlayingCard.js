@@ -35,6 +35,11 @@ import gold from './imgs/gold.jpg';
 import influence from './imgs/influence.jpg';
 
 const cardImg = {
+  infCanaan: leavestreak,  
+  infJerusalem: leavestreak,
+  infRome: leavestreak,
+  infNineveh: leavestreak,
+  infBabylon: leavestreak,
   esther: esther,
   king: king,
   mordecai: mordecai,

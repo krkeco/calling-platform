@@ -31,7 +31,7 @@ const PlayerDataForm = (props) => {
             wakeup {
               name,
               info
-              infoDeck{name,quote, cost, gold, influence, abilities, politics, fear, faith, provision, img},
+              infoDeck{chrono,name,quote, cost, gold, influence, abilities, politics, fear, faith, provision, img},
               character{name,quote, cost, gold, influence, abilities, politics, fear, faith, provision, img},
             }
           }`;

@@ -120,13 +120,15 @@ const PlayerForm = ({
 
   let storyInfo = <div className={titleBar}></div>;
 
+  let story, storyDeck = null;
+  
   if (stories != null) {
+    story = stories.find(a => a.name == storyKey[playerCharacters[0]])
+    storyDeck = [...story.infoDeck]
+    storyDeck.sort((a,b)=> {return a.chrono - b.chrono});
     storyInfo = (
       <div>
-        {stories.map((story, index) => {
-          if (story.name == storyKey[playerCharacters[0]]) {
-            return (
-              <div className="flexRow">
+        <div className="flexRow">
                 <div className={titleBar}>
                   Story Cards:
                   <div
@@ -146,7 +148,7 @@ const PlayerForm = ({
                         player={-1}
                       />
                     </div>
-                    {story.infoDeck.map((card, ind) => {
+                    {storyDeck.map((card, ind) => {
                       return (
                         <div className="zoom">
                           <PlayingCard
@@ -174,9 +176,6 @@ const PlayerForm = ({
                 </div>
                 </div>
               </div>
-            );
-          }
-        })}
       </div>
     );
   }

@@ -66,6 +66,7 @@ const PlayerForm = ({
         <InputLabel id="player-count">Players</InputLabel>
         <div className="flexRow">
           {x == 0 ? (
+            <Tooltip arrow title="Character Info">
             <IconButton
               onClick={() => {
                 toggleTitleBar(playerCharacters[x]);
@@ -74,6 +75,7 @@ const PlayerForm = ({
             >
               <FontAwesomeIcon className="infoBtn" icon={icon} />
             </IconButton>
+            </Tooltip>
           ) : (
             <span />
           )}

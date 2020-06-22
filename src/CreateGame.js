@@ -25,6 +25,7 @@ const PlayerDataForm = (props) => {
   const [stories, setStories] = useState(null);
 
   const wakeServer = async () => {
+    console.log('waking server')
     if (!awake) {
       try {
         let query = `query {
@@ -55,11 +56,15 @@ const PlayerDataForm = (props) => {
           // console.log(awake.toString())
         }
       } catch (e) {
-        console.log(e);
+        console.log('wake server e:'+e);
+        setTimeout(()=>wakeServer(),5000);
       }
     }
   };
-  wakeServer();
+  
+  useEffect(() => {
+    wakeServer();
+  })
 
   const setGameType = (eNum) => {
     setType(eNum);

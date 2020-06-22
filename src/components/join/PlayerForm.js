@@ -44,7 +44,7 @@ const PlayerForm = ({
   const [icon, setIcon] = useState(faQuestion);
   const toggleTitleBar = (id) => {
     if (titleBar == 'storyHidden') {
-      setTitleBar('storyActive');
+      setTitleBar('');
       setIcon(faTimes);
     } else {
       setTitleBar('storyHidden');
@@ -129,9 +129,9 @@ const PlayerForm = ({
     storyDeck = [...story.infoDeck]
     storyDeck.sort((a,b)=> {return a.chrono - b.chrono});
     storyInfo = (
-      <div>
+      <div className={titleBar}>
         <div className="flexRow">
-                <div className={titleBar}>
+                <div className="storyActive storyMargin" >
                   Story Cards:
                   <div
                     className="flexCol"
@@ -165,7 +165,7 @@ const PlayerForm = ({
                     })}
                   </div>
                 </div>
-                <div className={titleBar} >
+                <div className="storyActive" >
                   {story.name}
                   <div style={{
                     alignItems: 'center',
@@ -183,9 +183,11 @@ const PlayerForm = ({
   }
 
   return (
-    <div className="flexRow" style={{overflow:'scroll', width:'100%', justifyContent:'center' }} >
+    <div className="flexRow" style={{overflow:'scroll', width:'100%' }} >
       {storyInfo}
+      <div className="flexRow storyMargin">
       {playerForm}
+      </div>
     </div>
   );
 };

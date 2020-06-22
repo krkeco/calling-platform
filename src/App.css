@@ -478,6 +478,17 @@ padding:3px;
   border-radius: 5px;
 }
 
+.storyMargin{
+  /*background-color:blue;*/
+  /*padding-left: 300px;*/
+  /*margin-left:600px;*/
+  margin:auto;
+}/*
+.storyActive .storyMargin{
+  padding-left:200px;
+
+}*/
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

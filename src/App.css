@@ -1,9 +1,11 @@
 .appContainer{
-  height:98vh;
+  height:auto;
+  /*width:auto;*/
   /*background-color:yellow;*/
-  overflow:hidden;
+  /*overflow:scroll;*/
   padding:1vh;
   background-image: url('./imgs/sample/blunes.jpg');
+  background-repeat: repeat;
 }
 
 .container {
@@ -42,21 +44,17 @@
 }
 .handContainer{
   height:120px;
-  width:500px;
+  width:auto;
 }
 .guiContainer{
   overflow:scroll;
   width:auto;
-  
-  min-height:200px;
-  overflow:scroll;
-  /*background-color: red;*/
+  height:auto;
+  /*overflow:scroll;*/
 }
 .location {
   min-width: 400px;
-  /*min-height: 250px;*/
   min-height:280px;
-  /*overflow:scroll;*/
   border-radius: 5px;
   padding: 5px;
   margin: 5px;

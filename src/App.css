@@ -1,5 +1,6 @@
 .appContainer{
   height:auto;
+  min-height:98vh;
   /*width:auto;*/
   /*background-color:yellow;*/
   /*overflow:scroll;*/

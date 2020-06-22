@@ -183,7 +183,7 @@ const PlayerForm = ({
   }
 
   return (
-    <div className="flexRow">
+    <div className="flexRow" style={{overflow:'scroll', width:'100%', justifyContent:'center' }} >
       {storyInfo}
       {playerForm}
     </div>

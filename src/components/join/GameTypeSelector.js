@@ -17,6 +17,10 @@ const GameTypeSelector = ({
   setJoinId,
   players,
   setPlayers,
+  setScrap,
+  scrap,
+  refresh,
+  setRefresh
 }) => {
   let gameTypeSelector = (
     <FormControl className="formControl">
@@ -35,7 +39,38 @@ const GameTypeSelector = ({
         <MenuItem value={playerTypeEnum.HOST}>Host Local Game</MenuItem>
         <MenuItem value={playerTypeEnum.LAN}>Host Net Game</MenuItem>
         <MenuItem value={playerTypeEnum.GUEST}>Join Net Game</MenuItem>
-      </Select>
+      </Select>      
+
+      <div className="flexRow">
+        
+        <Select
+          disabled={gameId > -1 ? true : false}
+          
+          id="scrap-select"
+          value={scrap}
+          onChange={(e) => {
+            setScrap(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={true}>Scrapping</MenuItem>
+          <MenuItem value={false}>No Scrapping</MenuItem>
+        </Select>
+
+
+        
+        <Select
+          disabled={gameId > -1 ? true : false}
+          value={refresh}
+          onChange={(e) => {
+            setRefresh(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={true}>Market Refresh</MenuItem>
+          <MenuItem value={false}>No Market Refresh</MenuItem>
+        </Select>
+      </div>
 
       {playerType == playerTypeEnum.GUEST ? (
         <TextField
@@ -67,6 +102,8 @@ const GameTypeSelector = ({
   return gameTypeSelector;
 };
 
+
+
 const PlayerCountToggle = ({ players, gameId, handleChange }) => {
   let playerCountToggle = (
     <FormControl className="formControl">
@@ -88,4 +125,6 @@ const PlayerCountToggle = ({ players, gameId, handleChange }) => {
   );
   return playerCountToggle;
 };
+
+
 export default GameTypeSelector;

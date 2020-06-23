@@ -10,6 +10,9 @@ import GameView from './GameView';
 import bg from './imgs/sample/comix.jpg';
 
 const App = () => {
+
+  const [scrap, setScrap] = useState(true);
+  const [refresh, setRefresh] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [gameId, setId] = useState(-1);
   const [locations, setLocationInfo] = useState([]);
@@ -66,9 +69,11 @@ const App = () => {
     appendLog([...gameLog, log]);
   }
 
-  const startGame = async (result, playerIndex) => {
+  const startGame = async (result, playerIndex, mScrap, mRefresh) => {
     // console.log('getting game '+result)
     setId(result);
+    setScrap(mScrap);
+    setRefresh(mRefresh);
 
     getGame(result);
     setPlayerIndex(playerIndex);
@@ -328,6 +333,8 @@ const App = () => {
   if (gameId > -1) {
     view = (
       <GameView
+        scrap={scrap}
+        refresh={refresh}
         useCookie={useCookie}
         gameId={gameId}
         gameLog={gameLog}

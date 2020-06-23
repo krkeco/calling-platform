@@ -13,6 +13,8 @@ const dev =
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'v';
 
 const PlayerDataForm = (props) => {
+  const [scrap, setScrap] = useState(true);
+  const [refresh, setRefresh] = useState(true);
   const [awake, setWoke] = useState(false);
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
@@ -126,7 +128,7 @@ const PlayerDataForm = (props) => {
       // setWaitRoom([...playerCharacters])
       if (response.data.waitingRoom.started) {
         console.log('starting game' + theId);
-        props.startGame(theId, myIndex);
+        props.startGame(theId, myIndex, scrap, refresh);
       } else {
         setWaitRoom([...response.data.waitingRoom.room]);
         setTimeout(() => {
@@ -271,6 +273,10 @@ const PlayerDataForm = (props) => {
         {packageJson.version}
       </div>
       <GameTypeSelector
+        setScrap={setScrap}
+        scrap={scrap}
+        setRefresh={setRefresh}
+        refresh={refresh}
         playerType={playerType}
         handleChange={handleChange}
         gameId={gameId}

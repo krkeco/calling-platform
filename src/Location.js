@@ -182,17 +182,17 @@ const Location = (props) => {
         {props.location.name != 'Jerusalem' ? (
           <div className="flexRow flexStart marketContainer">
             <div className="infoBtnBig flexCol">
-              <Tooltip arrow title="Refresh Market">
-                <Button
-                  size="large"
-                  color="secondary"
-                  variant="contained"
-                  aria-label="Refresh Market"
-                  onClick={() => refreshMarket()}
-                >
-                  <FontAwesomeIcon icon={faRecycle} />
-                </Button>
-              </Tooltip>
+            {props.refresh ? ( <Tooltip arrow title="Refresh Market">
+                            <Button
+                              size="large"
+                              color="secondary"
+                              variant="contained"
+                              aria-label="Refresh Market"
+                              onClick={() => refreshMarket()}
+                            >
+                              <FontAwesomeIcon icon={faRecycle} />
+                            </Button>
+                          </Tooltip>):(<span/>)}
 
               <div className="infoBtnBig" />
 
@@ -210,7 +210,7 @@ const Location = (props) => {
 
             {Market(props, buyCard, zoom)}
           </div>
-        ) : (
+        ) : (props.scrap ? (
           <div
             className="scrapPile flexCol center"
             style={scrapBg}
@@ -235,7 +235,7 @@ const Location = (props) => {
             }}
           >
             Scrap Pile
-          </div>
+          </div>):(<span/>)
         )}
         <div className="bfWrapper">{Battlefield(props)}</div>
       </div>

@@ -35,6 +35,8 @@ const GameView = (props) => {
     locations.map((location, index) => {
       locCards.push(
         <Location
+          scrap={props.scrap}
+          refresh={props.refresh}
           refreshMarket={props.refreshMarket}
           player={currentPlayer}
           players={players}

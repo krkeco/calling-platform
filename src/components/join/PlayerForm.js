@@ -173,7 +173,7 @@ const PlayerForm = ({
                     height: 350,
                   }}>
                   {story.info.map((info, ind) => {
-                    return <div style={{ margin: 5 }}>{info}</div>;
+                    return <div style={{ margin: 5,marginBottom:15 }}>{info}</div>;
                   })}
                 </div>
                 </div>

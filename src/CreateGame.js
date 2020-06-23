@@ -14,7 +14,7 @@ const dev =
 
 const PlayerDataForm = (props) => {
   const [scrap, setScrap] = useState(true);
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [awake, setWoke] = useState(false);
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);

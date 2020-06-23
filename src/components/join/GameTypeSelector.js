@@ -22,6 +22,7 @@ const GameTypeSelector = ({
   refresh,
   setRefresh
 }) => {
+
   let gameTypeSelector = (
     <FormControl className="formControl">
       <InputLabel id="player-type-label">Game Type</InputLabel>
@@ -43,9 +44,12 @@ const GameTypeSelector = ({
 
       <div className="flexRow">
         
+
+        <FormControl>
+        <InputLabel id="scrap-label">Scrapping</InputLabel>
         <Select
           disabled={gameId > -1 ? true : false}
-          
+          labelId="scrap-label"
           id="scrap-select"
           value={scrap}
           onChange={(e) => {
@@ -59,8 +63,12 @@ const GameTypeSelector = ({
 
 
         
+        </FormControl>
+        <FormControl>
+      <InputLabel id="refresh-label">Refresh</InputLabel>
         <Select
           disabled={gameId > -1 ? true : false}
+          labelId="refresh-label"
           value={refresh}
           onChange={(e) => {
             setRefresh(e.target.value);
@@ -70,6 +78,8 @@ const GameTypeSelector = ({
           <MenuItem value={true}>Market Refresh</MenuItem>
           <MenuItem value={false}>No Market Refresh</MenuItem>
         </Select>
+        </FormControl>
+
       </div>
 
       {playerType == playerTypeEnum.GUEST ? (

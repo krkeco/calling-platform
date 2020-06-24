@@ -2,10 +2,17 @@ TODO
 commit:::
 
 check:::
-something about vs faith as defender
 
 wip:::
+refresh and scrap on/off needs
+	api
+	no guest
 
+	bane is not working well...
+
+	update 
+		huge fish
+		priscilla
 
 rejoin game???
 someday: subscriptions

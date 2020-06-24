@@ -11,9 +11,10 @@ import esther from './imgs/esther/esther.jpg';
 
 import jonah from './imgs/jonah/jonah.jpg';
 import wicked from './imgs/jonah/warrior.png';
+import hugefish from './imgs/jonah/hugefish.png';
 
 import paul from './imgs/paul/paul.jpg';
-import priscilla from './imgs/paul/priscilla.jpg';
+import priscilla from './imgs/paul/priscilla.png';
 
 import joshua from './imgs/joshua/joshua.jpg';
 import spies from './imgs/joshua/spies.jpg';
@@ -55,7 +56,7 @@ const cardImg = {
   vine: greenbiz,
   scorching: firetree,
   ship: floralite,
-  hugefish: blunes,
+  hugefish: hugefish,
 
 
   paul: paul,

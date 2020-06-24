@@ -50,7 +50,8 @@
 .guiContainer{
   overflow:scroll;
   width:auto;
-  height:auto;
+  /*height:auto;*/
+  min-height: 400px;
   /*overflow:scroll;*/
 }
 .location {
@@ -344,6 +345,16 @@ padding:3px;
 }
 .gamelog {
   height: 200px;
+  border:1px solid black;
+  overflow: scroll;
+}
+.postGamelog{
+  background-color:#ddda;
+  position:fixed;
+  right:10px;
+  top:10px;
+  height: 400px;
+  width:300px;
   border:1px solid black;
   overflow: scroll;
 }

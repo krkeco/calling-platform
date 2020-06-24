@@ -25,7 +25,7 @@ const App = () => {
     '#eeff41',
   ]);
   const [cards, setCards] = useState([]);
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(1);
   const [playerCount, setPlayerCount] = useState(2);
   const [gameLog, appendLog] = useState([]);
   const [playerIndex, setPlayerIndex] = useState(-1);
@@ -63,72 +63,17 @@ const App = () => {
     playCard(cardId, loc);
   };
 
-  if (turn == 0) {
-    setTurn(1);
-    let log = 'Starting first Turn: 1';
-    appendLog([...gameLog, log]);
-  }
-
-
   const startGame = async (result, playerIndex, mScrap, mRefresh) => {
     // console.log('getting game '+result)
     setId(result);
     theGameId = result;
     setScrap(mScrap);
     setRefresh(mRefresh);
-
+    appendLog([])
     getGame(result, true);
     setPlayerIndex(playerIndex);
-    
-    if (playerIndex > -1) {
-      // setGameUpdateIntervalId(
-        // [
-        //   ...gameUpdateIntervalId, 
-          // setInterval(async () => getGame(result, true), 2000)
-        // ]);
-      // gameCycle(result,true);
-      // interval = setInterval(() => {
-      //   console.log('This will run every second!'+theGameId);
-      //   if(theGameId != -1){
-      //     getGame(theGameId,interval);
-      //   }else{
-      //     clearInterval(interval);
-      //   }
-      // }, 2000);
-    }
-
-      
+     
   };
-  // let interval;
-  // useEffect(() => {
-  //   // let id = gameId;
-  //     interval = setInterval(() => {
-  //       console.log('This will run every second!'+theGameId);
-  //       if(theGameId != -1){
-  //         getGame(theGameId,interval);
-  //       }
-  //     }, 2000);
-  //     return () => clearInterval(interval);
-  // }, []);
-
-  // const [seconds, setSeconds] = useState(0);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSeconds(seconds => seconds + 1);
-  //     // console.log('seconds:'+seconds)
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  // const gameCycle = async(result,online)=>{
-  //   console.log('gamecycle:'+result+'/'+gameId)
-  //   if(result == gameId || turn <= 1){
-  //     setTimeout(async () => {
-  //       gameCycle(gameId,online);
-  //       getGame(gameId, true)}, 2000)
-  //   }
-  // }
 
   //async await
   const getGame = async (id, recurse) => {
@@ -178,9 +123,11 @@ const App = () => {
             JSON.stringify(response.data),
         );
 
-        appendLog([...response.data.currentPlayer.log]);
-        let element = document.getElementById('gamelog');
-        element.scrollTop = element.scrollHeight;
+        if(!recurse){
+          appendLog([...response.data.currentPlayer.log]);
+          let element = document.getElementById('gamelog');
+          element.scrollTop = element.scrollHeight;
+        }
 
         setLocationInfo(response.data.locations);
 
@@ -190,19 +137,12 @@ const App = () => {
         // setCurrentPlayer(0);
         setCurrentPlayer(response.data.currentPlayer.nextPlayer);
         if (response.data.currentPlayer.winner != '') {
+          appendLog([...response.data.currentPlayer.log]);
           let winner = response.data.currentPlayer.winner;
           setWinner(winner);
         }else if(recurse){
           setTimeout(()=>getGame(id,recurse),2000);
         }
-        if (response.data.currentPlayer.loser != '') {
-          if (!loser) {
-            let loser = response.data.currentPlayer.loser;
-            alert('uh-oh: ' + loser + ' fell for their bane :(');
-            setLoser(true);
-          }
-        }
-        // setQuerying(false)
       } catch (e) {
         console.log(e);
         // setQuerying(false)
@@ -333,8 +273,7 @@ const App = () => {
     setPlayerInfo([]);
     setCurrentPlayer(0);
     setTurn(0);
-    // appendLog([]);
-    alert(winner + ' is the winner!!'+theGameId);
+    alert(winner + ' is the winner!!');
   };
 
   const nextPlayer = async () => {
@@ -387,7 +326,7 @@ const App = () => {
     }
   };
 
-  let view = <CreateGame playerBGs={playerBGs} startGame={startGame} />;
+  let view = <CreateGame gameLog={gameLog} playerBGs={playerBGs} startGame={startGame} />;
   if (gameId > -1) {
     view = (
       <GameView

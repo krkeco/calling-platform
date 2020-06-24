@@ -7,6 +7,34 @@ import { HAND, URL } from './constants.js';
 import { IconButton, Button } from '@material-ui/core';
 import Helper from './Helper';
 
+  const LogView = ({props})=>{
+    return (<div className="flexRow spaceBetween" style={{ width: 150 }}>
+          <div className="flexCol" style={{ width: 150 }}>
+            <div className="titlePlayer flexCol" style={{ width: 150 }}>
+              <div className="flexRow">Game: {props.gameId}</div>
+              <div className="flexRow">
+                Player:{' '}
+                <span style={{ color: props.playerBGs[props.currentPlayer] }}>
+                  {props.players && props.players[props.currentPlayer] ? (
+                    <span>
+                      {props.players[props.currentPlayer].name}-{props.players[props.currentPlayer].id}
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </span>
+              </div>
+            </div>
+            <div>Current Turn: {props.turn}</div>
+            <div id="gamelog" className="flexCol gamelog">
+              GAME LOG:
+              {props.gameLog.map((log, ind) => {
+                return <div className="logText">{log}</div>;
+              })}
+            </div>
+          </div>
+        </div>)
+  };
 const GameView = (props) => {
   let currentPlayer = props.currentPlayer;
   let players = props.players;
@@ -103,34 +131,6 @@ const GameView = (props) => {
     });
   }
 
-  const logView = (
-    <div className="flexRow spaceBetween" style={{ width: 150 }}>
-      <div className="flexCol" style={{ width: 150 }}>
-        <div className="titlePlayer flexCol" style={{ width: 150 }}>
-          <div className="flexRow">Game: {props.gameId}</div>
-          <div className="flexRow">
-            Player:{' '}
-            <span style={{ color: playerBGs[currentPlayer] }}>
-              {players && players[currentPlayer] ? (
-                <span>
-                  {players[currentPlayer].name}-{players[currentPlayer].id}
-                </span>
-              ) : (
-                ''
-              )}
-            </span>
-          </div>
-        </div>
-        <div>Current Turn: {props.turn}</div>
-        <div id="gamelog" className="flexCol gamelog">
-          GAME LOG:
-          {gameLog.map((log, ind) => {
-            return <div className="logText">{log}</div>;
-          })}
-        </div>
-      </div>
-    </div>
-  );
   const guiView = (
     <div className="flexCol" style={{ width: 100, margin: 5 }}>
       <Button
@@ -174,7 +174,7 @@ const GameView = (props) => {
       </div>
 
       <div className="flexRow spaceBetween guiContainer">
-        {logView}
+        <LogView props={props}/>
         <div className="flexRow handContainer">{Hand}</div>
         {guiView}
       </div>

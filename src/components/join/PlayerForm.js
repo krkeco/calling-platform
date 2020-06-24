@@ -14,11 +14,24 @@ import { IconButton, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+
+import babylon from '../../imgs/esther/babylon.jpg';
+import jerusalem from '../../imgs/jerusalem.jpg';
+import canaan from '../../imgs/sample/seaskull.jpg';
+import nineveh from '../../imgs/jonah/nineveh.jpg';
+import rome from '../../imgs/sample/fishflower.jpg';
+
+
 const cardImg = {
   Jonah: jonah,
   Esther: esther,
   Joshua: joshua,
   Paul: paul,
+  Babylon: babylon,
+  Jerusalem: jerusalem,
+  Canaan: canaan,
+  Nineveh: nineveh,
+  Rome: rome,
 };
 const storyKey = {
   Jonah: 'Nineveh',
@@ -167,11 +180,17 @@ const PlayerForm = ({
                 </div>
                 <div className="storyActive" >
                   {story.name}
+
                   <div style={{
                     alignItems: 'center',
                     overflow: 'scroll',
                     height: 350,
                   }}>
+                  <img
+                    draggable={false}
+                    style={{width:'100%',height:'auto'}}
+                    src={cardImg[story.name]}
+                  />
                   {story.info.map((info, ind) => {
                     return <div style={{ margin: 5,marginBottom:15 }}>{info}</div>;
                   })}

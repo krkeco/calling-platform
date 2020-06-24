@@ -44,9 +44,10 @@
 				"Influence Bonus: 2 gold",
 				"Special Rules:",
 				"Apostle: If Paul plays an apostle on a location and become influencer, Paul plants a church, otherwise Paul gains a wound",
-				"Fellowship: Apostles gain +1 INF for each church on a location they are played on (even if you are not Paul)",
+				"Fellowship: Apostles gain +1 INF for each church on a location they are played on (even if they don't belong to Paul)",
 				"Mob: +1 INF for every other card you already played here",
-"Angelic: If you are not the greatest influencer this turn, this location does not check influence this turn"
+				"Angelic: If you do not have the most influence on this location, it does not check influence this turn",
+				"Imprisonment: After the influence phase, return this and the most expensive card on this location (that does not belong to you) to their original market decks, does not affect starter cards"
 			],
 				"influence":3,
 				"abilities":["rome"],
@@ -82,7 +83,7 @@
 					"Influence Bonus: 3 Fear; +1 at T2 and +1 at T3",
 					"Special Rules:",
 					"Fear [X]: Reduce all other player's influence by [X] on this location",
-"Faith: If you have 0 influence on this location, you may use your faith instead.  Faith is not affected by fear."
+					"Faith: If you have 0 influence on this location, you may use your faith as influence.  Faith is not affected by fear."
 				],
 				"influence":3,
 				"abilities":[0],
@@ -428,10 +429,10 @@
 				"chrono":3,
 				"quote":"Destroy them, and I will give ten thousand talents of silver to the king’s administrators",
 				"quantity":4,
-					"cost": 2,
+					"cost": 3,
 					"gold":3,
 					"influence":0,
-					"politics":-2,
+					"politics":-1,
 					"abilities":["edict"]},
 			{"name":"Edict of Haman",
 				"img":"haman",

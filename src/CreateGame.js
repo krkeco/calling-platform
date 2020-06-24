@@ -274,6 +274,13 @@ const PlayerDataForm = (props) => {
         The Calling Online Deck Building Game {dev}
         {packageJson.version}
       </div>
+
+      {props.gameLog.length > 1 ? (<div id="gamelog" className="flexCol postGamelog">
+                    GAME LOG:
+                    {props.gameLog.map((log, ind) => {
+                      return <div className="logText">{log}</div>;
+                    })}
+                  </div>):(<span/>)}
       <GameTypeSelector
         setScrap={setScrap}
         scrap={scrap}

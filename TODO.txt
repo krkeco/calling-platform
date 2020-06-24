@@ -4,11 +4,6 @@ commit:::
 check:::
 
 wip:::
-refresh and scrap on/off needs
-	api
-	no guest
-
-	bane is not working well...
 
 rejoin game???
 someday: subscriptions

@@ -15,6 +15,7 @@ const App = () => {
   const [refresh, setRefresh] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [gameId, setId] = useState(-1);
+  let theGameId = gameId;//for some incredibly smart reason this works in setintervals while state does not
   const [locations, setLocationInfo] = useState([]);
   const [players, setPlayerInfo] = useState([]);
   const [playerBGs, setBGs] = useState([
@@ -30,8 +31,7 @@ const App = () => {
   const [playerIndex, setPlayerIndex] = useState(-1);
   // const [isQuerying, setQuerying] = useState(false);
   const [loser, setLoser] = useState(false);
-  const [gameUpdateIntervalId, setGameUpdateIntervalId] = useState(-1);
-
+  const [gameUpdateIntervalId, setGameUpdateIntervalId] = useState([]);
   const [useCookie, setCookie] = useCookies(['tcoTutorial']);
   // function onChange(newName) {
   // setCookie('tcoTutorial', true, { path: '/' });
@@ -69,35 +69,83 @@ const App = () => {
     appendLog([...gameLog, log]);
   }
 
+
   const startGame = async (result, playerIndex, mScrap, mRefresh) => {
     // console.log('getting game '+result)
     setId(result);
+    theGameId = result;
     setScrap(mScrap);
     setRefresh(mRefresh);
 
-    getGame(result);
+    getGame(result, true);
     setPlayerIndex(playerIndex);
+    
     if (playerIndex > -1) {
-      setGameUpdateIntervalId(
-        setInterval(async () => getGame(result, true), 2000),
-      );
+      // setGameUpdateIntervalId(
+        // [
+        //   ...gameUpdateIntervalId, 
+          // setInterval(async () => getGame(result, true), 2000)
+        // ]);
+      // gameCycle(result,true);
+      // interval = setInterval(() => {
+      //   console.log('This will run every second!'+theGameId);
+      //   if(theGameId != -1){
+      //     getGame(theGameId,interval);
+      //   }else{
+      //     clearInterval(interval);
+      //   }
+      // }, 2000);
     }
+
+      
   };
+  // let interval;
+  // useEffect(() => {
+  //   // let id = gameId;
+  //     interval = setInterval(() => {
+  //       console.log('This will run every second!'+theGameId);
+  //       if(theGameId != -1){
+  //         getGame(theGameId,interval);
+  //       }
+  //     }, 2000);
+  //     return () => clearInterval(interval);
+  // }, []);
+
+  // const [seconds, setSeconds] = useState(0);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSeconds(seconds => seconds + 1);
+  //     // console.log('seconds:'+seconds)
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  // const gameCycle = async(result,online)=>{
+  //   console.log('gamecycle:'+result+'/'+gameId)
+  //   if(result == gameId || turn <= 1){
+  //     setTimeout(async () => {
+  //       gameCycle(gameId,online);
+  //       getGame(gameId, true)}, 2000)
+  //   }
+  // }
 
   //async await
-  const getGame = async (id, online) => {
+  const getGame = async (id, recurse) => {
     // if(currentPlayer == playerIndex ){
-    if (online && playerIndex != currentPlayer + 1 && turn != 1) {
+    if (id == -1){//&& playerIndex != currentPlayer + 1 && turn != 1) {
       console.log(
         'no need to get game data on locals turn' +
           playerIndex +
           (currentPlayer + 1),
       );
+      // clearInterval(intervalId)
     } else {
       console.log('getting game data');
       try {
         let theId = parseInt(id);
         console.log('getting game from ' + theId);
+        
         let query = `query Game($theId: Int) {
           players(gameId: $theId){
             name, id,type, firstPlayer,
@@ -144,6 +192,8 @@ const App = () => {
         if (response.data.currentPlayer.winner != '') {
           let winner = response.data.currentPlayer.winner;
           setWinner(winner);
+        }else if(recurse){
+          setTimeout(()=>getGame(id,recurse),2000);
         }
         if (response.data.currentPlayer.loser != '') {
           if (!loser) {
@@ -268,15 +318,23 @@ const App = () => {
   const setWinner = (winner) => {
     setCookie('tcoTutorial', true, { path: '/' });
     // let newLog = [...gameLog];
-    alert(winner + ' is the winner!!');
     // newLog.push(winner + ' won the game!');
-    clearInterval(gameUpdateIntervalId);
+    // for(let x = 0; x < gameUpdateIntervalId.length; x++){
+    //   clearInterval(gameUpdateIntervalId[x]);
+    // }
+    // setGameUpdateIntervalId([]);
+    // clearInterval(interval);
     setId(-1);
+    theGameId=-1;
+    setCards([])
+    setPlayerIndex(-1)
+    setLoser(false);
     setLocationInfo([]);
     setPlayerInfo([]);
     setCurrentPlayer(0);
-    setTurn(1);
+    setTurn(0);
     // appendLog([]);
+    alert(winner + ' is the winner!!'+theGameId);
   };
 
   const nextPlayer = async () => {
@@ -353,7 +411,9 @@ const App = () => {
       />
     );
   }
-  return <div className="flexCol appContainer">{view}</div>;
+  return <div className="flexCol appContainer">
+      {view}
+    </div>;
 };
 
 export default App;

@@ -71,7 +71,7 @@ const GameView = (props) => {
   let Hand = [];
   if (players && players[currentPlayer]) {
     players[currentPlayer].hand.map((card, index) => {
-      console.log('hand:' + index);
+      // console.log('hand:' + index);
 
       Hand.push(
         <div

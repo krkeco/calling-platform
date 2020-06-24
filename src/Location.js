@@ -179,8 +179,35 @@ const Location = (props) => {
           </div>
         </div>
 
-        {props.location.name != 'Jerusalem' ? (
+        
           <div className="flexRow flexStart marketContainer">
+        {props.scrap && props.location.name == 'Jerusalem' ? (
+          <div
+            className="scrapPile flexCol center"
+            style={scrapBg}
+            onDragEnter={(e) => {
+              e.preventDefault();
+              setScrapBg({ backgroundColor: 'maroon' });
+            }}
+            onDragLeave={(e) => {
+              setDrag('none');
+              setScrapBg({});
+            }}
+            onDrop={(event) => {
+              setDrag('none');
+              setScrapBg({});
+              props.onDrop(event, -1);
+            }}
+            onDragOver={(event) => {
+              setDrag('scrap');
+
+              setScrapBg({ backgroundColor: 'maroon' });
+              props.onDragOver(event);
+            }}
+          >
+            Scrap Pile
+          </div>):(<span/>)
+        }
             <div className="infoBtnBig flexCol">
             {props.refresh ? ( <Tooltip arrow title="Refresh Market">
                             <Button
@@ -210,33 +237,6 @@ const Location = (props) => {
 
             {Market(props, buyCard, zoom)}
           </div>
-        ) : (props.scrap ? (
-          <div
-            className="scrapPile flexCol center"
-            style={scrapBg}
-            onDragEnter={(e) => {
-              e.preventDefault();
-              setScrapBg({ backgroundColor: 'maroon' });
-            }}
-            onDragLeave={(e) => {
-              setDrag('none');
-              setScrapBg({});
-            }}
-            onDrop={(event) => {
-              setDrag('none');
-              setScrapBg({});
-              props.onDrop(event, -1);
-            }}
-            onDragOver={(event) => {
-              setDrag('scrap');
-
-              setScrapBg({ backgroundColor: 'maroon' });
-              props.onDragOver(event);
-            }}
-          >
-            Scrap Pile
-          </div>):(<span/>)
-        )}
         <div className="bfWrapper">{Battlefield(props)}</div>
       </div>
     </div>

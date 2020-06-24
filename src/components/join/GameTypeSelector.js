@@ -42,9 +42,9 @@ const GameTypeSelector = ({
         <MenuItem value={playerTypeEnum.GUEST}>Join Net Game</MenuItem>
       </Select>      
 
+{playerTypeEnum.GUEST != playerType ? (
       <div className="flexRow">
         
-
         <FormControl>
         <InputLabel id="scrap-label">Scrapping</InputLabel>
         <Select
@@ -60,8 +60,6 @@ const GameTypeSelector = ({
           <MenuItem value={true}>Scrapping</MenuItem>
           <MenuItem value={false}>No Scrapping</MenuItem>
         </Select>
-
-
         
         </FormControl>
         <FormControl>
@@ -81,6 +79,7 @@ const GameTypeSelector = ({
         </FormControl>
 
       </div>
+      ):(<span/>)}
 
       {playerType == playerTypeEnum.GUEST ? (
         <TextField

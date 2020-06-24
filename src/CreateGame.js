@@ -107,7 +107,7 @@ const PlayerDataForm = (props) => {
       // let index = localPlayers
       console.log('index is ' + myIndex);
       let query = `query Game($theGame: Int) {
-        waitingRoom(gameId: $theGame){room, started}
+        waitingRoom(gameId: $theGame){room, started, scrapCard, refreshMarket}
       }`;
 
       let res = await fetch(URL, {
@@ -124,11 +124,13 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       console.log('response to gamestatus:' + JSON.stringify(response));
+      // setScrap(response.data.waitingRoom.scrapCard)
+      // setRefresh(response.data.waitingRoom.refreshMarket)
       // setGameId(response.data.newGame)
       // setWaitRoom([...playerCharacters])
       if (response.data.waitingRoom.started) {
         console.log('starting game' + theId);
-        props.startGame(theId, myIndex, scrap, refresh);
+        props.startGame(theId, myIndex, response.data.waitingRoom.scrapCard, response.data.waitingRoom.refreshMarket);
       } else {
         setWaitRoom([...response.data.waitingRoom.room]);
         setTimeout(() => {
@@ -143,8 +145,8 @@ const PlayerDataForm = (props) => {
 
   const createGame = async () => {
     try {
-      let query = `query NewGame($playerCharacters: [String], $playerCharacterType: [String]) {
-        newGame(players: $playerCharacters, types: $playerCharacterType)
+      let query = `query NewGame($playerCharacters: [String], $playerCharacterType: [String], $refresh: Boolean,$scrap: Boolean) {
+        newGame(players: $playerCharacters, types: $playerCharacterType, refreshMarket: $refresh, scrapCard: $scrap)
       }`;
 
       let res = await fetch(URL, {
@@ -155,7 +157,7 @@ const PlayerDataForm = (props) => {
         },
         body: JSON.stringify({
           query,
-          variables: { playerCharacters, playerCharacterType },
+          variables: { playerCharacters, playerCharacterType, refresh, scrap },
         }),
       });
 

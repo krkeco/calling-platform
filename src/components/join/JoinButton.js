@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { URL, playerTypeEnum } from '../../constants';
-import loader from '../../imgs/loading.gif';
 
 const JoinButton = ({
   awake,

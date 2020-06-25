@@ -7,7 +7,7 @@ import './App.css';
 import PlayerForm from './components/join/PlayerForm';
 import GameTypeSelector from './components/join/GameTypeSelector';
 import ActionButton from './components/join/JoinButton';
-import loader from './imgs/loading.gif';
+
 
 const dev =
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'v';

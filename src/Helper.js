@@ -37,12 +37,12 @@ const Helper = ({ useCookie }) => {
               ->Win by completing your calling, or influencing 3 locations
             </div>
             <div className="hintText">
-              ->Your deck starts with 10 cards: 5 gold, 4 influence, 1 character
+              ->Your deck starts with 8 cards: 5 gold, 2 influence, 1 character
             </div>
 
             <div className="hintText">
-              ->Every turn you draw 5 cards from your deck. At the end of the
-              turn, discard all cards. Shuffle your discard into your deck when
+              ->Every turn you draw 4 cards from your deck. At the end of the
+              turn, discard all your cards (even the ones you didn't play). Shuffle your discard into your deck when
               you run out of cards to draw
             </div>
 
@@ -74,25 +74,21 @@ const Helper = ({ useCookie }) => {
               ->Play cards with gold to acquire cards from the market
             </div>
             <div className="hintText">
-              ->Click on the zoom icon to zoom in on the market cards- The $cost
+              ->Click on the zoom icon to zoom in on market or battlefield cards- The $cost
               and name are on the first line, what the card does is below that
-            </div>
-            <div className="hintText">
-              ->You can also zoom in on the battlefield by clicking inside it,
-              or click a card in your hand to zoom in on it.
             </div>
             <div className="hintText">
               ->If you have enough gold on a location you may click on a card to
               acquire it- it goes into your discard pile for now
             </div>
             <div className="hintText">
-              ->It's a good idea to acquire cards with 2+ gold early on so you
-              can acquire more powerful cards
+              ->It's a good idea to acquire cards with 2+ gold so you
+              can acquire more powerful cards, but keep an eye on what your opponents buy
             </div>
             <div className="hintText">
               ->After the first turn, you can spend 1 gold to refresh the market
               to remove the old market cards and get 3 random cards from the
-              market deck
+              market deck if you have that option selected in createGame
             </div>
 
             <div className="hintText">
@@ -106,14 +102,13 @@ const Helper = ({ useCookie }) => {
               ->Play cards with Influence to contest locations
             </div>
             <div className="hintText">
-              ->At the end of the turn compare influences. the player with the
-              most will subtract the second most from their influence. if the
-              remaining influence is more than the location's influence, the
-              player becomes the influencer
+              ->At the end of the turn locations compare influences. 
+              At each location, the player with the highest influence subtracts the influence of the player with the second highest influence
+              if the player still has more influence than the location (usually 3), they become influencer
             </div>
 
             <div className="hintText">
-              -> You will always need at least 5 influence to capture a location
+              -> You will always need at least 4 influence to capture a location
             </div>
 
             <div className="hintText">

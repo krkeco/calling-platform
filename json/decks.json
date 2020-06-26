@@ -11,7 +11,7 @@
 				"Influence cards: If you influence a location, you get a special influence card. Influence cards don't go to your discard at the end of turn, but you automatically draw them if you influence locations",
 "Scrapping Cards: Dragging a card into the scrap pile will remove it from your deck for the rest of the game.  This is helpful when you scrap influence and gold so you can get better cards more often"
 			],
-			"influence":2,
+			"influence":3,
 			"abilities":["jerusalem"],
 			"card":{
 				"name":"Jerusalem Influence",
@@ -49,7 +49,7 @@
 				"Angelic: If you do not have the most influence on this location, it does not check influence this turn",
 				"Imprisonment: AFTER the influence phase, return this and the most expensive card on this location (that does not belong to you) to their original market decks, does not affect starter cards"
 			],
-				"influence":2,
+				"influence":3,
 				"abilities":["rome"],
 			"card":{
 				"name":"Romes's Influence",
@@ -85,7 +85,7 @@
 					"Fear [X]: Reduce all other player's influence by [X] on this location",
 					"Faith: If you have 0 influence on this location, you may use your faith as influence.  Faith is not affected by fear."
 				],
-				"influence":2,
+				"influence":3,
 				"abilities":[0],
 			"card":{
 				"name":"Canaan's Influence",
@@ -120,7 +120,7 @@
 					"Special Rules:",
 					"Provision [X]: This card draws and plays [X] cards on its location"
 				],
-				"influence":2,
+				"influence":3,
 				"abilities":["nineveh"],
 			"card":{
 				"name":"Nineveh's Influence",
@@ -155,7 +155,7 @@
 					"Mordecai: copy the card with the highest cost you have already played on this location-- character/starter card costs are 0",
 					"Xerxe's Edict: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
 				],
-				"influence":2,
+				"influence":3,
 				"abilities":["babylon"],
 				"card":{
 					"name":"Babylon's Edict",

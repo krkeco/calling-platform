@@ -4,6 +4,7 @@ commit:::
 check:::
 
 wip:::
+update images to jpg for faster loadtime
 
 rejoin game???
 someday: subscriptions

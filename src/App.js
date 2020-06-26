@@ -307,7 +307,7 @@ const App = () => {
 
       if (response.data.nextPlayer.winner) {
         let winner = response.data.nextPlayer.winner;
-        setWinner(winner);
+        // setWinner(winner);
       } else {
         setCurrentPlayer(response.data.nextPlayer.nextPlayer);
 

@@ -204,7 +204,7 @@ const PlayingCard = (props) => {
             )}
             {props.card.politics ? (
               <div className="text stat">
-                {props.card.politics} P<span className="stat">olitics</span>
+                {props.card.politics} Int<span className="stat">egrity</span>
               </div>
             ) : (
               <span />

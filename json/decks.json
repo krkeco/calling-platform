@@ -37,8 +37,8 @@
 			"location":{
 				"name":"Rome",
 			"info":[
-				"Intro:  The story of Paul goes around the world, and ultimately ends up in Rome (the center of the world then).  Paul is one of the most impactful individuals in the new testament, following Christ-- and leading the Gentiles (most of us) to Christ.  He does this by evangalizing and church planting, and so his story is about planting churches throughout the lands to anywhere he can, all the while being opposed by Jews and Pagans alike.",
 				"Story: Paul is called to be an apostle and lead others to Christ.  In his ministry he works alongside [Barnabas], [Priscilla and Aquila], and [Timothy] writing numerous [Epistles] to the churches they plant, as well as being assaulted and worshipped by [Mob]s on numerous occassions. He is eventually [imprisoned] (multiple times).  While in prison he [Exhorts] the church helping them stay on course, is caught in a [huge storm] and shipwrecked but saved by [Angelic protection]",
+				"Theme: Paul's journey is all about following Christ.  He does this by evangalizing, church planting, and finding fellowship. He (and other Christians) are called to go out and make disciples, not just as a number, but in order to fellowship.",
 				"Calling: Plant 7 churches to win",
 				"Bane: If Paul fails to plant a church he gains a wound, if he has 7 wounds he loses the game",
 				"Influence Bonus: 2 gold",
@@ -76,8 +76,8 @@
 			"location":{
 				"name":"Canaan",
 				"info":[
-					"Intro: Joshua is the leader called to enter the promised land.  He has been redeemed from slavery in Egypt and leads God's people to the land of milk and honey promised to his ancestors- Canaan.  He must overcome the fear that the land eminates and fight with faith not relying on his own power, but Gods.",
 					"Story: Joshua sees the land filled with [milk and honey] and has himself made a [faithful report] of it but other [spies] caused fear in the Israelite camp due to the rumors of giants [nephilim] and [armies as vast as the sand on the sea]- they must choose whether to follow God faithfully as promised on [Mt Gerazim] or recant their covanent with Him and suffer the curses of [Mt Ebal]",
+					"Theme: Joshua's story is a story of relying on faith to overcome the fear of the world.  Fear is a powerful weapon against the proud and those with power, but those who rely on faith do not need to fear the wrath of the world.",
 					"Calling: Every time Joshua plays enough influence to become influencer of Canaan (even if he already is) it will go up 1 tier.  When it reaches Tier 4, Joshua wins",
 					"Bane: If there is 13 more fear than faith on Canaan, Joshua loses.",
 					"Influence Bonus: 3 Fear; +1 at T2 and +1 at T3",
@@ -112,10 +112,10 @@
 			"location":{
 				"name":"Nineveh",
 				"info":[
-					"Intro: Called to save a people so wicked he would rather die than save them.  Jonah must rely on God's provision to exhort the people of Nineveh in order to lead them to repentence without rebelling and becoming so hardened himself that he gives up.",
 					"Story: Initially he leaves for [Tarshish] in order to escape God's call, but God provides a [huge fish] to bring him back to his mission to the [foolish] and [wicked] people of Nineveh.  He eventually exhorts the city into repentence, but does not himself repent of his hardness until he has seen his [leafy plant] destroyed by a worm and [scorching east wind] and God explains how much more the people of Nineveh are worth and should be provided for",
+					"Theme: Jonah is given provision by God constantly.  Even in the throws of death, consumed by the sea, God provides for him.  Even in the darkest depravity of the human condition, God wishes to provide a way out (through repentence) to the Ninevites as well.",
 					"Calling: Jonah must play 5 Ninevites on Nineveh AND be influencer of Nineveh to win",
-					"Bane: Hardened Heart- If Jonah is played (either by the player or provision) 3 times NOT on Nineveh he loses the game",
+					"Bane: Hardened Heart- If Jonah is played (either by the player or provision) 3 times on a location other than Nineveh he loses the game",
 					"Influence Bonus: Provision 1",
 					"Special Rules:",
 					"Provision [X]: This card draws and plays [X] cards on its location"
@@ -145,27 +145,27 @@
 			"location":{
 				"name":"Babylon",
 				"info":[
-					"Intro: Esther dumped into the middle of a political war where she must choose between her own neck and the lives her people-- vying for the kings favor and opposing those who would destroy her.",
-					"Story: Esther is adopted by her uncle [Mordecai] who saves the kings life and opposes a proud man [Haman] who looks to destroy all the Jews through a [corrupt] bribe to the [king].  Numerous political agents/[Eunich]s work with Esther to gain the favor of the very fickle [king] and prevent the [annihilation] of the people",
+					"Story: Esther is adopted by her uncle [Mordecai] who saves the kings life (which goes unnoticed for quite some time) and opposes a proud man [Haman] who looks to destroy her people through a [corrupt] bribe to the [king].  Numerous [King's servants] work with Esther to gain the favor of the very fickle [king], reveal Haman's treachery, and prevent the [annihilation] of God's people",
+					"Theme: Esther is a story of reaping what you sow.  Those who work with integrity and make good on their promises will be rewarded by God in heaven.",
 					"Calling: Esther must have 18 influence more than any other player on Babylon to win",
-					"Bane: If there are 4 edicts played on babylon in one turn and Esther is not the influencer there, she loses",
-					"Influence Bonus: 2 influence, edict",
+					"Bane: If there are 4 promises played on babylon in one turn and Esther is not the influencer there, she loses",
+					"Influence Bonus: 2 influence, Promise",
 					"Special Rules:",
-					"Politics: Add up your total politics on this location and multiply it by the total number of edicts on the location.  Add that to your influence.",
+					"Integrity: Add up your total Integrity on this location and multiply it by the total number of Promises on the location.  Add that to your influence.",
 					"Mordecai: copy the card with the highest cost you have already played on this location-- character/starter card costs are 0",
-					"Xerxe's Edict: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
+					"Xerxe's promise: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
 				],
 				"influence":3,
 				"abilities":["babylon"],
 				"card":{
-					"name":"Babylon's Edict",
+					"name":"Babylon's promise",
 					"img":"infBabylon",
 				"quote":"",
 					"cost": 0,
 					"gold":0,
 					"draw":0,
 					"influence":2,
-					"abilities":["scrap","edict"]
+					"abilities":["scrap","promise"]
 			}}
 		}
 	},
@@ -414,17 +414,7 @@
 					"abilities":[]}
 		],
 		"esther":[
-			{"name":"Eunich",
-				"img":"eunich",
-				"chrono":4,
-				"quote":"Relief and deliverance for these people will arise.",
-				"quantity":4,
-				"cost": 2,
-				"gold":0,
-				"influence":4,
-				"politics":-1,
-				"abilities":[]},
-			{"name":"Edict: Corruption",
+			{"name":"Corruption",
 				"img":"taxes",
 				"chrono":3,
 				"quote":"Destroy them, and I will give ten thousand talents of silver to the king’s administrators",
@@ -433,18 +423,28 @@
 					"gold":3,
 					"influence":0,
 					"politics":-1,
-					"abilities":["edict"]},
-			{"name":"Edict of Haman",
+					"abilities":["promise"]},
+			{"name":"Haman's Promise",
 				"img":"haman",
 				"chrono":2,
 				"quote":"Who is he? Where is he—the man who has dared to do such a thing?",
 				"quantity":3,
-				 	"cost": 3,
+				 	"cost": 2,
 				 	"gold":0,
-				 	"influence":2,
-				 	"politics":1,
-				 	"abilities":["edict"]},
-			{"name":"Edict of Mordecai",
+				 	"influence":5,
+				 	"politics":-1,
+				 	"abilities":["promise"]},
+			{"name":"King's Servant",
+				"img":"eunich",
+				"chrono":4,
+				"quote":"Relief and deliverance for these people will arise.",
+				"quantity":4,
+				"cost": 3,
+				"gold":0,
+				"influence":3,
+				"politics":1,
+				"abilities":[]},
+			{"name":"Mordecai's Promise",
 				"img":"mordecai",
 				"chrono":1,
 				"quote":"What should be done for the man the king delights to honor?",
@@ -453,7 +453,7 @@
 					"gold":0,
 					"influence":0,
 					"abilities":["mordecai"]},
-			{"name":"Edict of Xerxes",
+			{"name":"Promise of Xerxes",
 				"chrono":5,
 				"img":"king",
 				"quote":"What is your request? Even up to half the kingdom, it will be given you.",
@@ -461,8 +461,8 @@
 					"cost": 4,
 					"gold":0,
 					"influence":0,
-					"abilities":["xerxes","edict"]},
-			{"name":"Edict of Annihilation",
+					"abilities":["xerxes","promise"]},
+			{"name":"Annihilation",
 				"chrono":6,
 				"img":"annihilation",
 				"quote":"Destroy, kill, and annihilate!",
@@ -471,7 +471,7 @@
 					"gold":0,
 					"influence":15,
 					"politics":-2,
-					"abilities":["edict"]}
+					"abilities":["promise"]}
 		]
 
 

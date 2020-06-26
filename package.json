@@ -1,6 +1,6 @@
 {
   "name": "calling-platform",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",

@@ -14,6 +14,7 @@ const dev =
 
 const PlayerDataForm = (props) => {
   const [scrap, setScrap] = useState(true);
+  const [bane, setBane] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [awake, setWoke] = useState(false);
   const [players, setPlayers] = useState(2);
@@ -145,8 +146,8 @@ const PlayerDataForm = (props) => {
 
   const createGame = async () => {
     try {
-      let query = `query NewGame($playerCharacters: [String], $playerCharacterType: [String], $refresh: Boolean,$scrap: Boolean) {
-        newGame(players: $playerCharacters, types: $playerCharacterType, refreshMarket: $refresh, scrapCard: $scrap)
+      let query = `query NewGame($playerCharacters: [String], $playerCharacterType: [String], $refresh: Boolean,$scrap: Boolean,$bane: Boolean) {
+        newGame(players: $playerCharacters, types: $playerCharacterType, refreshMarket: $refresh, scrapCard: $scrap, banes: $bane)
       }`;
 
       let res = await fetch(URL, {
@@ -157,7 +158,7 @@ const PlayerDataForm = (props) => {
         },
         body: JSON.stringify({
           query,
-          variables: { playerCharacters, playerCharacterType, refresh, scrap },
+          variables: { playerCharacters, playerCharacterType, refresh, scrap, bane },
         }),
       });
 
@@ -284,6 +285,8 @@ const PlayerDataForm = (props) => {
       <GameTypeSelector
         setScrap={setScrap}
         scrap={scrap}
+        setBane={setBane}
+        bane={bane}
         setRefresh={setRefresh}
         refresh={refresh}
         playerType={playerType}

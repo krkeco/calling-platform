@@ -19,6 +19,8 @@ const GameTypeSelector = ({
   setPlayers,
   setScrap,
   scrap,
+  bane,
+  setBane,
   refresh,
   setRefresh
 }) => {
@@ -43,7 +45,7 @@ const GameTypeSelector = ({
       </Select>      
 
 {playerTypeEnum.GUEST != playerType ? (
-      <div className="flexRow">
+      <div className="flexCol">
         
         <FormControl>
         <InputLabel id="scrap-label">Scrapping</InputLabel>
@@ -75,6 +77,21 @@ const GameTypeSelector = ({
         >
           <MenuItem value={true}>Market Refresh</MenuItem>
           <MenuItem value={false}>No Market Refresh</MenuItem>
+        </Select>
+        </FormControl>        
+        <FormControl>
+          <InputLabel id="bane-label">Banes</InputLabel>
+            <Select
+              disabled={gameId > -1 ? true : false}
+              labelId="refresh-label"
+              value={bane}
+              onChange={(e) => {
+                setBane(e.target.value);
+              }}
+              className="dropdownBox"
+            >
+              <MenuItem value={true}>Banes!</MenuItem>
+              <MenuItem value={false}>No Banes</MenuItem>
         </Select>
         </FormControl>
 

@@ -9,7 +9,7 @@
 				"Influence Bonus: 1 gold 2 influence",
 				"Special Rules:",
 				"Influence cards: If you influence a location, you get a special influence card. Influence cards don't go to your discard at the end of turn, but you automatically draw them if you influence locations",
-"Scrapping Cards: Dragging a card into the scrap pile will remove it from your deck for the rest of the game.  This is helpful when you scrap influence and gold so you can get better cards more often"
+				"Scrapping Cards: Dragging a card into the scrap pile will remove it from your deck for the rest of the game.  This is helpful when you scrap influence and gold so you can get better cards more often"
 			],
 			"influence":3,
 			"abilities":["jerusalem"],
@@ -39,12 +39,12 @@
 			"info":[
 				"Story: Paul is called to be an apostle and lead others to Christ.  In his ministry he works alongside [Barnabas], [Priscilla and Aquila], and [Timothy] writing numerous [Epistles] to the churches they plant, as well as being assaulted and worshipped by [Mob]s on numerous occassions. He is eventually [imprisoned] (multiple times).  While in prison he [Exhorts] the church helping them stay on course, is caught in a [huge storm] and shipwrecked but saved by [Angelic protection]",
 				"Theme: Paul's journey is all about following Christ.  He does this by evangalizing, church planting, and finding fellowship. He (and other Christians) are called to go out and make disciples, not just as a number, but in order to fellowship.",
-				"Calling: Plant 7 churches to win",
-				"Bane: If Paul fails to plant a church he gains a wound, if he has 7 wounds he loses the game",
 				"Influence Bonus: 2 gold",
+				"Calling: Plant 5 churches (read Church Plant)",
+				"Bane: Get 6 wounds",
+				"Church Plant: If the Paul player plays an apostle on a location and become influencer; Paul plants a church- otherwise Paul gains a wound",
 				"Special Rules:",
-				"Apostle: If Paul plays an apostle on a location and become influencer; Paul plants a church- otherwise Paul gains a wound",
-				"Fellowship: Apostles gain +1 INF for each church on a location they are played on (even if the apostle doesn't belong to Paul)",
+				"Apostle: Apostles gain +1 INF for each church on a location they are played on (even if the apostle doesn't belong to Paul)",
 				"Mob: +1 INF for every other card you already played here",
 				"Angelic: If you do not have the most influence on this location, it does not check influence this turn",
 				"Imprisonment: AFTER the influence phase, return this and the most expensive card on this location (that does not belong to you) to their original market decks, does not affect starter cards"
@@ -78,9 +78,10 @@
 				"info":[
 					"Story: Joshua sees the land filled with [milk and honey] and has himself made a [faithful report] of it but other [spies] caused fear in the Israelite camp due to the rumors of giants [nephilim] and [armies as vast as the sand on the sea]- they must choose whether to follow God faithfully as promised on [Mt Gerazim] or recant their covanent with Him and suffer the curses of [Mt Ebal]",
 					"Theme: Joshua's story is a story of relying on faith to overcome the fear of the world.  Fear is a powerful weapon against the proud and those with power, but those who rely on faith do not need to fear the wrath of the world.",
-					"Calling: Every time Joshua plays enough influence to become influencer of Canaan (even if he already is) it will go up 1 tier.  When it reaches Tier 4, Joshua wins",
-					"Bane: If there is 13 more fear than faith on Canaan, Joshua loses.",
-					"Influence Bonus: 3 Fear; +1 at T2 and +1 at T3",
+					"Influence Bonus: 2 Fear; +2 at T2",
+					"Calling: Canaan becomes Tier 3 (read Promised Land)",
+					"Bane: 9 more fear than faith on Canaan",
+					"Promised Land: Every time the player Joshua would become influencer of Canaan (even if the player already is) it goes up one tier",
 					"Special Rules:",
 					"Fear [X]: Reduce all other player's influence by [X] on this location",
 					"Faith: If you have 0 influence on this location, you may use your faith as influence.  Faith is not affected by fear."
@@ -114,9 +115,10 @@
 				"info":[
 					"Story: Initially he leaves for [Tarshish] in order to escape God's call, but God provides a [huge fish] to bring him back to his mission to the [foolish] and [wicked] people of Nineveh.  He eventually exhorts the city into repentence, but does not himself repent of his hardness until he has seen his [leafy plant] destroyed by a worm and [scorching east wind] and God explains how much more the people of Nineveh are worth and should be provided for",
 					"Theme: Jonah is given provision by God constantly.  Even in the throws of death, consumed by the sea, God provides for him.  Even in the darkest depravity of the human condition, God wishes to provide a way out (through repentence) to the Ninevites as well.",
-					"Calling: Jonah must play 5 Ninevites on Nineveh AND be influencer of Nineveh to win",
-					"Bane: Hardened Heart- If Jonah is played (either by the player or provision) 3 times on a location other than Nineveh he loses the game",
 					"Influence Bonus: Provision 1",
+					"Calling: Play 4 Ninevites on Nineveh AND be influencer of Nineveh",
+					"Bane: Get 2 Hardened (read Hardened heart)",
+					"Hardened Heart: If Jonah is on any location besides Nineveh, add 1 hardened to Nineveh",
 					"Special Rules:",
 					"Provision [X]: This card draws and plays [X] cards on its location"
 				],
@@ -147,25 +149,26 @@
 				"info":[
 					"Story: Esther is adopted by her uncle [Mordecai] who saves the kings life (which goes unnoticed for quite some time) and opposes a proud man [Haman] who looks to destroy her people through a [corrupt] bribe to the [king].  Numerous [King's servants] work with Esther to gain the favor of the very fickle [king], reveal Haman's treachery, and prevent the [annihilation] of God's people",
 					"Theme: Esther is a story of reaping what you sow.  Those who work with integrity and make good on their promises will be rewarded by God in heaven.",
-					"Calling: Esther must have 18 influence more than any other player on Babylon to win",
-					"Bane: If there are 4 promises played on babylon in one turn and Esther is not the influencer there, she loses",
-					"Influence Bonus: 2 influence, Promise",
+					"Calling: Play 14 influence more than any other player on Babylon",
+					"Bane: Have negative influence on Babylon",
+					"Influence Bonus: 2 influence, endeavor",
 					"Special Rules:",
-					"Integrity: Add up your total Integrity on this location and multiply it by the total number of Promises on the location.  Add that to your influence.",
+					"endeavor: An endeavor in it self does nothing, but depending on how much integrity you have on a location it can give you a boost of influence",
+					"Integrity: Add up your total Integrity on a location and multiply it by the number of endeavors on the location.  Add that to your influence.",
 					"Mordecai: copy the card with the highest cost you have already played on this location-- character/starter card costs are 0",
-					"Xerxe's promise: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
+					"Xerxe's Vow: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
 				],
 				"influence":3,
 				"abilities":["babylon"],
 				"card":{
-					"name":"Babylon's promise",
+					"name":"Babylon's endeavor",
 					"img":"infBabylon",
 				"quote":"",
 					"cost": 0,
 					"gold":0,
 					"draw":0,
 					"influence":2,
-					"abilities":["scrap","promise"]
+					"abilities":["scrap","endeavor"]
 			}}
 		}
 	},
@@ -423,8 +426,8 @@
 					"gold":3,
 					"influence":0,
 					"politics":-1,
-					"abilities":["promise"]},
-			{"name":"Haman's Promise",
+					"abilities":["endeavor"]},
+			{"name":"Haman's Endeavor",
 				"img":"haman",
 				"chrono":2,
 				"quote":"Who is he? Where is he—the man who has dared to do such a thing?",
@@ -433,7 +436,7 @@
 				 	"gold":0,
 				 	"influence":5,
 				 	"politics":-1,
-				 	"abilities":["promise"]},
+				 	"abilities":["endeavor"]},
 			{"name":"King's Servant",
 				"img":"eunich",
 				"chrono":4,
@@ -444,7 +447,7 @@
 				"influence":3,
 				"politics":1,
 				"abilities":[]},
-			{"name":"Mordecai's Promise",
+			{"name":"Mordecai's Blessing",
 				"img":"mordecai",
 				"chrono":1,
 				"quote":"What should be done for the man the king delights to honor?",
@@ -453,7 +456,7 @@
 					"gold":0,
 					"influence":0,
 					"abilities":["mordecai"]},
-			{"name":"Promise of Xerxes",
+			{"name":"Xerxes Command",
 				"chrono":5,
 				"img":"king",
 				"quote":"What is your request? Even up to half the kingdom, it will be given you.",
@@ -461,7 +464,7 @@
 					"cost": 4,
 					"gold":0,
 					"influence":0,
-					"abilities":["xerxes","promise"]},
+					"abilities":["xerxes","endeavor"]},
 			{"name":"Annihilation",
 				"chrono":6,
 				"img":"annihilation",
@@ -471,7 +474,7 @@
 					"gold":0,
 					"influence":15,
 					"politics":-2,
-					"abilities":["promise"]}
+					"abilities":["endeavor"]}
 		]
 
 

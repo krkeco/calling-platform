@@ -10,7 +10,8 @@ import eunich from './imgs/esther/eunich.jpg';
 import esther from './imgs/esther/esther.jpg';
 
 import jonah from './imgs/jonah/jonah.jpg';
-import wicked from './imgs/jonah/warrior.jpg';
+import wicked from './imgs/jonah/prince.jpg';
+import foolish from './imgs/jonah/princess.jpg';
 import hugefish from './imgs/jonah/hugefish.jpg';
 import vine from './imgs/jonah/vine.jpg';
 import scorching from './imgs/jonah/SEW.jpg';
@@ -53,7 +54,7 @@ const cardImg = {
   eunich: eunich,
 
   jonah: jonah,
-  foolish: bedazzlejewel,
+  foolish: foolish,
   wicked: wicked,
   vine: vine,
   scorching: scorching,

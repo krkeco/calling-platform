@@ -245,15 +245,16 @@ const PlayerDataForm = (props) => {
       });
 
       let response = await res.json();
-      let count = response.data.joinGame.length - 1;
+      let specId = 5;
+      // let count = response.data.joinGame.length - 1;
       setGameId(theGame);
-      console.log('my index should be ' + count);
-      setLocalPlayers(count);
+      // console.log('my index should be ' + count);
+      // setLocalPlayers(count);
 
-      setWaitRoom([...response.data.joinGame]);
+      // setWaitRoom([...response.data.joinGame]);
       console.log('response to newgame:' + JSON.stringify(response));
       // props.startGame(response.data.game)
-      queryGameStatus(5000, theGame, 5);
+      queryGameStatus(5000, theGame, specId);
     } catch (e) {
       console.log(e);
     }

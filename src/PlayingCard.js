@@ -16,7 +16,7 @@ import vine from './imgs/jonah/vine.jpg';
 import scorching from './imgs/jonah/SEW.jpg';
 
 import paul from './imgs/paul/paul.jpg';
-import priscilla from './imgs/paul/priscilla.png';
+import priscilla from './imgs/paul/priscilla.jpg';
 
 import joshua from './imgs/joshua/joshua.jpg';
 import spies from './imgs/joshua/spies.jpg';

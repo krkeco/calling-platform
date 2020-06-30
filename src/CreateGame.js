@@ -89,15 +89,15 @@ const PlayerDataForm = (props) => {
 
   const handleChange = (value) => {
     if(value == 0){
-      setPlayers(value);
+      // setPlayers(value);
       // let newCharacters = [];
       // let reducedChars = newCharacters.slice(0, value);
-      setCharacter([]);
+      // setCharacter([]);
 
       // let newTypes = [...playerCharacterType];
       // let reducedTypes = newTypes.slice(0, value);
       // console.log('newchar:' + reducedTypes);
-      setCharacterType([]);
+      // setCharacterType([]);
     }else{
       setPlayers(value);
       let newCharacters = [...playerCharacters];
@@ -228,8 +228,10 @@ const PlayerDataForm = (props) => {
 
   const spectateGame = async () => {
     try {
+      let playType = [];
+      let playChar = [];
       let theGame = parseInt(joinGameId);
-      let query = `query JoinGame($playerCharacters: [String],$playerCharacterType: [String], $theGame: Int) {
+      let query = `query JoinGame($playChar: [String],$playType: [String], $theGame: Int) {
         joinGame(players: $playerCharacters,types: $playerCharacterType, gameId: $theGame)
       }`;
       let res = await fetch(URL, {
@@ -240,7 +242,7 @@ const PlayerDataForm = (props) => {
         },
         body: JSON.stringify({
           query,
-          variables: { theGame, playerCharacters, playerCharacterType },
+          variables: { theGame, playChar, playType },
         }),
       });
 

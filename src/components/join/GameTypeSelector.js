@@ -35,12 +35,8 @@ const GameTypeSelector = ({
         value={playerType}
         onChange={(e) => {
           setType(e.target.value);
-          
-          if(e.target.value == playerTypeEnum.SPEC){
-            handleChange(0);
-          }else{
             handleChange(1);
-          }
+          
         }}
         className="dropdownBox"
       >
@@ -122,7 +118,7 @@ const GameTypeSelector = ({
       ) : (
         <div />
       )}
-      {playerType != playerTypeEnum.HOST && players > 1 ? (
+      {playerType != playerTypeEnum.HOST && playerType != playerTypeEnum.SPEC && players != 1 ? (
         setPlayers(1)
       ) : (
         <div />

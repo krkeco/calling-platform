@@ -13,10 +13,12 @@ const dev =
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'dev' : 'v';
 
 const PlayerDataForm = (props) => {
+  const [awake, setWoke] = useState(false);
+
   const [scrap, setScrap] = useState(true);
   const [bane, setBane] = useState(true);
   const [refresh, setRefresh] = useState(false);
-  const [awake, setWoke] = useState(false);
+  
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
@@ -72,6 +74,12 @@ const PlayerDataForm = (props) => {
   const setGameType = (eNum) => {
     setType(eNum);
     if (eNum == playerTypeEnum.HOST) {
+    } else if (eNum == playerTypeEnum.SPEC){
+      console.log('setting type to nothing')
+      setCharacter([]);
+      setCharacterType([]);
+      setLocalPlayers(0);
+      setPlayers(0);
     } else {
       setCharacter([...playerCharacters[0]]);
       setCharacterType([...playerCharacterType[0]]);
@@ -80,15 +88,27 @@ const PlayerDataForm = (props) => {
   };
 
   const handleChange = (value) => {
-    setPlayers(value);
-    let newCharacters = [...playerCharacters];
-    let reducedChars = newCharacters.slice(0, value);
-    setCharacter([...reducedChars]);
+    if(value == 0){
+      setPlayers(value);
+      // let newCharacters = [];
+      // let reducedChars = newCharacters.slice(0, value);
+      setCharacter([]);
 
-    let newTypes = [...playerCharacterType];
-    let reducedTypes = newTypes.slice(0, value);
-    console.log('newchar:' + reducedTypes);
-    setCharacterType([...reducedTypes]);
+      // let newTypes = [...playerCharacterType];
+      // let reducedTypes = newTypes.slice(0, value);
+      // console.log('newchar:' + reducedTypes);
+      setCharacterType([]);
+    }else{
+      setPlayers(value);
+      let newCharacters = [...playerCharacters];
+      let reducedChars = newCharacters.slice(0, value);
+      setCharacter([...reducedChars]);
+
+      let newTypes = [...playerCharacterType];
+      let reducedTypes = newTypes.slice(0, value);
+      console.log('newchar:' + reducedTypes);
+      setCharacterType([...reducedTypes]);
+    }
   };
 
   const characterChange = (index, event) => {
@@ -205,6 +225,39 @@ const PlayerDataForm = (props) => {
       console.log(e);
     }
   };
+
+  const spectateGame = async () => {
+    try {
+      let theGame = parseInt(joinGameId);
+      let query = `query JoinGame($playerCharacters: [String],$playerCharacterType: [String], $theGame: Int) {
+        joinGame(players: $playerCharacters,types: $playerCharacterType, gameId: $theGame)
+      }`;
+      let res = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          query,
+          variables: { theGame, playerCharacters, playerCharacterType },
+        }),
+      });
+
+      let response = await res.json();
+      let count = response.data.joinGame.length - 1;
+      setGameId(theGame);
+      console.log('my index should be ' + count);
+      setLocalPlayers(count);
+
+      setWaitRoom([...response.data.joinGame]);
+      console.log('response to newgame:' + JSON.stringify(response));
+      // props.startGame(response.data.game)
+      queryGameStatus(5000, theGame, 5);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const joinGame = async () => {
     try {
       let theGame = parseInt(joinGameId);
@@ -248,6 +301,7 @@ const PlayerDataForm = (props) => {
             startGame={startGame}
             awake={awake}
             joinGame={joinGame}
+            spectateGame={spectateGame}
             playerType={playerType}
             createGame={createGame}
           />

@@ -165,9 +165,9 @@
 					"img":"infBabylon",
 				"quote":"",
 					"cost": 0,
-					"gold":1,
+					"gold":0,
 					"draw":0,
-					"influence":0,
+					"influence":1,
 					"abilities":["scrap","endeavor"]
 			}}
 		}

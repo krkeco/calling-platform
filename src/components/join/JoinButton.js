@@ -7,6 +7,7 @@ const JoinButton = ({
   createGame,
   playerType,
   joinGame,
+  spectateGame,
   startGame,
   gameId,
 }) => {
@@ -25,6 +26,20 @@ const JoinButton = ({
         color="secondary"
       >
         Join Game
+      </Button>
+    );
+  }
+
+  if (playerType == playerTypeEnum.SPEC) {
+    return (
+      <Button
+        disabled={gameId > -1 ? true : false}
+        style={{ margin: 5 }}
+        onClick={spectateGame}
+        variant="contained"
+        color="secondary"
+      >
+        Spectate Game
       </Button>
     );
   }

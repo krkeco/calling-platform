@@ -35,16 +35,22 @@ const GameTypeSelector = ({
         value={playerType}
         onChange={(e) => {
           setType(e.target.value);
-          handleChange(1);
+          
+          if(e.target.value == playerTypeEnum.SPEC){
+            handleChange(0);
+          }else{
+            handleChange(1);
+          }
         }}
         className="dropdownBox"
       >
         <MenuItem value={playerTypeEnum.HOST}>Host Local Game</MenuItem>
         <MenuItem value={playerTypeEnum.LAN}>Host Net Game</MenuItem>
         <MenuItem value={playerTypeEnum.GUEST}>Join Net Game</MenuItem>
+        <MenuItem value={playerTypeEnum.SPEC}>Spectate Net Game</MenuItem>
       </Select>      
 
-{playerTypeEnum.GUEST != playerType ? (
+{playerTypeEnum.GUEST != playerType && playerType != playerTypeEnum.SPEC ? (
       <div className="flexCol">
         
         <FormControl>
@@ -98,7 +104,7 @@ const GameTypeSelector = ({
       </div>
       ):(<span/>)}
 
-      {playerType == playerTypeEnum.GUEST ? (
+      {playerType == playerTypeEnum.GUEST || playerType == playerTypeEnum.SPEC  ? (
         <TextField
           disabled={gameId > -1 ? true : false}
           id="game-number"
@@ -116,9 +122,7 @@ const GameTypeSelector = ({
       ) : (
         <div />
       )}
-      {(playerType == playerTypeEnum.GUEST ||
-        playerType == playerTypeEnum.LAN) &&
-      players > 1 ? (
+      {playerType != playerTypeEnum.HOST && players > 1 ? (
         setPlayers(1)
       ) : (
         <div />

@@ -10,4 +10,5 @@ module.exports.playerTypeEnum = {
   HOST: 'host',
   GUEST: 'guest',
   LAN: 'lan',
+  SPEC: 'spectator',
 };

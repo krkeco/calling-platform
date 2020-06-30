@@ -137,7 +137,7 @@ const PlayerForm = ({
 
   let story, storyDeck = null;
   
-  if (stories != null && players > 0) {
+  if (stories != null && playerCharacters > 0) {
     story = stories.find(a => a.name == storyKey[playerCharacters[0]])
     storyDeck = [...story.infoDeck]
     storyDeck.sort((a,b)=> {return a.chrono - b.chrono});

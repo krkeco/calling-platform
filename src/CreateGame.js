@@ -247,7 +247,7 @@ const PlayerDataForm = (props) => {
       });
 
       let response = await res.json();
-      let specId = 0;
+      let specId = 5;
       // let count = response.data.joinGame.length - 1;
       setGameId(theGame);
       // console.log('my index should be ' + count);

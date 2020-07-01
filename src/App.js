@@ -120,14 +120,14 @@ const App = () => {
         let response = await res.json();
         console.log(
           'response for game info: currentplayer is ' +
-            JSON.stringify(response.data),
+            JSON.stringify(response.data.currentPlayer),
         );
 
-        if(!recurse){
-          appendLog([...response.data.currentPlayer.log]);
-          let element = document.getElementById('gamelog');
-          element.scrollTop = element.scrollHeight;
-        }
+        // if(!recurse){
+          appendLog([...response.data.currentPlayer.log.reverse()]);
+          // let element = document.getElementById('gamelog');
+          // element.scrollTop = element.scrollHeight;
+        // }
 
         setLocationInfo(response.data.locations);
 

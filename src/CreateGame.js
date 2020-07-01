@@ -151,6 +151,7 @@ const PlayerDataForm = (props) => {
       // setWaitRoom([...playerCharacters])
       if (response.data.waitingRoom.started) {
         console.log('starting game' + theId);
+        
         props.startGame(theId, myIndex, response.data.waitingRoom.scrapCard, response.data.waitingRoom.refreshMarket);
       } else {
         setWaitRoom([...response.data.waitingRoom.room]);
@@ -248,11 +249,13 @@ const PlayerDataForm = (props) => {
 
       let response = await res.json();
       let specId = 5;
+      if(props.useCookie['tcoGameCookie'] == theGame){
+        specId = props.useCookie['tcoPlayerCookie'];
+      }
       // let count = response.data.joinGame.length - 1;
       setGameId(theGame);
       // console.log('my index should be ' + count);
       // setLocalPlayers(count);
-
       // setWaitRoom([...response.data.joinGame]);
       console.log('response to newgame:' + JSON.stringify(response));
       // props.startGame(response.data.game)

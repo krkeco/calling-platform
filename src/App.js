@@ -32,7 +32,23 @@ const App = () => {
   // const [isQuerying, setQuerying] = useState(false);
   const [loser, setLoser] = useState(false);
   const [gameUpdateIntervalId, setGameUpdateIntervalId] = useState([]);
-  const [useCookie, setCookie] = useCookies(['tcoTutorial']);
+  const [useCookie, setCookie] = useCookies(['tcoTutorial','tcoPlayerCookie','tcoGameCookie']);
+  /*
+  rejoin cookie
+    when join/create game- 
+      set currentgameid = gameid
+      set currentplayerid = your index
+      set gametime = currentmills
+
+      if you join as spectator
+      check gametime < 3 hours ago
+      currentgameid == joining game id
+        set index to your currentplayerid
+
+
+
+
+  */
   // function onChange(newName) {
   // setCookie('tcoTutorial', true, { path: '/' });
   // }
@@ -65,6 +81,8 @@ const App = () => {
 
   const startGame = async (result, playerIndex, mScrap, mRefresh) => {
     // console.log('getting game '+result)
+    setCookie('tcoPlayerCookie', playerIndex, { path: '/' });
+    setCookie('tcoGameCookie', result, { path: '/' });
     setId(result);
     theGameId = result;
     setScrap(mScrap);
@@ -326,7 +344,7 @@ const App = () => {
     }
   };
 
-  let view = <CreateGame gameLog={gameLog} playerBGs={playerBGs} startGame={startGame} />;
+  let view = <CreateGame useCookie={useCookie} gameLog={gameLog} playerBGs={playerBGs} startGame={startGame} />;
   if (gameId > -1) {
     view = (
       <GameView
@@ -351,6 +369,8 @@ const App = () => {
     );
   }
   return <div className="flexCol appContainer">
+
+        p{useCookie['tcoPlayerCookie']}-g{useCookie['tcoGameCookie']}
       {view}
     </div>;
 };

@@ -370,7 +370,7 @@ const App = () => {
   }
   return <div className="flexCol appContainer">
 
-        p{useCookie['tcoPlayerCookie']}-g{useCookie['tcoGameCookie']}
+        <span className="cookie-info"> player{useCookie['tcoPlayerCookie']}--game{useCookie['tcoGameCookie']}</span>
       {view}
     </div>;
 };

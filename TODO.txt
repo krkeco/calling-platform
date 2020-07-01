@@ -4,7 +4,10 @@ commit:::
 check:::
 
 wip:::
-update images to jpg for faster loadtime
+testing locations 1/2
+testing apigame
+testing AI
+
 
 rejoin game???
 someday: subscriptions

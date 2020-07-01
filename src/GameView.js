@@ -44,6 +44,7 @@ const GameView = (props) => {
   let gameLog = props.gameLog;
   let playerBGs = props.playerBGs;
   const [zoom, setZoom] = useState([]);
+  const [loading, setLoading] = useState(false);
   const checkZoom = (index) => {
     let newZoo = [];
     if (zoom[index] != 'zoom') {
@@ -59,6 +60,15 @@ const GameView = (props) => {
     //   setZoom('zoom')
     // }
   };
+
+  const nextButtonFunk = async() =>{
+    if(!loading){
+      setLoading(true);
+      await props.nextPlayer();
+      setTimeout(()=>setLoading(false),500);
+    }
+  }
+
   if (locations) {
     locations.map((location, index) => {
       locCards.push(
@@ -86,12 +96,13 @@ const GameView = (props) => {
   if (currentPlayer == playerIndex || playerIndex == -1) {
     nextButton = (
       <Button
+        disabled={loading}
         style={{ width: '100%', height: 75, margin: 5 }}
-        onClick={props.nextPlayer}
+        onClick={nextButtonFunk}
         variant="contained"
         color="secondary"
       >
-        Next Player {currentPlayer}/{playerIndex}
+      Next Player {currentPlayer}/{playerIndex}
       </Button>
     );
   }

@@ -33,26 +33,6 @@ const App = () => {
   const [loser, setLoser] = useState(false);
   const [gameUpdateIntervalId, setGameUpdateIntervalId] = useState([]);
   const [useCookie, setCookie] = useCookies(['tcoTutorial','tcoPlayerCookie','tcoGameCookie']);
-  /*
-  rejoin cookie
-    when join/create game- 
-      set currentgameid = gameid
-      set currentplayerid = your index
-      set gametime = currentmills
-
-      if you join as spectator
-      check gametime < 3 hours ago
-      currentgameid == joining game id
-        set index to your currentplayerid
-
-
-
-
-  */
-  // function onChange(newName) {
-  // setCookie('tcoTutorial', true, { path: '/' });
-  // }
-  // alert(JSON.stringify(useCookie['tcoTutorial']))
 
   const onDragStart = (event, cardId) => {
     if (currentPlayer == playerIndex || playerIndex == -1) {
@@ -275,13 +255,7 @@ const App = () => {
   };
   const setWinner = (winner) => {
     setCookie('tcoTutorial', true, { path: '/' });
-    // let newLog = [...gameLog];
-    // newLog.push(winner + ' won the game!');
-    // for(let x = 0; x < gameUpdateIntervalId.length; x++){
-    //   clearInterval(gameUpdateIntervalId[x]);
-    // }
-    // setGameUpdateIntervalId([]);
-    // clearInterval(interval);
+
     setId(-1);
     theGameId=-1;
     setCards([])
@@ -339,8 +313,10 @@ const App = () => {
         getGame(gameId);
       }
       appendLog([...newLog]);
+      return true;
     } catch (e) {
       console.log(e);
+      return false;
     }
   };
 

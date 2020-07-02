@@ -123,13 +123,6 @@ const Location = (props) => {
                 {props.location.influence})
               </span>
             </Tooltip>
-            {props.location.weariness > 0 ? (
-              <Tooltip arrow title="Fear">
-                <span> F!:{props.location.weariness}</span>
-              </Tooltip>
-            ) : (
-              ''
-            )}
             {props.location.hardened > 0 ? (
               <Tooltip arrow title="Hardened">
                 <span> H:{props.location.hardened}</span>

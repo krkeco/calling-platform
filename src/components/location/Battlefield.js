@@ -69,14 +69,14 @@ const Battlefield = (props) => {
                     arrow
                     title="Fear- this will reduce other player's influence"
                   >
-                    <div>{playerBF.fear > 0 ? `F!:${playerBF.fear}` : ``}</div>
+                    <div>{playerBF.fear > 0 ? `!Fe:${playerBF.fear}` : ``}</div>
                   </Tooltip>
 
                   <Tooltip
                     arrow
                     title="Faith- this will replace influence if player has 0 influence"
                   >
-                    <div>{playerBF.faith > 0 ? `F:${playerBF.faith}` : ``}</div>
+                    <div>{playerBF.faith > 0 ? `Fa:${playerBF.faith}` : ``}</div>
                   </Tooltip>
                 </div>
               </div>

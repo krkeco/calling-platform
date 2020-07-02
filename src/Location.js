@@ -146,7 +146,7 @@ const Location = (props) => {
               ''
             )}
             {props.location.edicts > 0 ? (
-              <Tooltip arrow title="Edicts">
+              <Tooltip arrow title="Endeavor">
                 <span> E:{props.location.edicts}</span>
               </Tooltip>
             ) : (

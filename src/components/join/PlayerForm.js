@@ -72,6 +72,7 @@ const PlayerForm = ({
         className="flexCol center userFormContainer"
         style={{
           minWidth: 150,
+          height:'auto',
           backgroundColor: bgColor,
         }}
       >

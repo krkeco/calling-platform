@@ -247,7 +247,7 @@
 				 	"cost": 5,
 				 	"gold":0,
 				 	"draw":0,
-				 	"influence":4,
+				 	"influence":5,
 				 	"abilities":["mob"]},
 			{"name":"Angelic Protection",
 				"img":"angelic",

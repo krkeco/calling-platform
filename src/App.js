@@ -23,6 +23,8 @@ const App = () => {
     '#5e35b1',
     '#43a047',
     '#eeff41',
+    '#ff751a',
+    '#ff33ff',
   ]);
   const [cards, setCards] = useState([]);
   const [turn, setTurn] = useState(1);

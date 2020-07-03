@@ -40,7 +40,7 @@
 				"Story: Paul is called to be an apostle and lead others to Christ.  In his ministry he works alongside [Barnabas], [Priscilla and Aquila], and [Timothy] writing numerous [Epistles] to the churches they plant, as well as being assaulted and worshipped by [Mob]s on numerous occassions. He is eventually [imprisoned] (multiple times).  While in prison he [Exhorts] the church helping them stay on course, is caught in a [huge storm] and shipwrecked but saved by [Angelic protection]",
 				"Theme: Paul's journey is all about following Christ.  He does this by evangalizing, church planting, and finding fellowship. He (and other Christians) are called to go out and make disciples, not just as a number, but in order to fellowship.",
 				"Influence Bonus: 2 gold",
-				"Calling: Plant 5 churches (read Church Plant)",
+				"Calling: Plant 7 churches (read Church Plant)",
 				"Bane: Get 6 wounds",
 				"Church Plant: If the Paul player plays an apostle on a location and become influencer; Paul plants a church- otherwise Paul gains a wound",
 				"Special Rules:",
@@ -113,7 +113,7 @@
 			"location":{
 				"name":"Nineveh",
 				"info":[
-					"Story: Initially he leaves for [Tarshish] in order to escape God's call, but God provides a [huge fish] to bring him back to his mission to the [foolish] and [wicked] people of Nineveh.  He eventually exhorts the city into repentence, but does not himself repent of his hardness until he has seen his [leafy plant] destroyed by a worm and [scorching east wind] and God explains how much more the people of Nineveh are worth and should be provided for",
+					"Story: Initially he leaves for [Tarshish] in order to escape God's call, but God provides a [huge fish] to bring him back to his mission to the foolish and wicked [Ninevites].  He eventually exhorts the city into repentence, but does not himself repent of his hardness until he has seen his [leafy plant] destroyed by a worm and [scorching east wind] and God explains how much more the people of Nineveh are worth and should be provided for",
 					"Theme: Jonah is given provision by God constantly.  Even in the throws of death, consumed by the sea, God provides for him.  Even in the darkest depravity of the human condition, God wishes to provide a way out (through repentence) to the Ninevites as well.",
 					"Influence Bonus: Provision 1",
 					"Calling: Play 4 Ninevites on Nineveh AND be influencer of Nineveh",

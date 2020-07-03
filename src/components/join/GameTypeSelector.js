@@ -146,6 +146,8 @@ const PlayerCountToggle = ({ players, gameId, handleChange }) => {
         <MenuItem value={2}>Two</MenuItem>
         <MenuItem value={3}>Three</MenuItem>
         <MenuItem value={4}>Four</MenuItem>
+        <MenuItem value={5}>Five</MenuItem>
+        <MenuItem value={6}>Six</MenuItem>
       </Select>
     </FormControl>
   );

@@ -15,6 +15,7 @@ import foolish from './imgs/jonah/princess.jpg';
 import hugefish from './imgs/jonah/hugefish.jpg';
 import vine from './imgs/jonah/vine.jpg';
 import scorching from './imgs/jonah/SEW.jpg';
+import tarshish from './imgs/jonah/tarshish.jpg';
 
 import paul from './imgs/paul/paul.jpg';
 import priscilla from './imgs/paul/priscilla.jpg';
@@ -58,7 +59,7 @@ const cardImg = {
   wicked: wicked,
   vine: vine,
   scorching: scorching,
-  ship: floralite,
+  ship: tarshish,
   hugefish: hugefish,
 
 

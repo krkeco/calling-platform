@@ -43,6 +43,7 @@ const GameView = (props) => {
   let locCards = [];
   let gameLog = props.gameLog;
   let playerBGs = props.playerBGs;
+  let doubleBlind = props.doubleBlind;
   const [zoom, setZoom] = useState([]);
   const [loading, setLoading] = useState(false);
   const checkZoom = (index) => {
@@ -62,10 +63,16 @@ const GameView = (props) => {
   };
 
   const nextButtonFunk = async() =>{
-    if(!loading){
-      setLoading(true);
-      await props.nextPlayer();
-      setTimeout(()=>setLoading(false),500);
+
+    if(!loading ){
+      if(doubleBlind){
+        await props.nextPlayer();
+        setLoading(true);
+      }else{
+        setLoading(true);
+        await props.nextPlayer();
+        setTimeout(()=>setLoading(false),500);
+      }
     }
   }
 
@@ -126,7 +133,7 @@ const GameView = (props) => {
           draggable
           style={{
             margin: 5,
-            backgroundColor: `${playerBGs[currentPlayer]}`,
+            backgroundColor: `${playerBGs[playerIndex]}`,
             opacity: 1,
             borderRadius: 5,
           }}
@@ -134,8 +141,8 @@ const GameView = (props) => {
           <PlayingCard
             id={index}
             card={card}
-            backgroundColor={playerBGs[currentPlayer]}
-            player={currentPlayer}
+            backgroundColor={playerBGs[playerIndex]}
+            player={playerIndex}
           />
         </div>,
       );

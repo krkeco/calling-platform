@@ -21,6 +21,10 @@ import paul from './imgs/paul/paul.jpg';
 import priscilla from './imgs/paul/priscilla.jpg';
 
 import joshua from './imgs/joshua/joshua.jpg';
+import ark from './imgs/joshua/ark.jpg';
+import balak from './imgs/joshua/balak.jpg';
+import mah from './imgs/joshua/mah.jpg';
+import natsot from './imgs/joshua/natsot.jpg';
 import spies from './imgs/joshua/spies.jpg';
 
 import bedazzlejewel from './imgs/sample/bedazzlejewel.jpg';
@@ -76,13 +80,13 @@ const cardImg = {
   storm:seacave,
 
   joshua: joshua,
-  milkhoney: blossomgrove,
+  milkhoney: mah,
   spies: spies,
   faithfulreport: floralite,
   anak: corridor,
-  natsots: gemlightning,
-  gerazim: firetree,
-  ebal: corridor,
+  natsots: natsot,
+  gerazim: ark,
+  ebal: balak,
 
   gold: gold,
   influence: influence,

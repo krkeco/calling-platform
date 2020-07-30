@@ -10,8 +10,9 @@ import GameView from './GameView';
 import bg from './imgs/sample/comix.jpg';
 
 const App = () => {
-
+ console.log('url:'+URL)
   const [scrap, setScrap] = useState(true);
+  const [doubleBlind, setBlinds] = useState(false);
   const [refresh, setRefresh] = useState(true);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [gameId, setId] = useState(-1);
@@ -61,7 +62,7 @@ const App = () => {
     playCard(cardId, loc);
   };
 
-  const startGame = async (result, playerIndex, mScrap, mRefresh) => {
+  const startGame = async (result, playerIndex, mScrap, mRefresh, mBlinds) => {
     // console.log('getting game '+result)
     setCookie('tcoPlayerCookie', playerIndex, { path: '/' });
     setCookie('tcoGameCookie', result, { path: '/' });
@@ -72,6 +73,13 @@ const App = () => {
     appendLog([])
     getGame(result, true);
     setPlayerIndex(playerIndex);
+    setBlinds(mBlinds);
+
+    //RANDOM
+    if(mBlinds){
+      setCurrentPlayer(playerIndex);
+
+    }
      
   };
 
@@ -135,7 +143,15 @@ const App = () => {
 
         console.log('currnetplayer:' + response.data);
         // setCurrentPlayer(0);
+
+        //RANDOM
+        if(doubleBlind){
+
+        }else{
+
         setCurrentPlayer(response.data.currentPlayer.nextPlayer);
+        }
+        
         if (response.data.currentPlayer.winner != '') {
           appendLog([...response.data.currentPlayer.log]);
           let winner = response.data.currentPlayer.winner;
@@ -265,7 +281,7 @@ const App = () => {
     setLoser(false);
     setLocationInfo([]);
     setPlayerInfo([]);
-    setCurrentPlayer(0);
+    setCurrentPlayer(-1);
     setTurn(0);
     alert(winner + ' is the winner!!');
   };
@@ -303,7 +319,13 @@ const App = () => {
         let winner = response.data.nextPlayer.winner;
         // setWinner(winner);
       } else {
+        //RANDOM
+        if(doubleBlind){
+
+        }else{
+          
         setCurrentPlayer(response.data.nextPlayer.nextPlayer);
+        }
 
         if (turn != response.data.nextPlayer.turn) {
           setTurn(response.data.nextPlayer.turn);
@@ -326,6 +348,7 @@ const App = () => {
   if (gameId > -1) {
     view = (
       <GameView
+        doubleBlind={doubleBlind}
         scrap={scrap}
         refresh={refresh}
         useCookie={useCookie}

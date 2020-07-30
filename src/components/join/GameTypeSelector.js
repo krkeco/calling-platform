@@ -22,7 +22,9 @@ const GameTypeSelector = ({
   bane,
   setBane,
   refresh,
-  setRefresh
+  setRefresh,
+  setBlinds,
+  doubleBlind
 }) => {
 
   let gameTypeSelector = (
@@ -80,7 +82,22 @@ const GameTypeSelector = ({
           <MenuItem value={true}>Market Refresh</MenuItem>
           <MenuItem value={false}>No Market Refresh</MenuItem>
         </Select>
-        </FormControl>        
+        </FormControl>            
+     {/*   <FormControl>
+      <InputLabel id="refresh-label">DoubleBlind</InputLabel>
+        <Select
+          disabled={gameId > -1 ? true : false}
+          labelId="refresh-label"
+          value={doubleBlind}
+          onChange={(e) => {
+            setBlinds(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={false}>OpenHand</MenuItem>
+          <MenuItem value={true}>DoubleBlind</MenuItem>
+        </Select>
+        </FormControl>     */}   
         <FormControl>
           <InputLabel id="bane-label">Banes</InputLabel>
             <Select

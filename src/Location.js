@@ -16,7 +16,7 @@ import Battlefield from './components/location/Battlefield';
 
 import babylon from './imgs/esther/babylon.jpg';
 import jerusalem from './imgs/jerusalem.jpg';
-import canaan from './imgs/sample/seaskull.jpg';
+import canaan from './imgs/joshua/jericho.jpg';
 import nineveh from './imgs/jonah/nineveh.jpg';
 import rome from './imgs/sample/fishflower.jpg';
 
@@ -139,8 +139,8 @@ const Location = (props) => {
               ''
             )}
             {props.location.edicts > 0 ? (
-              <Tooltip arrow title="Endeavor">
-                <span> E:{props.location.edicts}</span>
+              <Tooltip arrow title="Challenges">
+                <span> C:{props.location.edicts}</span>
               </Tooltip>
             ) : (
               ''

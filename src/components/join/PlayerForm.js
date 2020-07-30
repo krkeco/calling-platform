@@ -17,7 +17,7 @@ import { faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import babylon from '../../imgs/esther/babylon.jpg';
 import jerusalem from '../../imgs/jerusalem.jpg';
-import canaan from '../../imgs/sample/seaskull.jpg';
+import canaan from '../../imgs/joshua/jericho.jpg';
 import nineveh from '../../imgs/jonah/nineveh.jpg';
 import rome from '../../imgs/sample/fishflower.jpg';
 

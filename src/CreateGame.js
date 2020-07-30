@@ -18,7 +18,8 @@ const PlayerDataForm = (props) => {
   const [scrap, setScrap] = useState(true);
   const [bane, setBane] = useState(true);
   const [refresh, setRefresh] = useState(false);
-  
+  const [doubleBlind, setBlinds] = useState(false);
+
   const [players, setPlayers] = useState(2);
   const [localPlayers, setLocalPlayers] = useState(2);
   const [gameId, setGameId] = useState(-1);
@@ -152,7 +153,7 @@ const PlayerDataForm = (props) => {
       if (response.data.waitingRoom.started) {
         console.log('starting game' + theId);
         
-        props.startGame(theId, myIndex, response.data.waitingRoom.scrapCard, response.data.waitingRoom.refreshMarket);
+        props.startGame(theId, myIndex, response.data.waitingRoom.scrapCard, response.data.waitingRoom.refreshMarket, false);
       } else {
         setWaitRoom([...response.data.waitingRoom.room]);
         setTimeout(() => {
@@ -343,6 +344,8 @@ const PlayerDataForm = (props) => {
                     })}
                   </div>):(<span/>)}
       <GameTypeSelector
+        doubleBlind={doubleBlind}
+        setBlinds={setBlinds}
         setScrap={setScrap}
         scrap={scrap}
         setBane={setBane}

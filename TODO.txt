@@ -4,10 +4,8 @@ commit:::
 check:::
 
 wip:::
-testing locations 1/2
-testing apigame
-testing AI
-
+imprisonment has issues
+no scrap characters!
 
 rejoin game???
 someday: subscriptions

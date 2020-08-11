@@ -17,7 +17,7 @@ const PlayerDataForm = (props) => {
 
   const [scrap, setScrap] = useState(true);
   const [bane, setBane] = useState(true);
-  const [gameplayType, setGameplayType] = useState('all');
+  const [gameplayType, setGameplayType] = useState('coop');
   const [refresh, setRefresh] = useState(false);
   const [doubleBlind, setBlinds] = useState(false);
 

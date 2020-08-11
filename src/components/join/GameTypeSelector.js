@@ -28,10 +28,92 @@ const GameTypeSelector = ({
   setBlinds,
   doubleBlind
 }) => {
+  let scrapForm =  <FormControl style={{width:150}}>
+        <InputLabel id="scrap-label">Scrapping</InputLabel>
+        <Select
+          disabled={gameId > -1 ? true : false}
+          labelId="scrap-label"
+          id="scrap-select"
+          value={scrap}
+          onChange={(e) => {
+            setScrap(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={true}>Scrapping</MenuItem>
+          <MenuItem value={false}>No Scrapping</MenuItem>
+        </Select>
+        
+        </FormControl>
+
+  let refreshMarketForm = <FormControl style={{width:150}}>
+      <InputLabel id="refresh-label">Refresh</InputLabel>
+        <Select
+          disabled={gameId > -1 ? true : false}
+          labelId="refresh-label"
+          value={refresh}
+          onChange={(e) => {
+            setRefresh(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={true}>Market Refresh</MenuItem>
+          <MenuItem value={false}>No Market Refresh</MenuItem>
+        </Select>
+        </FormControl>        
+
+        let doubleBlindForm =  <FormControl style={{width:150}}>
+      <InputLabel id="refresh-label">DoubleBlind</InputLabel>
+        <Select
+          disabled={gameId > -1 ? true : false}
+          labelId="refresh-label"
+          value={doubleBlind}
+          onChange={(e) => {
+            setBlinds(e.target.value);
+          }}
+          className="dropdownBox"
+        >
+          <MenuItem value={false}>OpenHand</MenuItem>
+          <MenuItem value={true}>DoubleBlind</MenuItem>
+        </Select>
+        </FormControl> 
+
+    let baneForm = <FormControl style={{width:150}}>
+          <InputLabel id="bane-label">Banes</InputLabel>
+            <Select
+              disabled={gameId > -1 ? true : false}
+              labelId="refresh-label"
+              value={bane}
+              onChange={(e) => {
+                setBane(e.target.value);
+              }}
+              className="dropdownBox"
+            >
+              <MenuItem value={true}>Banes!</MenuItem>
+              <MenuItem value={false}>No Banes</MenuItem>
+        </Select>
+        </FormControl>
+
+        let gamePlayForm = <FormControl style={{width:150}}>
+          <InputLabel id="bane-label">PVP/CoOp</InputLabel>
+            <Select
+              disabled={gameId > -1 ? true : false}
+              labelId="refresh-label"
+              value={gameplayType}
+              onChange={(e) => {
+                setGameplayType(e.target.value);
+              }}
+              className="dropdownBox"
+            >
+              <MenuItem value={'all'}>PVP!</MenuItem>
+              <MenuItem value={'coop'}>Co-operative!</MenuItem>
+        </Select>
+        </FormControl>
+
 
   let gameTypeSelector = (
-    <FormControl className="formControl">
-      <InputLabel id="player-type-label">Game Type</InputLabel>
+    <div className="formControl">
+      <InputLabel id="player-type-label">Browser Type</InputLabel>
       <Select
         disabled={gameId > -1 ? true : false}
         labelId="player-type-label"
@@ -52,84 +134,21 @@ const GameTypeSelector = ({
 
 {playerTypeEnum.GUEST != playerType && playerType != playerTypeEnum.SPEC ? (
       <div className="flexCol">
-        
-        <FormControl>
-        <InputLabel id="scrap-label">Scrapping</InputLabel>
-        <Select
-          disabled={gameId > -1 ? true : false}
-          labelId="scrap-label"
-          id="scrap-select"
-          value={scrap}
-          onChange={(e) => {
-            setScrap(e.target.value);
-          }}
-          className="dropdownBox"
-        >
-          <MenuItem value={true}>Scrapping</MenuItem>
-          <MenuItem value={false}>No Scrapping</MenuItem>
-        </Select>
-        
-        </FormControl>
-        <FormControl>
-      <InputLabel id="refresh-label">Refresh</InputLabel>
-        <Select
-          disabled={gameId > -1 ? true : false}
-          labelId="refresh-label"
-          value={refresh}
-          onChange={(e) => {
-            setRefresh(e.target.value);
-          }}
-          className="dropdownBox"
-        >
-          <MenuItem value={true}>Market Refresh</MenuItem>
-          <MenuItem value={false}>No Market Refresh</MenuItem>
-        </Select>
-        </FormControl>            
-     {/*   <FormControl>
-      <InputLabel id="refresh-label">DoubleBlind</InputLabel>
-        <Select
-          disabled={gameId > -1 ? true : false}
-          labelId="refresh-label"
-          value={doubleBlind}
-          onChange={(e) => {
-            setBlinds(e.target.value);
-          }}
-          className="dropdownBox"
-        >
-          <MenuItem value={false}>OpenHand</MenuItem>
-          <MenuItem value={true}>DoubleBlind</MenuItem>
-        </Select>
-        </FormControl>     */}   
-        <FormControl>
-          <InputLabel id="bane-label">Banes</InputLabel>
-            <Select
-              disabled={gameId > -1 ? true : false}
-              labelId="refresh-label"
-              value={bane}
-              onChange={(e) => {
-                setBane(e.target.value);
-              }}
-              className="dropdownBox"
-            >
-              <MenuItem value={true}>Banes!</MenuItem>
-              <MenuItem value={false}>No Banes</MenuItem>
-        </Select>
-        </FormControl><FormControl>
-          <InputLabel id="bane-label">Banes</InputLabel>
-            <Select
-              disabled={gameId > -1 ? true : false}
-              labelId="refresh-label"
-              value={gameplayType}
-              onChange={(e) => {
-                setGameplayType(e.target.value);
-              }}
-              className="dropdownBox"
-            >
-              <MenuItem value={'all'}>PVP!</MenuItem>
-              <MenuItem value={'coop'}>Co-operative!</MenuItem>
-        </Select>
-        </FormControl>
-
+      <div className="flexRow" style={{ display:'flex',alignItems:'center',justifyContent:'space-between',width:500 }}>
+      <PlayerCountToggle
+          gameId={gameId}
+          players={players}
+          handleChange={handleChange}
+        />     
+      {gamePlayForm}
+      {scrapForm}
+      </div>
+      {gameplayType == 'all' ? <div className="flexRow" style={{ display:'flex',alignItems:'center',justifyContent:'space-between',width:500 }}>
+      {refreshMarketForm}
+      {doubleBlindForm}
+      {baneForm}
+        </div> : <></>}
+     
       </div>
       ):(<span/>)}
 
@@ -142,12 +161,6 @@ const GameTypeSelector = ({
           onChange={(e) => setJoinId(e.target.value)}
           label="GameId:"
         />
-      ) : playerType == playerTypeEnum.HOST ? (
-        <PlayerCountToggle
-          gameId={gameId}
-          players={players}
-          handleChange={handleChange}
-        />
       ) : (
         <div />
       )}
@@ -156,7 +169,7 @@ const GameTypeSelector = ({
       ) : (
         <div />
       )}
-    </FormControl>
+    </div>
   );
   return gameTypeSelector;
 };
@@ -165,7 +178,7 @@ const GameTypeSelector = ({
 
 const PlayerCountToggle = ({ players, gameId, handleChange }) => {
   let playerCountToggle = (
-    <FormControl className="formControl">
+    <FormControl className="formControl" style={{width:150}}>
       <InputLabel id="player-count-label">Local Players</InputLabel>
       <Select
         disabled={gameId > -1 ? true : false}

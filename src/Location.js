@@ -171,7 +171,20 @@ const Location = (props) => {
             )}
           </div>
         </div>
-
+          {props.location.coopDisplay.length > 0 ? <div className="flexRow flexStart marketContainer">
+                    <div className="infoBtnBig flexRow">
+            {props.location.coopDisplay.map((card,index)=>{
+              return <div onClick={()=>{
+                props.removeEffect(index,props.location.id, card)}}>
+              <PlayingCard
+              id={index}
+              size="small"
+              card={card}
+              backgroundColor="yellow"
+              player={null}
+            /></div>
+            })}
+            </div></div> : <></>}
         
           <div className="flexRow flexStart marketContainer">
         {props.scrap && props.location.name == 'Jerusalem' ? (
@@ -201,6 +214,7 @@ const Location = (props) => {
             Scrap Pile
           </div>):(<span/>)
         }
+
             <div className="infoBtnBig flexCol">
             {props.refresh ? ( <Tooltip arrow title="Refresh Market">
                             <Button

@@ -10,6 +10,8 @@ import { URL, playerTypeEnum } from '../../constants';
 
 const GameTypeSelector = ({
   playerType,
+  gameplayType,
+  setGameplayType,
   setType,
   handleChange,
   gameId,
@@ -111,6 +113,20 @@ const GameTypeSelector = ({
             >
               <MenuItem value={true}>Banes!</MenuItem>
               <MenuItem value={false}>No Banes</MenuItem>
+        </Select>
+        </FormControl><FormControl>
+          <InputLabel id="bane-label">Banes</InputLabel>
+            <Select
+              disabled={gameId > -1 ? true : false}
+              labelId="refresh-label"
+              value={gameplayType}
+              onChange={(e) => {
+                setGameplayType(e.target.value);
+              }}
+              className="dropdownBox"
+            >
+              <MenuItem value={'all'}>PVP!</MenuItem>
+              <MenuItem value={'coop'}>Co-operative!</MenuItem>
         </Select>
         </FormControl>
 

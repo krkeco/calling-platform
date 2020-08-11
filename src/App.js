@@ -109,6 +109,7 @@ const App = () => {
           locations(gameId: $theId){
             name, id,influence,influencer,edicts, weariness, info,proselytized,wounds,hardened,abilities,
             market{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
+            coopDisplay{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
             battlefield{name,poliBonus,faith, fear, influence, gold, cards{name,quote,img,draw, influence, gold, politics, faith, fear,provision,abilities}}
           },
           currentPlayer(gameId: $theId){turn,nextPlayer,winner,loser, log}
@@ -271,6 +272,47 @@ const App = () => {
       alert("you can't buy when it isn't your turn!");
     }
   };
+
+  const removeEffect = async (index, location, card) => {
+    // if (currentPlayer == playerIndex || playerIndex == -1) {
+      let cardIndex = parseInt(index);
+      let theGame = parseInt(gameId);
+      let LocationId = parseInt(location);
+      let playerName = players[currentPlayer].id;
+      // let data = {"cardname":index, "player":players[currentPlayer].name, "location":location}
+      console.log(
+        `trying to remove effect card with index${cardIndex} player${playerName} loc${location} game${gameId}`,
+      );
+      try {
+        let query = `query RemoveEffect($playerName: Int, $cardIndex: Int, $LocationId: Int, $theGame: Int) {
+          removeEffect(gameId: $theGame, playerId: $playerName, locationId: $LocationId, cardIndex: $cardIndex)
+        }`;
+        let res = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            query,
+            variables: { playerName, cardIndex, LocationId, theGame },
+          }),
+        });
+
+        let response = await res.json();
+        console.log('response to playcard:' + JSON.stringify(response));
+
+        // let log = players[currentPlayer].name + ' ' + response.data.buy;
+        // appendLog([...gameLog, log]);
+
+        getGame(gameId);
+      } catch (e) {
+        console.log(e);
+      }
+    // } else {
+    //   alert("you can't buy when it isn't your turn!");
+    // }
+  };
   const setWinner = (winner) => {
     setCookie('tcoTutorial', true, { path: '/' });
 
@@ -358,6 +400,7 @@ const App = () => {
         turn={turn}
         refreshMarket={refreshMarket}
         buyCard={buyCard}
+        removeEffect={removeEffect}
         playerBGs={playerBGs}
         nextPlayer={nextPlayer}
         playerIndex={playerIndex}

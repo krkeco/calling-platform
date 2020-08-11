@@ -86,6 +86,7 @@ const GameView = (props) => {
           player={currentPlayer}
           players={players}
           buyCard={props.buyCard}
+          removeEffect={props.removeEffect}
           location={location}
           name={location.name}
           playerBGs={playerBGs}

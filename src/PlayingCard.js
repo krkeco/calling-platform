@@ -127,7 +127,7 @@ const PlayingCard = (props) => {
   };
 
   let bgColor = props.backgroundColor;
-  if (props.card.abilities.indexOf('scrap') > -1) {
+  if (props.card.abilities?.indexOf('scrap') > -1) {
     bgColor = 'teal';
   }
 

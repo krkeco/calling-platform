@@ -105,8 +105,10 @@ const GameTypeSelector = ({
               }}
               className="dropdownBox"
             >
+              <MenuItem value={'mono'}>[Easy] 1 Bane Co-Op!</MenuItem>
+              <MenuItem value={'coop'}>Co-Operative!</MenuItem>
+              <MenuItem value={'hard'}>[HARD]Co-Op!</MenuItem>
               <MenuItem value={'all'}>PVP!</MenuItem>
-              <MenuItem value={'coop'}>Co-operative!</MenuItem>
         </Select>
         </FormControl>
 

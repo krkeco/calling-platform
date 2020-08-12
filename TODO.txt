@@ -4,8 +4,3 @@ commit:::
 check:::
 
 wip:::
-imprisonment has issues
-no scrap characters!
-
-rejoin game???
-someday: subscriptions

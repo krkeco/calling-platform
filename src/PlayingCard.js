@@ -22,6 +22,8 @@ import priscilla from './imgs/paul/priscilla.jpg';
 
 import joshua from './imgs/joshua/joshua.jpg';
 import ark from './imgs/joshua/ark.jpg';
+import nephilim from './imgs/joshua/nephilim.jpg';
+import faithful from './imgs/joshua/faithful.jpg';
 import balak from './imgs/joshua/balak.jpg';
 import mah from './imgs/joshua/mah.jpg';
 import natsot from './imgs/joshua/natsot.jpg';
@@ -82,8 +84,8 @@ const cardImg = {
   joshua: joshua,
   milkhoney: mah,
   spies: spies,
-  faithfulreport: floralite,
-  anak: corridor,
+  faithfulreport: faithful,
+  anak: nephilim,
   natsots: natsot,
   gerazim: ark,
   ebal: balak,
@@ -120,7 +122,7 @@ const PlayingCard = (props) => {
   };
   const size = (size) => {
     if (size == 'small') {
-      return 'playcard small';
+      return 'playcard small'
     } else {
       return 'playcard';
     }

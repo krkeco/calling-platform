@@ -153,7 +153,11 @@ const App = () => {
         setCurrentPlayer(response.data.currentPlayer.nextPlayer);
         }
         
-        if (response.data.currentPlayer.winner != '') {
+        if (response.data.currentPlayer.loser != '') {
+          appendLog([...response.data.currentPlayer.log]);
+          let loser = response.data.currentPlayer.loser;
+          setWinner(loser);
+        }else if (response.data.currentPlayer.winner != '') {
           appendLog([...response.data.currentPlayer.log]);
           let winner = response.data.currentPlayer.winner;
           setWinner(winner);

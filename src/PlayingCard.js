@@ -166,7 +166,7 @@ const PlayingCard = (props) => {
         <div className="cardBox flexCol spaceBetween">
           <div>
             <p className="text titleCard">
-            {props.size == 'coop' ? <span>
+            {props.size == 'coop' && props.card.fear > 0 ? <span>
                 {props.card.fear} !F
               </span> : props.card.cost > 0 ? `$${props.card.cost}` : ''}
               {' '}

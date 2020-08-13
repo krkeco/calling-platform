@@ -178,7 +178,7 @@ const Location = (props) => {
                 props.removeEffect(index,props.location.id, card)}}>
               <PlayingCard
               id={index}
-              size="small"
+              size="coop"
               card={card}
               backgroundColor="yellow"
               player={null}

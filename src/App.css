@@ -231,9 +231,11 @@
 }
 .infoBtn{
   padding:5px;
+  padding-left:4px;
+  padding-right:4px;
   width:15px;
   height:15px;
-  border-radius:15px;
+  border-radius:20px;
   background-color:#bbb;
 }
 .infoBtnBig{

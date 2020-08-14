@@ -214,13 +214,6 @@ const PlayingCard = (props) => {
             ) : (
               <span />
             )}
-            {props.card.politics ? (
-              <div className="text stat">
-                {props.card.politics} Int<span className="stat">egrity</span>
-              </div>
-            ) : (
-              <span />
-            )}
             {props.card.abilities && props.card.abilities.length > 0 ? (
               <div className="text stat">
                 A:{' '}

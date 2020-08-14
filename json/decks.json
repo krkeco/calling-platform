@@ -46,7 +46,10 @@
 				"Apostle: Apostles gain +1 INF for each church on a location they are played on (even if the apostle doesn't belong to Paul)",
 				"Mob: +1 INF for every other card you already played here",
 				"Angelic: If you do not have the most influence on this location, it does not check influence this turn (Callings like Esther and Joshua are not affected)",
-				"Imprisonment: AFTER the influence phase, return this and the most expensive card on this location (that does not belong to you) to their original market decks, does not affect starter cards"
+				"Imprisonment: AFTER the influence phase, return this and the most expensive card on this location (that does not belong to you) to their original market decks, does not affect starter cards",
+				"CoOp Rules:",
+				"Persecution: Every turn Paul is first player, 1 card will be played from the Paul market onto each location.  If that card conquers the location, Paul will get a wound."
+
 			],
 				"influence":3,
 				"abilities":["rome"],
@@ -83,7 +86,12 @@
 					"Promised Land: Every time the player Joshua would become influencer of Canaan (even if the player already is) it goes up one tier",
 					"Special Rules:",
 					"Fear [X]: Reduce all other player's influence by [X] on this location",
-					"Faith: If you have 0 influence on this location, Use your faith as influence.  Faith is not affected by fear."
+					"Faith: If you have 0 influence on this location, Use your faith as influence.  Faith is not affected by fear.",
+					"CoOp Rules:",
+					"All fear cards are removed from the Joshua deck and make up a separate 'fear' deck.",
+					"Spreading Fear: Each turn Joshua is first player, play 1 card from the fear deck on Canaan for each player",
+					"if there is more than 13 fear on Canaan for each player (13* x where x = # of players) you have fallen",
+					"Remove fear by playing faith and influence on a location.  If you have as much or more, you can click a fear card and it will be removed"
 				],
 				"influence":3,
 				"abilities":[0],
@@ -119,7 +127,15 @@
 					"Bane: Be Hardened 3 times (read Hardened heart)",
 					"Hardened Heart: If Jonah is played on any location besides Nineveh (by the player, or provision), add 1 hardened to Nineveh",
 					"Special Rules:",
-					"Provision [X]: This card draws and plays [X] cards on its location"
+					"Provision [X]: This card draws and plays [X] cards on its location",
+					"CoOp Rules:",
+					"Ninevites are removed from the Nineveh deck and make a separate EvilDoer deck",
+					"Every turn Jonah is first player play 1 card from the EvilDoer deck on Nineveh",
+					"For each priestess on Nineveh all players discard a card",
+					"For each Warrior, reduce the size of all markets by 1",
+					"If there are 4 or more Ninevites on Nineveh at the end of a turn, you have fallen",
+					"Remove a Ninevite by playing a card with provision or with 2 gold and clicking it (it goes back into the Ninevite deck)",
+					"Rescue a Ninevite by playing 2 provision on the location and then clicking it- this will bring it to the market (so you can acquire it)"
 				],
 				"influence":3,
 				"abilities":["nineveh"],
@@ -142,20 +158,29 @@
 				"gold":0,
 				"influence":1,
 				"politics":2,
-				"abilities":[]},
+				"abilities":["Courage"]},
 			"location":{
 				"name":"Babylon",
 				"info":[
 					"Story: Esther is adopted by her uncle [Mordecai] who saves the kings life (which goes unnoticed for quite some time) and opposes a proud man [Haman] who looks to destroy her people through a [corrupt] bribe to the [king].  Numerous [King's servants] work with Esther to gain the favor of the very fickle [king], reveal Haman's treachery, and prevent the [annihilation] of God's people",
-					"Theme: Esther is a story of reaping what you sow.  Those who work with integrity and make good on their promises will be rewarded by God in heaven.",
+					"Theme: Esther is a story of reaping what you sow.  Those who work with courage and make good on their promises will be rewarded by God in heaven.",
 					"Calling: Play 14 influence more than any other player on Babylon",
 					"Bane: Have negative influence on Babylon",
 					"Influence Bonus: 1 Influence, Challenge",
 					"Special Rules:",
 					"Challenge: A challenge is an undertaking that you must face... or not...  Depending on how courageous you are. For each Challenge on a location, you will gain influence based on your courage to perform those challenges.",
-					"Courage: Multiply your total Courage with the location's total Challenges and add that to your Influence",
+					"Courage: Gain 2 influence for each challenge on this location",
+					"Cowardice: Lose 2 influence for each challenge on this location",
 					"Mordecai: copy the card with the highest cost you have already played on this location-- character/starter card costs are 0",
-					"Xerxe's Vow: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location"
+					"Xerxe's Vow: At the end of the turn, BEFORE the influence phase, permanently trade this card with the highest cost card on the location",
+					"CoOp Rules:",
+					"Remove 4 Haman 2 Taxes 1 Xerxes and 1 Annihilate from the Market and make a challenge deck",
+					"Every turn Esther is first player play 1 challenge per player on Babylon.  Each challenge adds a global effect to the game",
+					"Taxes: All cards cost 1 more",
+					"Haman: All locations have 2 extra influence",
+					"Xerxes: at the end of a turn if this is still in play, put the most expensive card played this turn in Babylon's market",
+					"Annihilation: add 13 influence to Babylon, counts as 2 challenges (requires 2 courage or 7 gold to remove)",
+					"Remove a challenge by playing enough gold to pay its cost OR playing a card with courage and then clicking it.  Removed challenges go back into the Challenge deck"
 				],
 				"influence":3,
 				"abilities":["babylon"],
@@ -435,7 +460,7 @@
 				 	"gold":0,
 				 	"influence":6,
 				 	"politics":-2,
-				 	"abilities":["challenge"]},
+				 	"abilities":["Cowardice","challenge"]},
 			{
 				"name":"Mordecai's Blessing",
 				"img":"mordecai",
@@ -446,7 +471,7 @@
 				"gold":0,
 				"influence":2,
 				"politics":2,
-				"abilities":[]},
+				"abilities":["Courage"]},
 			{
 				"name":"King's Eunich",
 				"img":"eunich",

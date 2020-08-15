@@ -172,6 +172,7 @@ const Location = (props) => {
           </div>
         </div>
           {props.location.coopDisplay.length > 0 ? <div className="flexRow flexStart marketContainer">
+        <div className="flexCol">{Object.keys(props.location.coopCount).map(coop=>{return <div>{coop}:{props.location.coopCount[coop]}</div>})}</div>
                     <div className="infoBtnBig flexRow">
             {props.location.coopDisplay.map((card,index)=>{
               return <div onClick={()=>{

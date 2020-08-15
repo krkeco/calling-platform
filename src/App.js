@@ -107,6 +107,7 @@ const App = () => {
             hand{cost,quote,img, draw, gold, influence, name, politics, faith, fear, provision,abilities}
           },
           locations(gameId: $theId){
+            coopCount { totalGold,totalInfluence,totalFaith,totalCourage,totalProvision},
             name, id,influence,influencer,edicts, weariness, info,proselytized,wounds,hardened,abilities,
             market{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
             coopDisplay{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
@@ -129,7 +130,7 @@ const App = () => {
         let response = await res.json();
         console.log(
           'response for game info: currentplayer is ' +
-            JSON.stringify(response.data.currentPlayer),
+            JSON.stringify(response.data.locations),
         );
 
         // if(!recurse){

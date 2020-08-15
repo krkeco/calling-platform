@@ -101,7 +101,7 @@
 				"quote":"",
 				"cost": 0,
 				"gold":0,
-				"faith":2,
+				"faith":3,
 				"draw":0,
 				"influence":0,
 				"abilities":["scrap"]

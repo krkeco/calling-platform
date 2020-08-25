@@ -113,7 +113,7 @@ const App = () => {
             coopDisplay{cost,quote,img,draw, gold, influence, name, politics, faith, fear, provision, abilities},
             battlefield{name,poliBonus,faith, fear, influence, gold, cards{name,quote,img,draw, influence, gold, politics, faith, fear,provision,abilities}}
           },
-          currentPlayer(gameId: $theId){turn,nextPlayer,winner,loser, log}
+          currentPlayer(gameId: $theId){turn,nextPlayer,winner,winning,loser, log}
       }`;
         let res = await fetch(URL, {
           method: 'POST',
@@ -128,10 +128,10 @@ const App = () => {
         });
 
         let response = await res.json();
-        console.log(
-          'response for game info: currentplayer is ' +
-            JSON.stringify(response.data.locations),
-        );
+        // console.log(
+        //   'response for game info: currentplayer is ' +
+        //     JSON.stringify(response.data.locations),
+        // );
 
         // if(!recurse){
           appendLog([...response.data.currentPlayer.log.reverse()]);
@@ -143,7 +143,7 @@ const App = () => {
 
         setPlayerInfo(response.data.players);
 
-        console.log('currnetplayer:' + response.data);
+        console.log('currnetplayer:' + JSON.stringify(response.data.currentPlayer));
         // setCurrentPlayer(0);
 
         //RANDOM
@@ -158,7 +158,7 @@ const App = () => {
           appendLog([...response.data.currentPlayer.log]);
           let loser = response.data.currentPlayer.loser;
           setWinner(loser);
-        }else if (response.data.currentPlayer.winner != '') {
+        }else if (response.data.currentPlayer.winning) {
           appendLog([...response.data.currentPlayer.log]);
           let winner = response.data.currentPlayer.winner;
           setWinner(winner);
